@@ -28,6 +28,9 @@ TM2013 Preview1
 TM2013 Preview2
 对应的 verb 文件：TM2013P2.verb
 
+网易云音乐
+对应的 verb 文件：163music.verb
+
 ## 使用方法
 
 ###已安装有旧版 winetricks
