@@ -61,7 +61,7 @@ WINETRICKS_VERSION=20150114
 #   Copyright (C) 2011 Łukasz Wojniłowicz
 #   Copyright (C) 2011 Matthew Bozarth
 #   Copyright (C) 2013-2014 Andrey Gusev <andrey.goosev!gmail.com>
-#   Copyright (C) 2013 Hillwood Yang
+#   Copyright (C) 2013-2015 Hillwood Yang <hillwood!opensuse.org>
 #
 # License
 #   This program is free software; you can redistribute it and/or
