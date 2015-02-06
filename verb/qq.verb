@@ -1,0 +1,34 @@
+w_metadata qq apps \
+ title="QQ 6.3 (Chinese chat app)" \
+ publisher="Tencent" \
+ year="2014" \
+ media="download" \
+ file1="QQ6.3.exe" \
+ installed_exe1="$W_PROGRAMS_X86_WIN/Tencent/QQ/Bin/QQ.exe" \
+ homepage="http://www.qq.com" \
+ unattended="no"
+
+load_qq()
+{
+    w_download http://dldir1.qq.com/qqfile/qq/QQ6.3/12369/QQ6.3.exe cebe73a2f8b7299ba0f01aba779e0e4a7dbd173b
+
+    if w_workaround_wine_bug 29636 "Installing native riched20 to work around crash bug"
+    then
+        w_call riched20
+    fi
+
+    if w_workaround_wine_bug 34566 "Installing native ctf to work around crash"
+    then
+        w_call msctf
+    fi
+
+    # Make sure chinese fonts are available
+    w_call fakechinese
+
+    # uses mfc42u.dll
+    w_call mfc42
+
+    cd "$W_CACHE/$W_PACKAGE"
+    w_try "$WINE" "$file1"
+    w_declare_exe "$W_PROGRAMS_X86_WIN\\Tencent\\QQ\\Bin" QQ.exe
+}

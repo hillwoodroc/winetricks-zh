@@ -1,0 +1,20 @@
+w_metadata THS apps\
+    title="同花顺免费版" \
+    publisher="Zhejiang Hithink Flush Information Network Co." \
+    year="2013" \
+    media="download" \
+    file1="THS_insoft.exe" \
+    installed_exe1="$W_PROGRAMS_X86_WIN/同花顺/zdsj.exe" \
+    homepage="http://www.10jqka.com.cn/" \
+    unattended="no"
+
+load_THS()
+{
+w_download http://zjcmpp.hexin.com.cn/soft/THS_insoft.exe 
+cd "$W_CACHE/$W_PACKAGE"
+    w_call ie8
+    # Make sure chinese fonts are available
+    w_call fakechinese
+w_try "$WINE" "$file1"
+w_declare_exe "$W_PROGRAMS_X86_WIN\\同花顺" "zdsj.exe"
+}

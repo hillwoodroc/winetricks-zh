@@ -1,0 +1,39 @@
+w_metadata qqintl apps \
+    title="QQ International Instant Messenger 2.11" \
+    publisher="Tencent" \
+    year="2014" \
+    media="download" \
+    file1="QQIntl2.11.exe" \
+    installed_exe1="$W_PROGRAMS_X86_WIN/Tencent/QQIntl/Bin/QQ.exe" \
+    homepage="http://www.imqq.com" \
+    unattended="no"
+
+load_qqintl()
+{
+    w_download http://dldir1.qq.com/qqfile/QQIntl/QQi_PC/QQIntl2.11.exe 030df82390e7962177fcef66fc1a0fd1a3ba4090
+
+    if w_workaround_wine_bug 33086 "Installing native riched20 to allow typing in username"
+    then
+        w_call riched20
+    fi
+
+    if w_workaround_wine_bug 34566 "Installing native ctf to work around crash"
+    then
+        w_call msctf
+    fi
+
+    if w_workaround_wine_bug 37617 "Installing native wininet to work around crash"
+    then
+        w_call wininet
+    fi
+
+    # Make sure chinese fonts are available
+    w_call fakechinese
+
+    # wants mfc80u.dll
+    w_call vcrun2005
+
+    cd "$W_CACHE/$W_PACKAGE"
+    w_try "$WINE" "$file1"
+    w_declare_exe "$W_PROGRAMS_X86_WIN\\Tencent\\QQIntl\\Bin" QQ.exe
+}

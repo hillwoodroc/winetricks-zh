@@ -1,0 +1,33 @@
+w_metadata TM2013P2 apps\
+    title="TM 2013 Preview2" \
+    publisher="Tencent" \
+    year="2013" \
+    media="download" \
+    file1="TM2013Preview2.exe" \
+    installed_exe1="$W_PROGRAMS_X86_WIN/Tencent/TM/Bin/TM.exe" \
+    homepage="http://www.qq.com" \
+    unattended="no"
+
+load_TM2013P2()
+{
+w_download http://dldir1.qq.com/qqfile/qq/tm/2013Preview2/10913/TM2013Preview2.exe 88f26ff2a5852f5332f46e5e1e440d198db69803
+cd "$W_CACHE/$W_PACKAGE"
+    if w_workaround_wine_bug 29636 "Installing native riched20 to work around crash bug"
+    then
+        w_call riched20
+    fi
+
+    if w_workaround_wine_bug 34566 "Installing native ctf to work around crash"
+    then
+        w_call msctf
+    fi
+
+    # Make sure chinese fonts are available
+    w_call fakechinese
+
+    # uses mfc42u.dll
+    w_call mfc42
+w_try "$WINE" "$file1"
+w_declare_exe "$W_PROGRAMS_X86_WIN\\Tencent\\TM\\Bin" "TM.exe"
+}
+

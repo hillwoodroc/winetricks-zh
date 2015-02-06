@@ -1,0 +1,28 @@
+w_metadata TM2013P1 apps\
+    title="TM 2013 Preview1" \
+    publisher="Tencent" \
+    year="2013" \
+    media="download" \
+    file1="TM2013Preview1.exe" \
+    installed_exe1="$W_PROGRAMS_X86_WIN/Tencent/TM/Bin/TM.exe" \
+    homepage="http://www.qq.com" \
+    unattended="no"
+
+load_TM2013P1()
+{
+w_download http://dldir1.qq.com/qqfile/tm/TM2013Preview1.exe 9c18ac5a2c214c53ddf3f55a098354e41ba8d66b
+cd "$W_CACHE/$W_PACKAGE"
+    if w_workaround_wine_bug 33086 "Installing native riched20 to allow typing in username"
+    then
+        w_call riched20
+    fi
+    if w_workaround_wine_bug 30083 "Installing native ie8 to avoid crash in settings and other dialogs"
+    then
+        w_call ie8
+    fi
+    # Make sure chinese fonts are available
+    w_call fakechinese
+w_try "$WINE" "$file1"
+w_declare_exe "$W_PROGRAMS_X86_WIN\\Tencent\\TM\\Bin" "TM.exe"
+}
+

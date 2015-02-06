@@ -1,0 +1,29 @@
+w_metadata QQGame games\
+    title="QQGame2013" \
+    publisher="Tencent" \
+    year="2013" \
+    media="download" \
+    file1="QQGame2013Beta5P1_setup_guanjia.EXE" \
+    installed_exe1="$W_PROGRAMS_X86_WIN/Tencent/QQGame/QQGame.exe" \
+    homepage="http://www.qq.com" \
+    unattended="no"
+
+load_QQGame()
+{
+w_download http://dldir3.qq.com/minigamefile/QQGame2013Beta5P1_setup_guanjia.EXE 398642cff730a858e37a0448a5e4bf5a4a3b63d8
+cd "$W_CACHE/$W_PACKAGE"
+    if w_workaround_wine_bug 33086 "Installing native riched20 to allow typing in username"
+    then
+        w_call riched20
+    fi
+    if w_workaround_wine_bug 30083 "Installing native ie8 to avoid crash in settings and other dialogs"
+    then
+        w_call ie8
+    fi
+    # uses mfc42u.dll
+    w_call mfc42
+    # Make sure chinese fonts are available
+    w_call fakechinese
+w_try "$WINE" "$file1"
+w_declare_exe "$W_PROGRAMS_X86_WIN\\Tencent\\QQGame" "QQGame.exe"
+}
