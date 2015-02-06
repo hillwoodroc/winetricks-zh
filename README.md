@@ -40,4 +40,4 @@ TM2013 Preview2
 
 ## 注意
 
-winetrick 本身不像 crossover 一样带有一个 wine ，所以由于各个发行版自带的 wine 版本的差异，可以会导致使用该工具安装 windows 应用失败或者程序无法正确起动。所以请先想办法把系统自带的 wine 升级到最新版本。
+winetricks 本身不像 crossover 一样带有一个 wine ，所以由于各个发行版自带的 wine 版本的差异，可能会导致使用该工具安装 windows 应用失败或者程序无法正常起动。所以请先想办法把系统自带的 wine 升级到最新版本。
