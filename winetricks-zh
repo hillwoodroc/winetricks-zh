@@ -2,7 +2,7 @@
 
 # Name of this version of winetricks (YYYYMMDD)
 # (This doesn't change often, use the sha1sum of the file when reporting problems)
-WINETRICKS_VERSION=20150114
+WINETRICKS_VERSION=20150206
 
 # This is a utf-8 file
 # You should see an o with two dots over it here [ö]
@@ -620,7 +620,7 @@ w_download_to()
                     fi
                 fi
                 # If checksum matches, declare success and exit loop
-                w_get_sha1sum "$_W_file"
+                w_get_sha1sum "$_W_cache/$_W_file"
                 if [ "$_W_gotsum"x = "$3"x ]
                 then
                     checksum_ok=1
@@ -16542,6 +16542,9 @@ w_try "$WINE" "$file1"
 w_declare_exe "$W_PROGRAMS_X86_WIN\\Tencent\\TM\\Bin" "TM.exe"
 }
 
+#----------------------------------------------------------------
+
+
 w_metadata TM2013P2 apps\
     title="TM 2013 Preview2" \
     publisher="Tencent" \
@@ -16551,8 +16554,6 @@ w_metadata TM2013P2 apps\
     installed_exe1="$W_PROGRAMS_X86_WIN/Tencent/TM/Bin/TM.exe" \
     homepage="http://www.qq.com" \
     unattended="no"
-
-#----------------------------------------------------------------
 
 load_TM2013P2()
 {
