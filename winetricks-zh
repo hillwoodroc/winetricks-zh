@@ -8435,14 +8435,14 @@ w_metadata 163music apps\
     publisher="NetEase" \
     year="2014" \
     media="download" \
-    file1="cloudmusicsetup_1_6_1%5B82296%5D.exe" \
+    file1="cloudmusicsetup_1_6_1[82296].exe" \
     installed_exe1="$W_PROGRAMS_X86_WIN/Netease/CloudMusic/cloudmusic.exe" \
     homepage="http://music.163.com/" \
     unattended="no"
 
 load_163music()
 {
-w_download http://s1.music.126.net/download/pc/cloudmusicsetup_1_6_1%5B82296%5D.exe de4b1d6ce01dd30fa1a6a8513dea5e0a06612a38
+w_download http://s1.music.126.net/download/pc/cloudmusicsetup_1_6_1[82296].exe de4b1d6ce01dd30fa1a6a8513dea5e0a06612a38
 cd "$W_CACHE/$W_PACKAGE"
     w_call directx9
 w_try "$WINE" "$file1"
