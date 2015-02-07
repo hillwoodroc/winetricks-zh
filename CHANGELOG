@@ -1,11 +1,12 @@
 -------------------------------------------
 Sat Feb  7 2015 - hillwood@opensuse.org
 
-Add 163music(网易云音乐) support.
+- Add 163music(网易云音乐) support.
+- Update winetricks to 20150206
+  * fix Issue#1 
 
 --------------------------------------------
 Fri Feb  6 2015 - hillwood@opensuse.org
 
-Add QQ, QQGame, QQintl, 同花顺股票软件, 
-TM2013Preview1&Preview2 support.
-
+- Add QQ, QQGame, QQintl, 同花顺股票软件, 
+  TM2013Preview1&Preview2 support.
