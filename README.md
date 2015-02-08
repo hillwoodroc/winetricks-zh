@@ -31,6 +31,9 @@ TM2013 Preview2
 网易云音乐
 对应的 verb 文件：163music.verb
 
+Kugou 音乐
+对应的 verb 文件：kugou.verb
+
 ## 使用方法
 
 ###已安装有旧版 winetricks
