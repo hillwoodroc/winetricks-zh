@@ -14157,6 +14157,34 @@ load_kotor1()
 
 #----------------------------------------------------------------
 
+w_metadata kugou apps\
+    title="KuGou Music" \
+    publisher="KuGou" \
+    year="2015" \
+    media="download" \
+    file1="kugou7680.exe" \
+    installed_exe1="$W_PROGRAMS_X86_WIN/KuGou/KGMusic/KuGou.exe" \
+    homepage="http://www.kugou.com/" \
+    unattended="no"
+
+load_kugou()
+{
+w_download http://downmini.kugou.com/kugou7680.exe 87a0ebe14e79b2e624c2bed88e2d0c9e57600500
+cd "$W_CACHE/$W_PACKAGE"
+
+    w_call directmusic
+
+    w_call riched20
+
+    w_call ie8
+
+
+w_try "$WINE" "$file1"
+w_declare_exe "$W_PROGRAMS_X86_WIN\\KuGou\KGMusic" "KuGou.exe"
+}
+
+#----------------------------------------------------------------
+
 w_metadata losthorizon_demo games \
     title="Lost Horizon Demo" \
     publisher="Deep Silver" \
