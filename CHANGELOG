@@ -1,4 +1,10 @@
 -------------------------------------------
+Mon Feb  9 2015 - hillwood@opensuse.org
+
+- Add bug ID in 163music and kugoumusic
+- Remove ie installing from kugoumusic.
+
+-------------------------------------------
 Sun Feb  8 2015 - hillwood@opensuse.org
 
 - Add KuGou support.

@@ -12,7 +12,14 @@ load_163music()
 {
 w_download http://s1.music.126.net/download/pc/cloudmusicsetup_1_6_1[82296].exe de4b1d6ce01dd30fa1a6a8513dea5e0a06612a38
 cd "$W_CACHE/$W_PACKAGE"
-    w_call directx9
+
+    if w_workaround_wine_bug 38028 "Installing native directx9 to work around playback bug"
+    then
+        w_call directx9
+    fi
+
+    # Make sure chinese fonts are available
+    w_call fakechinese
 w_try "$WINE" "$file1"
 w_declare_exe "$W_PROGRAMS_X86_WIN\\Netease\CloudMusic" "cloudmusic.exe"
 }

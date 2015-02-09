@@ -14169,18 +14169,23 @@ w_metadata kugou apps\
 
 load_kugou()
 {
-w_download http://downmini.kugou.com/kugou7680.exe 87a0ebe14e79b2e624c2bed88e2d0c9e57600500
-cd "$W_CACHE/$W_PACKAGE"
+    w_download http://downmini.kugou.com/kugou7680.exe 87a0ebe14e79b2e624c2bed88e2d0c9e57600500
+    cd "$W_CACHE/$W_PACKAGE"
 
+    if w_workaround_wine_bug 38037 "Installing native directmusic to work around playback bug"
+    then
     w_call directmusic
+    fi
 
+    if w_workaround_wine_bug 38038 "Installing native riched20 to work around typing in search box"
+    then
     w_call riched20
+    fi
 
-    w_call ie8
-
-
-w_try "$WINE" "$file1"
-w_declare_exe "$W_PROGRAMS_X86_WIN\\KuGou\KGMusic" "KuGou.exe"
+    # Make sure chinese fonts are available
+    w_call fakechinese
+    w_try "$WINE" "$file1"
+    w_declare_exe "$W_PROGRAMS_X86_WIN\\KuGou\KGMusic" "KuGou.exe"
 }
 
 #----------------------------------------------------------------
