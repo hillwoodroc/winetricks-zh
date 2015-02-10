@@ -34,11 +34,20 @@ TM2013 Preview2
 Kugou 音乐
 对应的 verb 文件：kugou.verb
 
+QQ企业版 
+对应的 verb 文件：qqeim.verb
+
+美图秀秀
+对应的 verb 文件：meitu.verb
+
+印象笔记
+对应的 verb 文件：evernote.verb
+
 ## 使用方法
 
 ###已安装有旧版 winetricks
 
-打开终端进入 verb 文件，运行命令： winetricks <文件名> 
+打开终端进入 verb 文件夹，运行命令： winetricks <文件名> 
 
 ###未安装 winetricks 
 
