@@ -13195,6 +13195,30 @@ load_eve()
 
 #----------------------------------------------------------------
 
+w_metadata evernote apps \
+ title="Evernote" \
+ publisher="Evernote Corporation" \
+ year="2015" \
+ media="download" \
+ file1="Evernote_5.8.3.6507.exe" \
+ installed_exe1="$W_PROGRAMS_X86_WIN/Evernote/Evernote/Evernote.exe" \
+ homepage="http://www.evernote.com" \
+ unattended="no"
+
+load_evernote()
+{
+    w_download https://cdn1.evernote.com/win5/public/Evernote_5.8.3.6507.exe 9b84ffeb842db7848e7b2688aa1b7a581c80c6c8
+
+    # Make sure chinese fonts are available
+    w_call fakechinese
+
+    cd "$W_CACHE/$W_PACKAGE"
+    w_try "$WINE" "$file1"
+    w_declare_exe "$W_PROGRAMS_X86_WIN\\Evernote\Evernote" Evernote.exe
+}
+
+#----------------------------------------------------------------
+
 w_metadata fable_tlc games \
     title="Fable: The Lost Chapters" \
     publisher="Microsoft" \
@@ -14976,6 +15000,33 @@ load_mise()
 
 #----------------------------------------------------------------
 
+w_metadata meitu apps \
+ title="Meitu XiuXiu" \
+ publisher="Meitu" \
+ year="2014" \
+ media="download" \
+ file1="XiuXiu_360Setup_4.0.0.exe" \
+ installed_exe1="$W_PROGRAMS_X86_WIN/Meitu/XiuXiu/XiuXiu.exe" \
+ homepage="http://www.qq.com" \
+ unattended="no"
+
+load_meitu()
+{
+    w_download http://xiuxiu.dl.meitu.com/XiuXiu_360Setup_4.0.0.exe fcf83a61c7587ea775681c55aad388fbf835d646
+
+    # uses mfc42u.dll
+    w_call mfc42
+
+    # Make sure chinese fonts are available
+    w_call fakechinese
+
+    cd "$W_CACHE/$W_PACKAGE"
+    w_try "$WINE" "$file1"
+    w_declare_exe "$W_PROGRAMS_X86_WIN\\Tencent\\QQ\\Bin" QQ.exe
+}
+
+#----------------------------------------------------------------
+
 w_metadata myth2_demo games \
     title="Myth II demo 1.7.2" \
     publisher="Project Magma" \
@@ -15521,6 +15572,41 @@ load_qq()
     cd "$W_CACHE/$W_PACKAGE"
     w_try "$WINE" "$file1"
     w_declare_exe "$W_PROGRAMS_X86_WIN\\Tencent\\QQ\\Bin" QQ.exe
+}
+
+#----------------------------------------------------------------
+
+w_metadata qqeim apps \
+ title="QQ Enterpris（企业QQ）" \
+ publisher="Tencent" \
+ year="2014" \
+ media="download" \
+ file1="HRTX1.89.2036.exe" \
+ installed_exe1="$W_PROGRAMS_X86_WIN/Tencent/QQEIM/Bin/QQEIM.exe" \
+ homepage="http://www.qq.com" \
+ unattended="no"
+
+load_qqeim()
+{
+    w_download http://dldir1.qq.com/qqfile/crm/hrtx/HRTX1.89.2036.exe 3fc06b519d50b990212dd12d729f450c1d364f3f
+
+    if w_workaround_wine_bug 29636 "Installing native riched20 to work around crash bug"
+    then
+        w_call riched20
+    fi
+
+    if w_workaround_wine_bug 34566 "Installing native ctf to work around crash"
+    then
+        w_call msctf
+    fi
+
+    # Make sure chinese fonts are available
+    w_call fakechinese
+
+
+    cd "$W_CACHE/$W_PACKAGE"
+    w_try "$WINE" "$file1"
+    w_declare_exe "$W_PROGRAMS_X86_WIN\\Tencent\\QQEIM\\Bin" QQEIM.exe
 }
 
 #----------------------------------------------------------------

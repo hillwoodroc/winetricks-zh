@@ -1,0 +1,24 @@
+w_metadata meitu apps \
+ title="Meitu XiuXiu" \
+ publisher="Meitu" \
+ year="2014" \
+ media="download" \
+ file1="XiuXiu_360Setup_4.0.0.exe" \
+ installed_exe1="$W_PROGRAMS_X86_WIN/Meitu/XiuXiu/XiuXiu.exe" \
+ homepage="http://www.qq.com" \
+ unattended="no"
+
+load_meitu()
+{
+    w_download http://xiuxiu.dl.meitu.com/XiuXiu_360Setup_4.0.0.exe fcf83a61c7587ea775681c55aad388fbf835d646
+
+    # uses mfc42u.dll
+    w_call mfc42
+
+    # Make sure chinese fonts are available
+    w_call fakechinese
+
+    cd "$W_CACHE/$W_PACKAGE"
+    w_try "$WINE" "$file1"
+    w_declare_exe "$W_PROGRAMS_X86_WIN\\Tencent\\QQ\\Bin" QQ.exe
+}

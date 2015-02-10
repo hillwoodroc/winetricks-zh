@@ -1,0 +1,32 @@
+w_metadata qqeim apps \
+ title="QQ Enterpris（企业QQ）" \
+ publisher="Tencent" \
+ year="2014" \
+ media="download" \
+ file1="HRTX1.89.2036.exe" \
+ installed_exe1="$W_PROGRAMS_X86_WIN/Tencent/QQEIM/Bin/QQEIM.exe" \
+ homepage="http://www.qq.com" \
+ unattended="no"
+
+load_qqeim()
+{
+    w_download http://dldir1.qq.com/qqfile/crm/hrtx/HRTX1.89.2036.exe 3fc06b519d50b990212dd12d729f450c1d364f3f
+
+    if w_workaround_wine_bug 29636 "Installing native riched20 to work around crash bug"
+    then
+        w_call riched20
+    fi
+
+    if w_workaround_wine_bug 34566 "Installing native ctf to work around crash"
+    then
+        w_call msctf
+    fi
+
+    # Make sure chinese fonts are available
+    w_call fakechinese
+
+
+    cd "$W_CACHE/$W_PACKAGE"
+    w_try "$WINE" "$file1"
+    w_declare_exe "$W_PROGRAMS_X86_WIN\\Tencent\\QQEIM\\Bin" QQEIM.exe
+}
