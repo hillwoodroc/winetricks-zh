@@ -1,0 +1,28 @@
+w_metadata neoimaging apps\
+    title="光影魔术手 (A Chinese raster graphics editor)" \
+    publisher="Thunder Network" \
+    year="2014" \
+    media="download" \
+    file1="NeoImagingSetup_4.4.1.exe" \
+    installed_exe1="$W_PROGRAMS_X86_WIN/Thunder Network/NeoImaging/Program/KuGou.exe" \
+    homepage="http://www.qq.com" \
+    unattended="no"
+
+load_neoimaging()
+{
+    w_download http://down.neoimaging.cn/neoimaging/NeoImagingSetup_4.4.1.exe 13d3285601a1e52d0ef719bc7d2eeed994d7c097
+    cd "$W_CACHE/$W_PACKAGE"
+
+    if w_workaround_wine_bug 38038 "Installing native riched20 to work around typing in search box"
+    then
+    w_call riched20
+    fi
+    # fix crash
+     w_call winhttp
+
+    # Make sure chinese fonts are available
+    w_call fakechinese
+    w_try "$WINE" "$file1"
+    w_declare_exe "$W_PROGRAMS_X86_WIN\\Thunder Network\NeoImaging\Program" "nEOiMAGING4.exe"
+    w_declare_exe "$W_PROGRAMS_X86_WIN\\Thunder Network\NeoViewer\Program" "NeoViewer.exe"
+}

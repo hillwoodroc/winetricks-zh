@@ -5,43 +5,49 @@ winetricks-zh
 
 ##目的
 
-为所有发行版提供无差异化的 windows 安装向导支持。
+为所有发行版提供无差异化的 windows 应用安装向导支持。
 由于本人精力有限，希望能有更多贡献者能加入到这个小项目，为大家提供更多的国内应用支持。
 
 ##目前支持的应用
 
-QQ国际版2.11 
+1.QQ国际版2.11 
 对应的 verb 文件：qqintl.verb
 
-QQ 6.3（高版本 QQ 由于 wine 的 bug 导致无法创建起动器）
+2.QQ 6.3（高版本 QQ 由于 wine 的 bug 导致无法创建起动器）
 对应的 verb 文件：qq.verb
 
-同花顺股票软件
+3.同花顺股票软件
 对应的 verb 文件：THS.verb
 
-QQ游戏2013
+4.QQ游戏2013
 对应的 verb 文件：QQGame.verb
 
-TM2013 Preview1
+5.TM2013 Preview1
 对应的 verb 文件：TM2013P1.verb
 
-TM2013 Preview2
+6.TM2013 Preview2
 对应的 verb 文件：TM2013P2.verb
 
-网易云音乐
+7.网易云音乐
 对应的 verb 文件：163music.verb
 
-Kugou 音乐
+8.Kugou 音乐
 对应的 verb 文件：kugou.verb
 
-QQ企业版 
+9.QQ企业版 
 对应的 verb 文件：qqeim.verb
 
-美图秀秀
+10.美图秀秀
 对应的 verb 文件：meitu.verb
 
-印象笔记
+11.印象笔记
 对应的 verb 文件：evernote.verb
+
+12.光影魔术手
+对应的 verb 文件：neoimaging.verb
+
+13.QQ轻聊版
+对应的 verb 文件：qqlight.verb
 
 ## 使用方法
 
