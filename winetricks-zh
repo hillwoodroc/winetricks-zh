@@ -15077,7 +15077,7 @@ w_metadata neoimaging apps\
     year="2014" \
     media="download" \
     file1="NeoImagingSetup_4.4.1.exe" \
-    installed_exe1="$W_PROGRAMS_X86_WIN/Thunder Network/NeoImaging/Program/KuGou.exe" \
+    installed_exe1="$W_PROGRAMS_X86_WIN/Thunder Network/NeoImaging/Program/nEOiMAGING4.exe" \
     homepage="http://www.qq.com" \
     unattended="no"
 
@@ -15101,7 +15101,7 @@ load_neoimaging()
     w_declare_exe "$W_PROGRAMS_X86_WIN\\Thunder Network\NeoViewer\Program" "NeoViewer.exe"
 }
 
-----------------------------------------------------------------
+#----------------------------------------------------------------
 
 w_metadata nfsshift_demo games \
     title="Need For Speed: SHIFT Demo" \
