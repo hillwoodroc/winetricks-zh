@@ -16650,7 +16650,7 @@ load_theundergarden_demo()
 #----------------------------------------------------------------
 
 w_metadata THS apps\
-    title="同花顺免费版" \
+    title="同花顺免费版 (A Chinese stock app)" \
     publisher="Zhejiang Hithink Flush Information Network Co." \
     year="2013" \
     media="download" \
@@ -16661,7 +16661,7 @@ w_metadata THS apps\
 
 load_THS()
 {
-w_download http://zjcmpp.hexin.com.cn/soft/THS_insoft.exe 
+w_download http://zjcmpp.hexin.com.cn/download/THS_v8.50.55_20150207.exe dfad0bc243302646571f07bf94f995e2cb895d1e
 cd "$W_CACHE/$W_PACKAGE"
     w_call ie8
     # Make sure chinese fonts are available
@@ -16669,7 +16669,6 @@ cd "$W_CACHE/$W_PACKAGE"
 w_try "$WINE" "$file1"
 w_declare_exe "$W_PROGRAMS_X86_WIN\\同花顺" "zdsj.exe"
 }
-
 #----------------------------------------------------------------
 
 w_metadata TM2013P1 apps\
