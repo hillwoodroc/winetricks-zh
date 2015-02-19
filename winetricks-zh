@@ -2704,7 +2704,7 @@ winetricks_showmenu()
          _W_cached="кешовано"
          ;;
     zh_CN*)   _W_msg_title="Windows 应用安装向导 - 当前容器路径是 \"$WINEPREFIX\""
-         _W_msg_body='君欲安装那款应用？'
+         _W_msg_body='君欲安装何种应用？'
          _W_cached="已缓存"
          ;;
     *)   _W_msg_title="Winetricks - current prefix is \"$WINEPREFIX\""
