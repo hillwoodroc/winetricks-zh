@@ -53,6 +53,9 @@ winetricks-zh
 13.QQ轻聊版
 对应的 verb 文件：qqlight.verb
 
+14.LINE（连我）
+对应的 verb 文件：line.verb
+
 ## 使用方法
 
 ###已安装有旧版 winetricks
