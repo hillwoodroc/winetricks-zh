@@ -1,0 +1,20 @@
+w_metadata line apps\
+    title="LINE" \
+    publisher="LINE" \
+    year="2014" \
+    media="download" \
+    file1="LineInst.exe" \
+    installed_exe1="$W_PROGRAMS_X86_WIN/Naver/LINE/Line.exe" \
+    homepage="http://line.me/" \
+    unattended="no"
+
+load_line()
+{
+w_download http://cdn.line-apps.com/client/win/LineInst.exe 215f5f1551b76c1a86e1da62406bd868f281d81e
+cd "$W_CACHE/$W_PACKAGE"
+
+    # Make sure chinese fonts are available
+    w_call fakechinese
+w_try "$WINE" "$file1"
+w_declare_exe "$W_PROGRAMS_X86_WIN\\Naver\LINE" "Line.exe"
+}
