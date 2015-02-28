@@ -15335,8 +15335,12 @@ load_neoimaging()
     then
     w_call riched20
     fi
-    # fix crash
+
+# Upstream have fixed this bug in 1.7.37
+    if w_workaround_wine_bug 38080 "Installing native riched20 to work around crash bug" 1.7.37
+    then
      w_call winhttp
+    fi
 
     # Make sure chinese fonts are available
     w_call fakechinese
