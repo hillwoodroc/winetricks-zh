@@ -30,5 +30,10 @@ load_qq()
 
     cd "$W_CACHE/$W_PACKAGE"
     w_try "$WINE" "$file1"
+
+    # fix issues#10, fix crash after login
+    mkdir -p ~/.local/share/wineprefixes/qq/drive_c/users/$LOGNAME/Application\ Data/Tencent/QQ/Misc/com.tencent.wireless/SDK
+    chmod 000 ~/.local/share/wineprefixes/qq/drive_c/users/$LOGNAME/Application\ Data/Tencent/QQ/Misc/com.tencent.wireless/SDK
+
     w_declare_exe "$W_PROGRAMS_X86_WIN\\Tencent\\QQ\\Bin" QQ.exe
 }

@@ -1,0 +1,51 @@
+-------------------------------------------
+Thu May 13 2015 - hillwood@opensuse.org
+
+- fix issues#10
+- fix informations for some apps.
+
+-------------------------------------------
+Fri Feb 20 2015 - hillwood@opensuse.org
+
+- Add Traditional Chinese localization.
+- Add LINE support.
+
+-------------------------------------------
+Thu Fed 19 2015 - hillwood@opensuse.org
+
+- Add simplified Chinese localization.
+
+-------------------------------------------
+Thu Feb 12 2015 - hillwood@opensuse.org
+
+- Add QQ轻聊版, 光影魔术手 support.
+
+-------------------------------------------
+Tue Feb 10 2015 - hillwood@opensuse.org
+
+- Add QQ Enterpris（企业QQ）,美图秀秀, evernote
+  support.
+
+-------------------------------------------
+Mon Feb  9 2015 - hillwood@opensuse.org
+
+- Add bug ID in 163music and kugoumusic
+- Remove ie installing from kugoumusic.
+
+-------------------------------------------
+Sun Feb  8 2015 - hillwood@opensuse.org
+
+- Add KuGou support.
+
+-------------------------------------------
+Sat Feb  7 2015 - hillwood@opensuse.org
+
+- Add 163music(网易云音乐) support.
+- Update winetricks to 20150206 from upsteam.
+  * fix Issue#1 
+
+--------------------------------------------
+Fri Feb  6 2015 - hillwood@opensuse.org
+
+- Add QQ, QQGame, QQintl, 同花顺股票软件, 
+  TM2013Preview1&Preview2 support.

@@ -15074,7 +15074,7 @@ w_metadata meitu apps \
  media="download" \
  file1="XiuXiu_360Setup_4.0.0.exe" \
  installed_exe1="$W_PROGRAMS_X86_WIN/Meitu/XiuXiu/XiuXiu.exe" \
- homepage="http://www.qq.com" \
+ homepage="http://xiuxiu.web.meitu.com/" \
  unattended="no"
 
 load_meitu()
@@ -15089,7 +15089,7 @@ load_meitu()
 
     cd "$W_CACHE/$W_PACKAGE"
     w_try "$WINE" "$file1"
-    w_declare_exe "$W_PROGRAMS_X86_WIN\\Tencent\\QQ\\Bin" QQ.exe
+    w_declare_exe "$W_PROGRAMS_X86_WIN\\Meitu\\XiuXiu" XiuXiu.exe
 }
 
 #----------------------------------------------------------------
@@ -15323,7 +15323,7 @@ w_metadata neoimaging apps\
     media="download" \
     file1="NeoImagingSetup_4.4.1.exe" \
     installed_exe1="$W_PROGRAMS_X86_WIN/Thunder Network/NeoImaging/Program/nEOiMAGING4.exe" \
-    homepage="http://www.qq.com" \
+    homepage="http://www.neoimaging.cn/" \
     unattended="no"
 
 load_neoimaging()
@@ -15337,7 +15337,7 @@ load_neoimaging()
     fi
 
 # Upstream have fixed this bug in 1.7.37
-    if w_workaround_wine_bug 38080 "Installing native riched20 to work around crash bug" 1.7.37
+    if w_workaround_wine_bug 38080 "Installing native winhttp to work around crash bug" 1.7.37
     then
      w_call winhttp
     fi
@@ -15852,6 +15852,11 @@ load_qq()
 
     cd "$W_CACHE/$W_PACKAGE"
     w_try "$WINE" "$file1"
+
+    # fix issues#10, fix crash after login
+    mkdir -p ~/.local/share/wineprefixes/qq/drive_c/users/$LOGNAME/Application\ Data/Tencent/QQ/Misc/com.tencent.wireless/SDK
+    chmod 000 ~/.local/share/wineprefixes/qq/drive_c/users/$LOGNAME/Application\ Data/Tencent/QQ/Misc/com.tencent.wireless/SDK
+
     w_declare_exe "$W_PROGRAMS_X86_WIN\\Tencent\\QQ\\Bin" QQ.exe
 }
 

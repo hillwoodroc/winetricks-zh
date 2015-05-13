@@ -5,7 +5,7 @@ w_metadata neoimaging apps\
     media="download" \
     file1="NeoImagingSetup_4.4.1.exe" \
     installed_exe1="$W_PROGRAMS_X86_WIN/Thunder Network/NeoImaging/Program/nEOiMAGING4.exe" \
-    homepage="http://www.qq.com" \
+    homepage="http://www.neoimaging.cn/" \
     unattended="no"
 
 load_neoimaging()
@@ -19,13 +19,14 @@ load_neoimaging()
     fi
 
 # Upstream have fixed this bug in 1.7.37
-    if w_workaround_wine_bug 38080 "Installing native riched20 to work around crash bug" 1.7.37
+    if w_workaround_wine_bug 38080 "Installing native winhttp to work around crash bug" 1.7.37
     then
      w_call winhttp
     fi
 
     # Make sure chinese fonts are available
     w_call fakechinese
+
     w_try "$WINE" "$file1"
     w_declare_exe "$W_PROGRAMS_X86_WIN\\Thunder Network\NeoImaging\Program" "nEOiMAGING4.exe"
     w_declare_exe "$W_PROGRAMS_X86_WIN\\Thunder Network\NeoViewer\Program" "NeoViewer.exe"

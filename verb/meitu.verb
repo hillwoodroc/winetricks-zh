@@ -5,7 +5,7 @@ w_metadata meitu apps \
  media="download" \
  file1="XiuXiu_360Setup_4.0.0.exe" \
  installed_exe1="$W_PROGRAMS_X86_WIN/Meitu/XiuXiu/XiuXiu.exe" \
- homepage="http://www.qq.com" \
+ homepage="http://xiuxiu.web.meitu.com/" \
  unattended="no"
 
 load_meitu()
@@ -20,5 +20,5 @@ load_meitu()
 
     cd "$W_CACHE/$W_PACKAGE"
     w_try "$WINE" "$file1"
-    w_declare_exe "$W_PROGRAMS_X86_WIN\\Tencent\\QQ\\Bin" QQ.exe
+    w_declare_exe "$W_PROGRAMS_X86_WIN\\Meitu\\XiuXiu" XiuXiu.exe
 }
