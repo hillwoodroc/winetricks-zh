@@ -8648,16 +8648,16 @@ load_allfonts()
 w_metadata 163music apps\
     title="NetEase Cloud Music" \
     publisher="NetEase" \
-    year="2014" \
+    year="2015" \
     media="download" \
-    file1="cloudmusicsetup_1_6_1[82809].exe" \
+    file1="cloudmusicsetup_1_7_0[89635].exe" \
     installed_exe1="$W_PROGRAMS_X86_WIN/Netease/CloudMusic/cloudmusic.exe" \
     homepage="http://music.163.com/" \
     unattended="no"
 
 load_163music()
 {
-w_download http://s1.music.126.net/download/pc/cloudmusicsetup_1_6_1[82809].exe 0bf7689cdbb195d2d7fd2b26338edf870a1debfb
+w_download http://s1.music.126.net/download/pc/cloudmusicsetup_1_7_0[89635].exe 8cc6f8483a8ab623921472e0b429ef213fee7ffc
 cd "$W_CACHE/$W_PACKAGE"
 
     if w_workaround_wine_bug 38028 "Installing native directx9 to work around playback bug"
@@ -8667,6 +8667,7 @@ cd "$W_CACHE/$W_PACKAGE"
 
     # Make sure chinese fonts are available
     w_call fakechinese
+
 w_try "$WINE" "$file1"
 w_declare_exe "$W_PROGRAMS_X86_WIN\\Netease\CloudMusic" "cloudmusic.exe"
 }
