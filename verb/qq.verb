@@ -12,7 +12,7 @@ w_metadata qq apps \
 load_qq()
 {
     w_download http://dldir1.qq.com/qqfile/qq/QQ7.6/15742/QQ7.6.exe 51a8c392951b6bb04196bd5403332a8ea49dc5f6
-    w_download http://hillwoodhome.net/wine/QQ.tar.gz 49a60b0e5e6973223470e37c457619a5458e68f6
+    w_download http://hillwoodhome.net/wine/QQ.tar.gz 138ebd66ea3e8e99aff23658ed9f979370f028d3
 
     if w_workaround_wine_bug 29636 "Installing native riched20 to work around crash bug"
     then
