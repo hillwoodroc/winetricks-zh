@@ -3,14 +3,14 @@ w_metadata 163music apps\
     publisher="NetEase" \
     year="2015" \
     media="download" \
-    file1="cloudmusicsetup_1_7_0[89635].exe" \
+    file1="cloudmusicsetup_1_9_1[105579].exe" \
     installed_exe1="$W_PROGRAMS_X86_WIN/Netease/CloudMusic/cloudmusic.exe" \
     homepage="http://music.163.com/" \
     unattended="no"
 
 load_163music()
 {
-w_download http://s1.music.126.net/download/pc/cloudmusicsetup_1_7_0[89635].exe 8cc6f8483a8ab623921472e0b429ef213fee7ffc
+w_download http://s1.music.126.net/download/pc/cloudmusicsetup_1_9_1[105579].exe d8e0fef65425fb0efa009936672af14c02beda57
 cd "$W_CACHE/$W_PACKAGE"
 
     if w_workaround_wine_bug 38028 "Installing native directx9 to work around playback bug"

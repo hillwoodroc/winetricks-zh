@@ -8650,14 +8650,14 @@ w_metadata 163music apps\
     publisher="NetEase" \
     year="2015" \
     media="download" \
-    file1="cloudmusicsetup_1_7_0[89635].exe" \
+    file1="cloudmusicsetup_1_9_1[105579].exe" \
     installed_exe1="$W_PROGRAMS_X86_WIN/Netease/CloudMusic/cloudmusic.exe" \
     homepage="http://music.163.com/" \
     unattended="no"
 
 load_163music()
 {
-w_download http://s1.music.126.net/download/pc/cloudmusicsetup_1_7_0[89635].exe 8cc6f8483a8ab623921472e0b429ef213fee7ffc
+w_download http://s1.music.126.net/download/pc/cloudmusicsetup_1_9_1[105579].exe d8e0fef65425fb0efa009936672af14c02beda57
 cd "$W_CACHE/$W_PACKAGE"
 
     if w_workaround_wine_bug 38028 "Installing native directx9 to work around playback bug"
@@ -15822,18 +15822,20 @@ load_puzzleagent_demo()
 #----------------------------------------------------------------
 
 w_metadata qq apps \
- title="QQ 6.3 (Chinese chat app)" \
+ title="QQ 7.6 (Chinese chat app)" \
  publisher="Tencent" \
- year="2014" \
+ year="2015" \
  media="download" \
- file1="QQ6.3.exe" \
+ file1="QQ7.6.exe" \
+ file2="QQ.tar.gz"\
  installed_exe1="$W_PROGRAMS_X86_WIN/Tencent/QQ/Bin/QQ.exe" \
  homepage="http://www.qq.com" \
  unattended="no"
 
 load_qq()
 {
-    w_download http://dldir1.qq.com/qqfile/qq/QQ6.3/12369/QQ6.3.exe cebe73a2f8b7299ba0f01aba779e0e4a7dbd173b
+    w_download http://dldir1.qq.com/qqfile/qq/QQ7.6/15742/QQ7.6.exe 51a8c392951b6bb04196bd5403332a8ea49dc5f6
+    w_download http://hillwoodhome.net/wine/QQ.tar.gz 49a60b0e5e6973223470e37c457619a5458e68f6
 
     if w_workaround_wine_bug 29636 "Installing native riched20 to work around crash bug"
     then
@@ -15850,17 +15852,27 @@ load_qq()
 
     # uses mfc42u.dll
     w_call mfc42
+    if w_workaround_wine_bug 38171 "Installing desktop file to work around bug"
+    then
+        cd "$W_TMP/"
+        gunzip -dc "$W_CACHE/qq/QQ.tar.gz" | tar -xf -
+        mkdir -p ~/.local/share/applications/wine/Programs/腾讯软件/QQ
+        mkdir -p ~/.local/share/icons/hicolor/48x48/apps
+        mkdir -p ~/.local/share/icons/hicolor/256x256/apps
+        w_try mv QQ/腾讯QQ.desktop ~/.local/share/applications/wine/Programs/腾讯软件/QQ
+        w_try mv QQ/48x48/QQ.png ~/.local/share/icons/hicolor/48x48/apps
+        w_try mv QQ/256x256/QQ.png ~/.local/share/icons/hicolor/256x256/apps
+    fi
 
     cd "$W_CACHE/$W_PACKAGE"
     w_try "$WINE" "$file1"
-
+    
     # fix issues#10, fix crash after login
     mkdir -p ~/.local/share/wineprefixes/qq/drive_c/users/$LOGNAME/Application\ Data/Tencent/QQ/Misc/com.tencent.wireless/SDK
     chmod 000 ~/.local/share/wineprefixes/qq/drive_c/users/$LOGNAME/Application\ Data/Tencent/QQ/Misc/com.tencent.wireless/SDK
 
     w_declare_exe "$W_PROGRAMS_X86_WIN\\Tencent\\QQ\\Bin" QQ.exe
 }
-
 #----------------------------------------------------------------
 
 w_metadata qqeim apps \
@@ -15968,6 +15980,58 @@ load_qqintl()
     cd "$W_CACHE/$W_PACKAGE"
     w_try "$WINE" "$file1"
     w_declare_exe "$W_PROGRAMS_X86_WIN\\Tencent\\QQIntl\\Bin" QQ.exe
+}
+
+#----------------------------------------------------------------
+
+w_metadata qqlight apps \
+ title="QQ Light (Chinese chat app)" \
+ publisher="Tencent" \
+ year="2015" \
+ media="download" \
+ file1="QQ7.5Light.exe" \
+ file2="QQLight.tar.gz"\
+ installed_exe1="$W_PROGRAMS_X86_WIN/Tencent/QQ/Bin/QQ.exe" \
+ homepage="http://www.qq.com" \
+ unattended="no"
+
+load_qqlight()
+{
+    w_download http://dldir1.qq.com/qqfile/qq/QQ7.5Light/15462/QQ7.5Light.exe e75a0a7ee9ae00283ca5cf18221409c3acf60695
+    w_download http://hillwoodhome.net/wine/QQLight.tar.gz 68f27b92f80ef22fe101b4277845d25811309818
+
+    if w_workaround_wine_bug 29636 "Installing native riched20 to work around crash bug"
+    then
+        w_call riched20
+    fi
+
+    if w_workaround_wine_bug 34566 "Installing native ctf to work around crash"
+    then
+        w_call msctf
+    fi
+
+    # Make sure chinese fonts are available
+    w_call fakechinese
+
+    # uses mfc42u.dll
+    w_call mfc42
+
+    if w_workaround_wine_bug 38171 "Installing desktop file to work around bug"
+    then
+        cd "$W_TMP/"
+        gunzip -dc "$W_CACHE/qq/QQLight.tar.gz" | tar -xf -
+        mkdir -p ~/.local/share/applications/wine/Programs/腾讯软件/QQ
+        mkdir -p ~/.local/share/icons/hicolor/48x48/apps
+        mkdir -p ~/.local/share/icons/hicolor/256x256/apps
+        w_try mv QQ/QQ轻聊版.desktop ~/.local/share/applications/wine/Programs/腾讯软件/QQ
+        w_try mv QQ/48x48/QQLight.png ~/.local/share/icons/hicolor/48x48/apps
+        w_try mv QQ/256x256/QQLight.png ~/.local/share/icons/hicolor/256x256/apps
+    fi
+
+
+    cd "$W_CACHE/$W_PACKAGE"
+    w_try "$WINE" "$file1"
+    w_declare_exe "$W_PROGRAMS_X86_WIN\\Tencent\\QQ\\Bin" QQ.exe
 }
 
 #----------------------------------------------------------------
