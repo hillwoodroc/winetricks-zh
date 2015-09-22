@@ -1,9 +1,9 @@
 w_metadata qq apps \
- title="QQ 7.6 (Chinese chat app)" \
+ title="QQ 7.1 (Chinese chat app)" \
  publisher="Tencent" \
  year="2015" \
  media="download" \
- file1="QQ7.6.exe" \
+ file1="QQ7.1.exe" \
  file2="QQ.tar.gz"\
  installed_exe1="$W_PROGRAMS_X86_WIN/Tencent/QQ/Bin/QQ.exe" \
  homepage="http://www.qq.com" \
@@ -11,8 +11,8 @@ w_metadata qq apps \
 
 load_qq()
 {
-    w_download http://dldir1.qq.com/qqfile/qq/QQ7.6/15742/QQ7.6.exe 51a8c392951b6bb04196bd5403332a8ea49dc5f6
-    w_download http://hillwoodhome.net/wine/QQ.tar.gz 138ebd66ea3e8e99aff23658ed9f979370f028d3
+    w_download http://dldir1.qq.com/qqfile/qq/QQ7.1/14522/QQ7.1.exe 700b469560b1bd8521ede61a0e169ff8c38b1d29
+    w_download http://hillwoodhome.net/wine/QQ.tar.gz 08de45d3e5bb34b22e7c33e1163daec69742db58
 
     if w_workaround_wine_bug 29636 "Installing native riched20 to work around crash bug"
     then
@@ -30,24 +30,24 @@ load_qq()
     # uses mfc42u.dll
     w_call mfc42
 
-    cd "$W_CACHE/$W_PACKAGE"
-    w_try "$WINE" "$file1"
-
     if w_workaround_wine_bug 38171 "Installing desktop file to work around bug"
     then
         cd "$W_TMP/"
-        gunzip -dc "$W_CACHE/qq/QQ.tar.gz" | tar -xf -
-        mkdir -p ~/.local/share/applications/wine/Programs/腾讯软件/QQ
-        mkdir -p ~/.local/share/icons/hicolor/48x48/apps
-        mkdir -p ~/.local/share/icons/hicolor/256x256/apps
+        tar -zxf "$W_CACHE/qq/QQ.tar.gz"
+        mkdir -p $HOME/.local/share/applications/wine/Programs/腾讯软件/QQ
+        mkdir -p $HOME/.local/share/icons/hicolor/48x48/apps
+        mkdir -p $HOME/.local/share/icons/hicolor/256x256/apps
         w_try mv QQ/腾讯QQ.desktop ~/.local/share/applications/wine/Programs/腾讯软件/QQ
-        w_try mv QQ/48x18/QQ.png ~/.local/share/icons/hicolor/48x48/apps
+        w_try mv QQ/48x48/QQ.png ~/.local/share/icons/hicolor/48x48/apps
         w_try mv QQ/256x256/QQ.png ~/.local/share/icons/hicolor/256x256/apps
+        echo Exec=env WINEPREFIX=$HOME/.local/share/wineprefixes/qq wine C:\/Program\\ Files\/Tencent\/QQ\/Bin\/QQ.exe >> $HOME/.local/share/applications/wine/Programs/腾讯软件/QQ/腾讯QQ.desktop
     fi
+
+    cd "$W_CACHE/$W_PACKAGE"
+    w_try "$WINE" "$file1"
     
     # fix issues#10, fix crash after login
     mkdir -p ~/.local/share/wineprefixes/qq/drive_c/users/$LOGNAME/Application\ Data/Tencent/QQ/Misc/com.tencent.wireless/SDK
     chmod 000 ~/.local/share/wineprefixes/qq/drive_c/users/$LOGNAME/Application\ Data/Tencent/QQ/Misc/com.tencent.wireless/SDK
 
     w_declare_exe "$W_PROGRAMS_X86_WIN\\Tencent\\QQ\\Bin" QQ.exe
-}

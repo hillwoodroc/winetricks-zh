@@ -3,7 +3,7 @@ w_metadata qqlight apps \
  publisher="Tencent" \
  year="2015" \
  media="download" \
- file1="QQ7.5Light.exe" \
+ file1="QQ6.7Light.exe" \
  file2="QQLight.tar.gz"\
  installed_exe1="$W_PROGRAMS_X86_WIN/Tencent/QQ/Bin/QQ.exe" \
  homepage="http://www.qq.com" \
@@ -11,8 +11,8 @@ w_metadata qqlight apps \
 
 load_qqlight()
 {
-    w_download http://dldir1.qq.com/qqfile/qq/QQ7.5Light/15462/QQ7.5Light.exe e75a0a7ee9ae00283ca5cf18221409c3acf60695
-    w_download http://hillwoodhome.net/wine/QQLight.tar.gz 264e68395b72ef82ccee9ba9b2017a619b555820
+    w_download http://dldir1.qq.com/qqfile/qq/QQ6.7Light/13466/QQ6.7Light.exe e1e1ff2bf6461c08047d0a01927a43c5a0746bdf
+    w_download http://hillwoodhome.net/wine/QQLight.tar.gz db04deb656c0cce7b223cc3358a8af98b0deed52
 
     if w_workaround_wine_bug 29636 "Installing native riched20 to work around crash bug"
     then
@@ -33,16 +33,15 @@ load_qqlight()
     if w_workaround_wine_bug 38171 "Installing desktop file to work around bug"
     then
         cd "$W_TMP/"
-        gunzip -dc "$W_CACHE/qq/QQLight.tar.gz" | tar -xf -
-        mkdir -p ~/.local/share/applications/wine/Programs/腾讯软件/QQ
-        mkdir -p ~/.local/share/icons/hicolor/48x48/apps
-        mkdir -p ~/.local/share/icons/hicolor/256x256/apps
-        w_try mv QQ/QQ轻聊版.desktop ~/.local/share/applications/wine/Programs/腾讯软件/QQ
-        w_try mv QQ/48x48/QQLight.png ~/.local/share/icons/hicolor/48x48/apps
-        w_try mv QQ/256x256/QQLight.png ~/.local/share/icons/hicolor/256x256/apps
+        tar -zxf "$W_CACHE/qqlight/QQLight.tar.gz"
+        mkdir -p $HOME/.local/share/applications/wine/Programs/腾讯软件/QQ轻聊版/
+        mkdir -p $HOME/.local/share/icons/hicolor/48x48/apps
+        mkdir -p $HOME/.local/share/icons/hicolor/256x256/apps
+        w_try mv QQLight/QQ轻聊版.desktop $HOME/.local/share/applications/wine/Programs/腾讯软件/QQ轻聊版
+        w_try mv QQLight/48x48/QQLight.png $HOME/.local/share/icons/hicolor/48x48/apps
+        w_try mv QQLight/256x256/QQLight.png $HOME/.local/share/icons/hicolor/256x256/apps
+        echo Exec=env WINEPREFIX=$HOME/.local/share/wineprefixes/qq wine C:\/Program\\ Files\/Tencent\/QQ\/Bin\/QQ.exe >> $HOME/.local/share/applications/wine/Programs/腾讯软件/QQ/QQ轻聊版.desktop
     fi
-
-
 
     cd "$W_CACHE/$W_PACKAGE"
     w_try "$WINE" "$file1"
