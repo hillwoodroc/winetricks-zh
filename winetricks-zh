@@ -4203,7 +4203,7 @@ then
     # Which GUI helper to use (none/zenity/kdialog).  See winetricks_detect_gui.
     WINETRICKS_GUI=none
     # Default to a shared prefix:
-    WINETRICKS_OPT_SHAREDPREFIX=1
+    WINETRICKS_OPT_SHAREDPREFIX=0
 
     # Handle options before init, to avoid starting wine for --help or --version
     while winetricks_handle_option $1
