@@ -4203,7 +4203,7 @@ then
     # Which GUI helper to use (none/zenity/kdialog).  See winetricks_detect_gui.
     WINETRICKS_GUI=none
     # Default to a shared prefix:
-    WINETRICKS_OPT_SHAREDPREFIX=0
+    WINETRICKS_OPT_SHAREDPREFIX=1
 
     # Handle options before init, to avoid starting wine for --help or --version
     while winetricks_handle_option $1
@@ -16343,15 +16343,15 @@ load_qq()
         w_try mv QQ/腾讯QQ.desktop ~/.local/share/applications/wine/Programs/腾讯软件/QQ
         w_try mv QQ/48x48/QQ.png ~/.local/share/icons/hicolor/48x48/apps
         w_try mv QQ/256x256/QQ.png ~/.local/share/icons/hicolor/256x256/apps
-        echo Exec=env WINEPREFIX=$HOME/.local/share/wineprefixes/qq wine C:\/Program\\ Files\/Tencent\/QQ\/Bin\/QQ.exe >> $HOME/.local/share/applications/wine/Programs/腾讯软件/QQ/腾讯QQ.desktop
+        echo Exec=env WINEPREFIX=$WINEPREFIX wine C:\/Program\\ Files\/Tencent\/QQ\/Bin\/QQ.exe >> $HOME/.local/share/applications/wine/Programs/腾讯软件/QQ/腾讯QQ.desktop
     fi
 
     cd "$W_CACHE/$W_PACKAGE"
     w_try "$WINE" "$file1"
     
     # fix issues#10, fix crash after login
-    mkdir -p ~/.local/share/wineprefixes/qq/drive_c/users/$LOGNAME/Application\ Data/Tencent/QQ/Misc/com.tencent.wireless/SDK
-    chmod 000 ~/.local/share/wineprefixes/qq/drive_c/users/$LOGNAME/Application\ Data/Tencent/QQ/Misc/com.tencent.wireless/SDK
+    mkdir -p $WINEPREFIX/drive_c/users/$LOGNAME/Application\ Data/Tencent/QQ/Misc/com.tencent.wireless/SDK
+    chmod 000 $WINEPREFIX/drive_c/users/$LOGNAME/Application\ Data/Tencent/QQ/Misc/com.tencent.wireless/SDK
 
     w_declare_exe "$W_PROGRAMS_X86_WIN\\Tencent\\QQ\\Bin" QQ.exe
 }
@@ -16509,7 +16509,7 @@ load_qqlight()
         w_try mv QQLight/QQ轻聊版.desktop $HOME/.local/share/applications/wine/Programs/腾讯软件/QQ轻聊版
         w_try mv QQLight/48x48/QQLight.png $HOME/.local/share/icons/hicolor/48x48/apps
         w_try mv QQLight/256x256/QQLight.png $HOME/.local/share/icons/hicolor/256x256/apps
-        echo Exec=env WINEPREFIX=$HOME/.local/share/wineprefixes/qq wine C:\/Program\\ Files\/Tencent\/QQ\/Bin\/QQ.exe >> $HOME/.local/share/applications/wine/Programs/腾讯软件/QQ/QQ轻聊版.desktop
+        echo Exec=env WINEPREFIX=$WINEPREFIX wine C:\/Program\\ Files\/Tencent\/QQ\/Bin\/QQ.exe >> $HOME/.local/share/applications/wine/Programs/腾讯软件/QQ/QQ轻聊版.desktop
     fi
 
 
