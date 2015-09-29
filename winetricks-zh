@@ -9058,6 +9058,30 @@ load_allfonts()
 # Apps
 #----------------------------------------------------------------
 
+w_metadata 163mail apps\
+    title="163 MailMaster（网易邮箱大师）" \
+    publisher="NetEase" \
+    year="2015" \
+    media="download" \
+    file1="mail.exe" \
+    installed_exe1="$W_PROGRAMS_X86_WIN/MailMaster/Start.exe" \
+    homepage="http://mail.163.com/dashi/?from=mail46" \
+    unattended="no"
+
+load_163mail()
+{
+w_download http://client.dl.126.net/pcmail/dashi/mail.exe ee242fda1bcee6348ee9d8811784932cb57a458a
+cd "$W_CACHE/$W_PACKAGE"
+
+    # uses vcrun2005
+    w_call vcrun2005
+
+w_try "$WINE" "$file1"
+w_declare_exe "$W_PROGRAMS_X86_WIN\\MailMaster" "Start.exe"
+}
+
+#----------------------------------------------------------------
+
 w_metadata 163music apps\
     title="NetEase Cloud Music" \
     publisher="NetEase" \
@@ -9392,6 +9416,27 @@ load_emu8086()
     w_try_unzip "$W_TMP" "$W_CACHE/$W_PACKAGE"/$file1
     w_try "$WINE" "$W_TMP/Setup.exe" $W_UNATTENDED_SLASH_SILENT
     w_declare_exe "c:\\emu8086" "emu8086.exe"
+}
+
+#----------------------------------------------------------------
+
+w_metadata foxit apps \
+   title="FoxitReader" \
+   publisher="Foxit Software Incorporated" \
+   year="2015" \
+   media="download" \
+   file1="FoxitReader720.0722_prom_enu_Setup.exe" \
+   installed_exe1="$W_PROGRAMS_X86_WIN/Foxit Software/Foxit Reader/FoxitReader.exe" \
+   homepage="https://www.foxitsoftware.com" \
+   unattended="no"
+
+load_foxit()
+{
+    w_download http://cdn02.foxitsoftware.com/pub/foxit/reader/desktop/win/7.x/7.2/en_us/FoxitReader720.0722_prom_enu_Setup.exe bebe3c6c814045c95a068d9b2a5609fa4ee3fefb
+
+    cd "$W_CACHE/$W_PACKAGE"
+    w_try "$WINE" "$file1"
+    w_declare_exe "$W_PROGRAMS_X86_WIN\\Foxit Software\\Foxit Reader" FoxitReader.exe
 }
 
 #----------------------------------------------------------------
@@ -10650,6 +10695,35 @@ load_steam()
     fi
 
     w_declare_exe "$W_PROGRAMS_X86_WIN\\Steam" "Steam.exe"
+}
+
+#----------------------------------------------------------------
+
+w_metadata thunder apps\
+    title="Thunder 7(迅雷7, a Chinese download manager)" \
+    publisher="Thunder Network" \
+    year="2015" \
+    media="download" \
+    file1="Thunder_dl_7.9.40.5006.exe" \
+    installed_exe1="$W_PROGRAMS_X86_WIN/KuGou/KGMusic/KuGou.exe" \
+    homepage="http://www.xunlei.com/" \
+    unattended="no"
+
+load_thunder()
+{
+    w_download http://down.sandai.net/thunder7/Thunder_dl_7.9.40.5006.exe 73ab5034efb418251c17a0e49bbf1dc4190e5bfe
+
+    cd "$W_CACHE/$W_PACKAGE"
+
+    if w_workaround_wine_bug 39342 "Installing native riched20 to work around crash bug"
+    then
+    w_call riched20
+    fi
+
+    # Make sure chinese fonts are available
+    w_call fakechinese
+    w_try "$WINE" "$file1"
+    w_declare_exe "$W_PROGRAMS_X86_WIN\\Thunder Network\Thunder\Program" "Thunder.exe"
 }
 
 #----------------------------------------------------------------
@@ -16343,7 +16417,7 @@ load_qq()
         w_try mv QQ/腾讯QQ.desktop ~/.local/share/applications/wine/Programs/腾讯软件/QQ
         w_try mv QQ/48x48/QQ.png ~/.local/share/icons/hicolor/48x48/apps
         w_try mv QQ/256x256/QQ.png ~/.local/share/icons/hicolor/256x256/apps
-        echo Exec=env WINEPREFIX=$WINEPREFIX wine C:\/Program\\ Files\/Tencent\/QQ\/Bin\/QQ.exe >> $HOME/.local/share/applications/wine/Programs/腾讯软件/QQ/腾讯QQ.desktop
+        echo Exec=env WINEPREFIX=$WINEPREFIX $wine C:\/Program\\ Files\/Tencent\/QQ\/Bin\/QQ.exe >> $HOME/.local/share/applications/wine/Programs/腾讯软件/QQ/腾讯QQ.desktop
     fi
 
     cd "$W_CACHE/$W_PACKAGE"

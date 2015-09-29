@@ -1,0 +1,26 @@
+w_metadata thunder apps\
+    title="Thunder 7(迅雷7, a Chinese download manager)" \
+    publisher="Thunder Network" \
+    year="2015" \
+    media="download" \
+    file1="Thunder_dl_7.9.40.5006.exe" \
+    installed_exe1="$W_PROGRAMS_X86_WIN/KuGou/KGMusic/KuGou.exe" \
+    homepage="http://www.xunlei.com/" \
+    unattended="no"
+
+load_thunder()
+{
+    w_download http://down.sandai.net/thunder7/Thunder_dl_7.9.40.5006.exe 73ab5034efb418251c17a0e49bbf1dc4190e5bfe
+
+    cd "$W_CACHE/$W_PACKAGE"
+
+    if w_workaround_wine_bug 39342 "Installing native riched20 to work around crash bug"
+    then
+    w_call riched20
+    fi
+
+    # Make sure chinese fonts are available
+    w_call fakechinese
+    w_try "$WINE" "$file1"
+    w_declare_exe "$W_PROGRAMS_X86_WIN\\Thunder Network\Thunder\Program" "Thunder.exe"
+}

@@ -1,0 +1,18 @@
+w_metadata foxit apps \
+ title="FoxitReader" \
+ publisher="Foxit Software Incorporated" \
+ year="2015" \
+ media="download" \
+ file1="FoxitReader720.0722_prom_enu_Setup.exe" \
+ installed_exe1="$W_PROGRAMS_X86_WIN/Foxit Software/Foxit Reader/FoxitReader.exe" \
+ homepage="https://www.foxitsoftware.com" \
+ unattended="no"
+
+load_foxit()
+{
+    w_download http://cdn02.foxitsoftware.com/pub/foxit/reader/desktop/win/7.x/7.2/en_us/FoxitReader720.0722_prom_enu_Setup.exe bebe3c6c814045c95a068d9b2a5609fa4ee3fefb
+
+    cd "$W_CACHE/$W_PACKAGE"
+    w_try "$WINE" "$file1"
+    w_declare_exe "$W_PROGRAMS_X86_WIN\\Foxit Software\\Foxit Reader" FoxitReader.exe
+}

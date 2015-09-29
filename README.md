@@ -3,7 +3,7 @@ winetricks-zh
 
 这是一个 winetricks 的修改版，添加了一些国内常用的 windows 应用支持，以弥补官方版 winetricks 对国内应用支持不足的情况。但最终目的仍然是希望上游能将这些应用添加进去。
 
-旧版本默认将应用安装在单独的容器中，新版变更了该项功能，默认将所有应用都安装到了 $home/.wine 下，你需要使用 --ioslate 参数激活旧版本功能（例：winetricks --isolate qq）。如果你不喜欢上游的改动，请到 https://github.com/Winetricks/winetricks/issues/494 加入讨论。
+旧版本默认将应用安装在单独的容器中，新版变更了该项功能，默认将所有应用都安装到了 $home/.wine 下，你需要使用 --isolate 参数激活旧版本功能（例：winetricks --isolate qq）。如果你不喜欢上游的改动，请到 https://github.com/Winetricks/winetricks/issues/494 加入讨论。
 
 ![ScreenShot](http://ww4.sinaimg.cn/mw1024/ed7abe25gw1epeqzdqo30j20s40ex0tz.jpg)
 
@@ -57,6 +57,15 @@ winetricks-zh
 
 14.LINE（连我）
 对应的 verb 文件：line.verb
+
+15.迅雷（请不要调整窗口大小，可能崩溃）
+对应的 verb 文件：thunder.verb
+
+16.福昕阅读器
+对应的 verb 文件：foxit.verb
+
+17.网易邮箱大师
+对应的 verb 文件：163mail.verb
 
 
 ## 使用方法
