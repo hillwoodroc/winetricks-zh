@@ -19,7 +19,7 @@ winetricks-zh
 1.QQ国际版2.11 
 对应的 verb 文件：qqintl.verb
 
-2.QQ 7.1
+2.QQ 7.6
 对应的 verb 文件：qq.verb
 
 3.同花顺股票软件
