@@ -3,7 +3,7 @@ winetricks-zh
 
 这是一个 winetricks 的修改版，添加了一些国内常用的 windows 应用支持，以弥补官方版 winetricks 对国内应用支持不足的情况。但最终目的仍然是希望上游能将这些应用添加进去。
 
-旧版本默认将应用安装在单独的容器中，新版变更了该项功能，默认将所有应用都安装到了 $home/.wine 下，你需要使用 --isolate 参数激活旧版本功能（例：winetricks --isolate qq）。如果你不喜欢上游的改动，请到 https://github.com/Winetricks/winetricks/issues/494 加入讨论。
+旧版本默认将应用安装在单独的容器中，新版变更了该项功能，默认将所有应用都安装到了 $home/.wine 下，你需要使用 --isolate 参数激活旧版本功能（例：`winetricks --isolate qq`）。如果你不喜欢上游的改动，请到 [winetricks #494](https://github.com/Winetricks/winetricks/issues/494) 加入讨论。
 
 ![ScreenShot](http://ww4.sinaimg.cn/mw1024/ed7abe25gw1epeqzdqo30j20s40ex0tz.jpg)
 
@@ -72,11 +72,16 @@ winetricks-zh
 
 ###已安装有旧版 winetricks
 
-打开终端进入 verb 文件夹，运行命令： winetricks <文件名> 
+打开终端进入 verb 文件夹，运行命令： `winetricks <文件名>`
 
 ###未安装 winetricks 
 
-将 winetricks-zh 复制到 /usr/bin/ 下，然后在终端中直接运行 winetricks-zh。当然安装有 winetricks 的情况也可以使用这种方法。
+将 winetricks-zh 复制到 /usr/bin/ 下，然后在终端中直接运行 `winetricks-zh <verb 名>`。
+
+###使用 CrossOver
+
+请使用以下格式运行
+`WINE=/opt/cxoffice/bin/wine WINESERVER=/opt/cxoffice/bin/wineserver CX_BOTTLE=<bottle 名> winetricks-zh <verb 名>`
 
 ## 注意
 
