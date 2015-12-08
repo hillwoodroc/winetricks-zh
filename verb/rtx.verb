@@ -1,0 +1,25 @@
+w_metadata rtx apps \
+    title="RTX Instant Messenger 2.11" \
+    publisher="Tencent" \
+    year="2015" \
+    media="download" \
+    file1="rtxclient2015formal.exe" \
+	installed_exe1="$W_PROGRAMS_X86_WIN/Tencent/RTXC/RTX.exe" \
+    homepage="http://rtx.tencent.com" \
+    unattended="no"
+
+load_rtx()
+{
+    w_download http://dldir1.qq.com/foxmail/rtx/rtxclient2015formal.exe
+
+	for dep in msxml3 gdiplus riched20 riched30  vcrun6 vcrun2005 mfc42;
+		do w_call $dep
+	done
+
+    # Make sure chinese fonts are available
+    w_call fakechinese
+
+    cd "$W_CACHE/$W_PACKAGE"
+    w_try "$WINE" "$file1"
+    w_declare_exe "$W_PROGRAMS_X86_WIN\\Tencent\\RTXC" RTX.exe
+}
