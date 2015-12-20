@@ -3,7 +3,7 @@ w_metadata THS apps\
     publisher="Zhejiang Hithink Flush Information Network Co." \
     year="2013" \
     media="download" \
-    file1="THS_insoft.exe" \
+    file1="THS_v8.50.55_20150207.exe" \
     installed_exe1="$W_PROGRAMS_X86_WIN/同花顺/zdsj.exe" \
     homepage="http://www.10jqka.com.cn/" \
     unattended="no"

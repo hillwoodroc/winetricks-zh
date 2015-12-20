@@ -9215,14 +9215,14 @@ w_metadata 163music apps\
     publisher="NetEase" \
     year="2015" \
     media="download" \
-    file1="cloudmusicsetup_1_9_1[105579].exe" \
+    file1="cloudmusicsetup_1_9_3[116167].exe" \
     installed_exe1="$W_PROGRAMS_X86_WIN/Netease/CloudMusic/cloudmusic.exe" \
     homepage="http://music.163.com/" \
     unattended="no"
 
 load_163music()
 {
-w_download http://s1.music.126.net/download/pc/cloudmusicsetup_1_9_1[105579].exe d8e0fef65425fb0efa009936672af14c02beda57
+w_download http://s1.music.126.net/download/pc/cloudmusicsetup_1_9_3[116167].exe 75b7f7d82d874cdd1bcf78f8edda6d574cd630bb
 cd "$W_CACHE/$W_PACKAGE"
 
     if w_workaround_wine_bug 38028 "Installing native directx9 to work around playback bug"
@@ -9236,6 +9236,7 @@ cd "$W_CACHE/$W_PACKAGE"
 w_try "$WINE" "$file1"
 w_declare_exe "$W_PROGRAMS_X86_WIN\\Netease\CloudMusic" "cloudmusic.exe"
 }
+
 
 #----------------------------------------------------------------
 
@@ -17732,7 +17733,7 @@ w_metadata THS apps\
     publisher="Zhejiang Hithink Flush Information Network Co." \
     year="2013" \
     media="download" \
-    file1="THS_insoft.exe" \
+    file1="THS_v8.50.55_20150207.exe" \
     installed_exe1="$W_PROGRAMS_X86_WIN/同花顺/zdsj.exe" \
     homepage="http://www.10jqka.com.cn/" \
     unattended="no"
