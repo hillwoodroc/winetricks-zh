@@ -1,4 +1,9 @@
 -------------------------------------------
+Thu Dec 24 2015 - hillwood@opensuse.org
+
+- Update QQ to 7.9, fix work on wine 1.7.51 and above.
+
+-------------------------------------------
 Sun Dec 20 2015 - hillwood@opensuse.org
 
 - Fix issues#25
