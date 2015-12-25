@@ -3,8 +3,6 @@ winetricks-zh
 
 这是一个 winetricks 的修改版，添加了一些国内常用的 windows 应用支持，以弥补官方版 winetricks 对国内应用支持不足的情况。但最终目的仍然是希望上游能将这些应用添加进去。
 
-旧版本默认将应用安装在单独的容器中，新版变更了该项功能，默认将所有应用都安装到了 $home/.wine 下，你需要使用 --isolate 参数激活旧版本功能（例：`winetricks --isolate qq`）。如果你不喜欢上游的改动，请到 [winetricks #494](https://github.com/Winetricks/winetricks/issues/494) 加入讨论。
-
 ![ScreenShot](http://ww4.sinaimg.cn/mw1024/ed7abe25gw1epeqzdqo30j20s40ex0tz.jpg)
 
 ![ScreenShot](http://ww3.sinaimg.cn/mw1024/ed7abe25gw1epeqzeyyslj20s40exabf.jpg)
@@ -19,7 +17,7 @@ winetricks-zh
 1.QQ国际版2.11 
 对应的 verb 文件：qqintl.verb
 
-2.QQ 7.6
+2.QQ 7.9
 对应的 verb 文件：qq.verb
 
 3.同花顺股票软件
@@ -52,7 +50,7 @@ winetricks-zh
 12.光影魔术手
 对应的 verb 文件：neoimaging.verb
 
-13.QQ轻聊版
+13.QQ轻聊版 7.9
 对应的 verb 文件：qqlight.verb
 
 14.LINE（连我）
@@ -72,7 +70,7 @@ winetricks-zh
 
 ###已安装有旧版 winetricks
 
-打开终端进入 verb 文件夹，运行命令： `winetricks <文件名>`
+打开终端进入 verb 文件夹，运行命令： `winetricks --isolate <文件名>` (--isolate 参数起到将应用安装到单独容器中的作用，winetricks-zh 不需要此参数)
 
 ###未安装 winetricks 
 
