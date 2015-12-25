@@ -26,6 +26,17 @@ load_qqintl()
     then
         w_call wininet
     fi
+    
+    if w_workaround_wine_bug 37680 "Disable txplatform.exe to fix QQ can't be quit cleanly"
+    then
+        cat > "$W_TMP"/_disable-txplatform.exe.reg <<_EOF_
+REGEDIT4
+
+[HKEY_CURRENT_USER\Software\Wine\DllOverrides]
+"txplatform.exe"=""
+_EOF_
+        w_try_regedit "$W_TMP_WIN"\\_disable-txplatform.exe.reg
+    fi
 
     # Make sure chinese fonts are available
     w_call fakechinese

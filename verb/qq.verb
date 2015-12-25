@@ -5,7 +5,6 @@ w_metadata qq apps \
  media="download" \
  file1="QQ7.9.exe" \
  file2="QQ.tar.gz"\
- file3="disable-ntoskrnl.exe.reg" \
  installed_exe1="$W_PROGRAMS_X86_WIN/Tencent/QQ/Bin/QQScLauncher.exe" \
  homepage="http://www.qq.com" \
  unattended="no"
@@ -14,7 +13,6 @@ load_qq()
 {
     w_download http://dldir1.qq.com/qqfile/qq/QQ7.9/16638/QQ7.9.exe e7ca9724da3d103041b54b5a610489d38871e5da
     w_download http://hillwoodhome.net/wine/QQ.tar.gz 08de45d3e5bb34b22e7c33e1163daec69742db58
-    w_download http://hillwoodhome.net/wine/disable-ntoskrnl.exe.reg 34346deef766c9870d3bfa3123aae034a873e740
 
     if w_workaround_wine_bug 29636 "Installing native riched20 to work around crash bug"
     then
@@ -46,16 +44,29 @@ load_qq()
         echo Exec=env WINEPREFIX=$WINEPREFIX $WINE \"$W_PROGRAMS_X86_WIN\\Tencent\\QQ\\bin\\QQScLauncher.exe\">> $HOME/.local/share/applications/wine/Programs/腾讯软件/QQ/腾讯QQ.desktop
     fi
 
-    cd "$W_CACHE/$W_PACKAGE"
-
     if w_workaround_wine_bug 39384 "Disable ntoskrnl.exe to work around can't be started bug"
     then
-#        cd $WINEPREFIX/drive_c/windows/system32/drivers/
-#        touch QQFrmMgr.sys
-#        chmod 000 QQFrmMgr.sys
-        w_try_regedit "$file3"
+        cat > "$W_TMP"/_disable-ntoskrnl.exe.reg <<_EOF_
+REGEDIT4
+
+[HKEY_CURRENT_USER\Software\Wine\DllOverrides]
+"ntoskrnl.exe"=""
+_EOF_
+        w_try_regedit "$W_TMP_WIN"\\_disable-ntoskrnl.exe.reg
     fi
 
+    if w_workaround_wine_bug 37680 "Disable txplatform.exe to fix QQ can't be quit cleanly"
+    then
+        cat > "$W_TMP"/_disable-txplatform.exe.reg <<_EOF_
+REGEDIT4
+
+[HKEY_CURRENT_USER\Software\Wine\DllOverrides]
+"txplatform.exe"=""
+_EOF_
+        w_try_regedit "$W_TMP_WIN"\\_disable-txplatform.exe.reg
+    fi
+
+    cd "$W_CACHE/$W_PACKAGE"
     w_try "$WINE" "$file1"
     
     # fix issues#10, fix crash after login
