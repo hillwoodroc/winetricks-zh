@@ -1,4 +1,12 @@
 -------------------------------------------
+Thu Dec 25 2015 - hillwood@opensuse.org
+
+- Merge changs from upstream.
+- Fix QQ can't be quit cleanly.
+- Update README.md.
+- Set WINETRICKS_OPT_SHAREDPREFIX=0 as default.
+
+-------------------------------------------
 Thu Dec 24 2015 - hillwood@opensuse.org
 
 - Update QQ to 7.9, fix work on wine 1.7.51 and above.

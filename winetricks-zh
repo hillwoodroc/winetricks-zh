@@ -2,7 +2,7 @@
 
 # Name of this version of winetricks (YYYYMMDD)
 # (This doesn't change often, use the sha1sum of the file when reporting problems)
-WINETRICKS_VERSION=20150826
+WINETRICKS_VERSION=20151110
 
 # This is a utf-8 file
 # You should see an o with two dots over it here [ö]
@@ -426,10 +426,7 @@ w_read_key()
         zh_CN*)  _W_keymsg="按任意键为 '$W_PACKAGE'"
             _W_nokeymsg="No key given"
             ;;
-        zh_TW*)  _W_keymsg="按任意鍵為 '$W_PACKAGE'"
-            _W_nokeymsg="No key given"
-            ;;
-        zh_HK*)  _W_keymsg="按任意鍵為 '$W_PACKAGE'"
+        zh_TW*|zh_HK*)  _W_keymsg="按任意鍵為 '$W_PACKAGE'"
             _W_nokeymsg="No key given"
             ;;
         *)  _W_keymsg="Please enter the key for app '$W_PACKAGE'"
@@ -888,8 +885,7 @@ w_download_manual_to()
     pl*) _W_dlmsg="Proszę pobrać plik $_W_file z $_W_url, następnie umieścić go w $W_CACHE/$_W_packagename, a na końcu uruchomić ponownie ten skrypt.";;
     uk*) _W_dlmsg="Будь ласка, звантажте $_W_file з $_W_url, розташуйте в $W_CACHE/$_W_packagename, потім запустіть скрипт знову.";;
     zh_CN*) _W_dlmsg="请从 $_W_url 下载 $_W_file，并置放于 $W_CACHE/$_W_packagename, 然后重新运行 winetricks.";;
-    zh_TW*) _W_dlmsg="請從 $_W_url 下載 $_W_file，并置放於 $W_CACHE/$_W_packagename, 然后重新執行 winetricks.";;
-    zh_HK*) _W_dlmsg="請從 $_W_url 下載 $_W_file，并置放於 $W_CACHE/$_W_packagename, 然后重新執行 winetricks.";;
+    zh_TW*|zh_HK*) _W_dlmsg="請從 $_W_url 下載 $_W_file，并置放於 $W_CACHE/$_W_packagename, 然后重新執行 winetricks.";;
     *) _W_dlmsg="Please download $_W_file from $_W_url, place it in $W_CACHE/$_W_packagename, then re-run this script.";;
     esac
 
@@ -1403,7 +1399,7 @@ w_ahk_do()
     fi
 
     _W_CR=`printf \\\\r`
-    cat <<_EOF_ | sed "s/\$/$CR/" > "$W_TMP"/tmp.ahk
+    cat <<_EOF_ | sed "s/\$/$_W_CR/" > "$W_TMP"/tmp.ahk
 w_opt_unattended = ${W_OPT_UNATTENDED:-0}
 $@
 _EOF_
@@ -1489,6 +1485,7 @@ w_override_all_dlls()
     # Disable all known native Microsoft DLLs in favor of Wine's builtin ones
     # Generated with
     # find ~/wine-git/dlls -maxdepth 1 -type d -print | sed 's,.*/,,' | sort | fmt -50 | sed 's/$/ \\/'
+    # Last updated: 2015-09-28
     w_override_dlls builtin \
         acledit aclui activeds actxprxy adsiid advapi32 \
         advpack amstream api-ms-win-core-com-l1-1-0 \
@@ -2030,8 +2027,7 @@ w_workaround_wine_bug()
     pl*) w_warn "Obchodzenie błędu w wine ${1} $_W_msg" ;;
     uk*) w_warn "Обхід помилки ${1} $_W_msg" ;;
     zh_CN*)   w_warn "绕过 wine bug ${1} $_W_msg" ;;
-    zh_TW*)   w_warn "繞過 wine bug ${1} $_W_msg" ;;
-    zh_HK*)   w_warn "繞過 wine bug ${1} $_W_msg" ;;
+    zh_TW*|zh_HK*)   w_warn "繞過 wine bug ${1} $_W_msg" ;;
     *)   w_warn "Working around wine bug ${1} $_W_msg" ;;
     esac
     winetricks_stats_log_command w_workaround_wine_bug-$1
@@ -2472,26 +2468,14 @@ winetricks_prefixmenu()
          _W_msg_showbroken1="有问题的程序 (例如那些有数字版权问题)"
          _W_msg_help="查看帮助"
          ;;
-    zh_TW*)   _W_msg_title="Windows 應用裝載向導 - 選取一個 wine 容器"
+    zh_TW*|zh_HK*)   _W_msg_title="Windows 應用安裝向導 - 選取一個 wine 容器"
          _W_msg_body='君欲何為？'
-         _W_msg_apps='裝載一個 windows 應用'
-         _W_msg_games='裝載一個游戲'
-         _W_msg_benchmarks='裝載一個基准測試軟體'
+         _W_msg_apps='安裝一個 windows 應用'
+         _W_msg_games='安裝一個游戲'
+         _W_msg_benchmarks='安裝一個基准測試軟體'
          _W_msg_default="選取預設的 wine 容器"
-         _W_msg_unattended0="禁用靜默裝載"
-         _W_msg_unattended1="啟用靜默裝載"
-         _W_msg_showbroken0="隱藏有問題的程式 (例如那些有數字版權問題)"
-         _W_msg_showbroken1="有問題的程式 (例如那些有數字版權問題)"
-         _W_msg_help="檢視輔助說明"
-         ;;
-    zh_HK*)   _W_msg_title="Windows 應用裝載向導 - 選取一個 wine 容器"
-         _W_msg_body='君欲何為？'
-         _W_msg_apps='裝載一個 windows 應用'
-         _W_msg_games='裝載一個游戲'
-         _W_msg_benchmarks='裝載一個基准測試軟體'
-         _W_msg_default="選取預設的 wine 容器"
-         _W_msg_unattended0="禁用靜默裝載"
-         _W_msg_unattended1="啟用靜默裝載"
+         _W_msg_unattended0="禁用靜默安裝"
+         _W_msg_unattended1="啟用靜默安裝"
          _W_msg_showbroken0="隱藏有問題的程式 (例如那些有數字版權問題)"
          _W_msg_showbroken1="有問題的程式 (例如那些有數字版權問題)"
          _W_msg_help="檢視輔助說明"
@@ -2553,8 +2537,7 @@ winetricks_prefixmenu()
                 fi
             case $LANG in 
             zh_CN*) printf %s " FALSE prefix='$p' '选择管理 $_W_msg_name' " ;;
-            zh_TW*) printf %s " FALSE prefix='$p' '選擇管理 $_W_msg_name' " ;;
-            zh_HK*) printf %s " FALSE prefix='$p' '選擇管理 $_W_msg_name' " ;;
+            zh_TW*|zh_HK*) printf %s " FALSE prefix='$p' '選擇管理 $_W_msg_name' " ;;
             *) printf %s " FALSE prefix='$p' 'Select $_W_msg_name' " ;;
             esac
             done >> "$WINETRICKS_WORKDIR"/zenity.sh
@@ -2611,8 +2594,8 @@ winetricks_mainmenu()
          _W_msg_winecfg='Run winecfg'
          _W_msg_regedit='Run regedit'
          _W_msg_taskmgr='Run taskmgr'
-         _W_msg_shell='Run a commandline shell (for debugging)'
          _W_msg_uninstaller='Run uninstaller'
+         _W_msg_shell='Run a commandline shell (for debugging)'
          _W_msg_folder='Browse files'
          _W_msg_annihilate="Delete ALL DATA AND APPLICATIONS INSIDE THIS WINEPREFIX"
          ;;
@@ -2662,26 +2645,13 @@ winetricks_mainmenu()
          _W_msg_settings='修改设置'
          _W_msg_winecfg='运行 winecfg'
          _W_msg_regedit='运行注册表'
-         _W_msg_uninstaller='运行卸载程序'
          _W_msg_taskmgr='运行任务管理器'
+         _W_msg_uninstaller='Run uninstaller'
          _W_msg_shell='运行命令提示窗口 (作为调试)'
          _W_msg_folder='浏览容器中的文件'
          _W_msg_annihilate="删除当前容器所有相关文件，包括启动器，完全卸载"
          ;;
-    zh_TW*)   _W_msg_title="Windows 應用裝載向導 - 目前容器路徑是 \"$WINEPREFIX\""
-         _W_msg_body='管理目前容器'
-         _W_msg_dlls="裝載 Windows DLL 或套件"
-         _W_msg_fonts='裝載字型'
-         _W_msg_settings='修改設定'
-         _W_msg_winecfg='執行 winecfg'
-         _W_msg_regedit='執行註冊表'
-         _W_msg_uninstaller='執行反安裝程式'
-         _W_msg_taskmgr='執行工作管理者'
-         _W_msg_shell='執行指令輔助說明視窗 (作為除錯)'
-         _W_msg_folder='瀏覽容器中的檔案'
-         _W_msg_annihilate="移除目前容器所有相依檔案，包括啟動器，完全卸載"
-         ;;
-    zh_HK*)   _W_msg_title="Windows 應用裝載向導 - 目前容器路徑是 \"$WINEPREFIX\""
+    zh_TW*|zh_HK*)   _W_msg_title="Windows 應用裝載向導 - 目前容器路徑是 \"$WINEPREFIX\""
          _W_msg_body='管理目前容器'
          _W_msg_dlls="裝載 Windows DLL 或套件"
          _W_msg_fonts='裝載字型'
@@ -2689,6 +2659,7 @@ winetricks_mainmenu()
          _W_msg_winecfg='執行 winecfg'
          _W_msg_regedit='執行註冊表'
          _W_msg_taskmgr='執行工作管理者'
+         _W_msg_uninstaller='Run uninstaller'
          _W_msg_shell='執行指令輔助說明視窗 (作為除錯)'
          _W_msg_folder='瀏覽容器中的檔案'
          _W_msg_annihilate="移除目前容器所有相依檔案，包括啟動器，完全卸載"
@@ -2722,16 +2693,16 @@ winetricks_mainmenu()
             --height $WINETRICKS_MENU_HEIGHT \
             --width $WINETRICKS_MENU_WIDTH \
             --hide-column 2 \
-            FALSE dlls       '$_W_msg_dlls' \
-            FALSE fonts      '$_W_msg_fonts' \
-            FALSE settings   '$_W_msg_settings' \
-            FALSE winecfg    '$_W_msg_winecfg' \
-            FALSE regedit    '$_W_msg_regedit' \
-            FALSE taskmgr    '$_W_msg_taskmgr' \
-            FALSE shell      '$_W_msg_shell' \
+            FALSE dlls        '$_W_msg_dlls' \
+            FALSE fonts       '$_W_msg_fonts' \
+            FALSE settings    '$_W_msg_settings' \
+            FALSE winecfg     '$_W_msg_winecfg' \
+            FALSE regedit     '$_W_msg_regedit' \
+            FALSE taskmgr     '$_W_msg_taskmgr' \
             FALSE uninstaller '$_W_msg_uninstaller' \
-            FALSE folder     '$_W_msg_folder' \
-            FALSE annihilate '$_W_msg_annihilate' \
+            FALSE shell       '$_W_msg_shell' \
+            FALSE folder      '$_W_msg_folder' \
+            FALSE annihilate  '$_W_msg_annihilate' \
          "
          ) > "$WINETRICKS_WORKDIR"/zenity.sh
         sh "$WINETRICKS_WORKDIR"/zenity.sh | tr '|' ' '
@@ -2743,16 +2714,16 @@ winetricks_mainmenu()
                 --separate-output \
                 --radiolist \
                 "$_W_msg_body"\
-                dlls       "$_W_msg_dlls" off \
-                fonts      "$_W_msg_fonts" off \
-                settings   "$_W_msg_settings" off \
-                winecfg    "$_W_msg_winecfg" off \
-                regedit    "$_W_msg_regedit" off \
-                taskmgr    "$_W_msg_taskmgr" off \
+                dlls        "$_W_msg_dlls" off \
+                fonts       "$_W_msg_fonts" off \
+                settings    "$_W_msg_settings" off \
+                winecfg     "$_W_msg_winecfg" off \
+                regedit     "$_W_msg_regedit" off \
+                taskmgr     "$_W_msg_taskmgr" off \
                 uninstaller "$_W_msg_uninstaller" off \
-                shell      "$_W_msg_shell" off \
-                folder     "$_W_msg_folder" off \
-                annihilate "$_W_msg_annihilate" off \
+                shell       "$_W_msg_shell" off \
+                folder      "$_W_msg_folder" off \
+                annihilate  "$_W_msg_annihilate" off \
                 $_W_cmd_unattended "$_W_msg_unattended" off \
 
         ;;
@@ -2779,10 +2750,7 @@ winetricks_settings_menu()
     zh_CN*)   _W_msg_title="Windows 应用安装向导 - 当前容器路径是 \"$WINEPREFIX\""
          _W_msg_body='君欲更改哪项设置？'
          ;;
-    zh_TW*)   _W_msg_title="Windows 應用裝載向導 - 目前容器路徑是 \"$WINEPREFIX\""
-         _W_msg_body='君欲變更哪項設定？'
-         ;;
-    zh_HK*)   _W_msg_title="Windows 應用裝載向導 - 目前容器路徑是 \"$WINEPREFIX\""
+    zh_TW*|zh_HK*)   _W_msg_title="Windows 應用裝載向導 - 目前容器路徑是 \"$WINEPREFIX\""
          _W_msg_body='君欲變更哪項設定？'
          ;;
     *)   _W_msg_title="Winetricks - current prefix is \"$WINEPREFIX\""
@@ -2853,19 +2821,7 @@ winetricks_settings_menu()
                 --width $WINETRICKS_MENU_WIDTH \
                 "
             ;;
-        zh_TW*) printf %s "zenity \
-                --title '$_W_msg_title' \
-                --text '$_W_msg_body' \
-                --list \
-                --checklist \
-                --column '' \
-                --column 設定 \
-                --column 標題 \
-                --height $WINETRICKS_MENU_HEIGHT \
-                --width $WINETRICKS_MENU_WIDTH \
-                "
-            ;;
-        zh_HK*) printf %s "zenity \
+        zh_TW*|zh_HK*) printf %s "zenity \
                 --title '$_W_msg_title' \
                 --text '$_W_msg_body' \
                 --list \
@@ -2951,11 +2907,7 @@ winetricks_showmenu()
          _W_msg_body='君欲安装何种应用？'
          _W_cached="已缓存"
          ;;
-    zh_TW*)   _W_msg_title="Windows 應用裝載向導 - 目前容器路徑是 \"$WINEPREFIX\""
-         _W_msg_body='君欲裝載何種應用？'
-         _W_cached="已緩存"
-         ;;
-    zh_HK*)   _W_msg_title="Windows 應用裝載向導 - 目前容器路徑是 \"$WINEPREFIX\""
+    zh_TW*|zh_HK*)   _W_msg_title="Windows 應用裝載向導 - 目前容器路徑是 \"$WINEPREFIX\""
          _W_msg_body='君欲裝載何種應用？'
          _W_cached="已緩存"
          ;;
@@ -3059,25 +3011,7 @@ winetricks_showmenu()
                 --width $WINETRICKS_MENU_WIDTH \
                 "
              ;;
-        zh_TW*) printf %s "zenity \
-                --title '$_W_msg_title' \
-                --text '$_W_msg_body' \
-                --list \
-                --checklist \
-                --column '' \
-                --column 包名 \
-                --column 軟體名 \
-                --column 發行商 \
-                --column 發行年 \
-                --column 媒介 \
-                --column 狀態 \
-                --column '檔案大小 (MB)' \
-                --column '時間 (秒)' \
-                --height $WINETRICKS_MENU_HEIGHT \
-                --width $WINETRICKS_MENU_WIDTH \
-                "
-             ;;
-        zh_HK*) printf %s "zenity \
+        zh_TW*|zh_HK*) printf %s "zenity \
                 --title '$_W_msg_title' \
                 --text '$_W_msg_body' \
                 --list \
@@ -3349,8 +3283,7 @@ winetricks_list_all()
     pl*) _W_cached="zarchiwizowane"   ; _W_download="do pobrania"  ;;
     uk*) _W_cached="кешовано"   ; _W_download="завантажуване"  ;;
     zh_CN*)   _W_cached="已缓存"   ; _W_download="可下载"  ;;
-    zh_TW*)   _W_cached="已緩存"   ; _W_download="可下載"  ;;
-    zh_HK*)   _W_cached="已緩存"   ; _W_download="可下載"  ;;
+    zh_TW*|zh_HK*)   _W_cached="已緩存"   ; _W_download="可下載"  ;;
     *)   _W_cached="cached"   ; _W_download="downloadable"  ;;
     esac
 
@@ -3589,8 +3522,7 @@ winetricks_cache_iso()
         pl*)  w_warn "Włożono zły dysk [$_W_volname].  Proszę włożyć dysk [$_W_expected_volname]" ;;
             uk*)  w_warn "Неправильний диск [$_W_volname].  Будь ласка, вставте диск [$_W_expected_volname]" ;;
             zh_CN*)    w_warn " [$_W_volname] 光盘插入错误，请插入光盘 [$_W_expected_volname]" ;;
-            zh_TW*)    w_warn " [$_W_volname] 光槃插入錯誤，請插入光槃 [$_W_expected_volname]" ;;
-            zh_HK*)    w_warn " [$_W_volname] 光槃插入錯誤，請插入光槃 [$_W_expected_volname]" ;;
+            zh_TW*|zh_HK*)    w_warn " [$_W_volname] 光碟插入錯誤，請插入光碟 [$_W_expected_volname]" ;;
             *)    w_warn "Wrong disc [$_W_volname] inserted.  Please insert disc [$_W_expected_volname]" ;;
             esac
 
@@ -3810,8 +3742,7 @@ winetricks_mount_real_volume()
     pl*)  _W_mountmsg="Proszę włożyć dysk '$_W_expected_volname' (potrzebny paczce '$W_PACKAGE')" ;;
     uk*)  _W_mountmsg="Будь ласка, вставте том '$_W_expected_volname' (потрібний для пакунка '$W_PACKAGE')" ;;
     zh_CN*)  _W_mountmsg="请插入卷 '$_W_expected_volname' (为包 '$W_PACKAGE 所需')" ;;
-    zh_TW*)  _W_mountmsg="請插入卷 '$_W_expected_volname' (為包 '$W_PACKAGE 所需')" ;;
-    zh_HK*)  _W_mountmsg="請插入卷 '$_W_expected_volname' (為包 '$W_PACKAGE 所需')" ;;
+    zh_TW*|zh_HK*)  _W_mountmsg="請插入卷 '$_W_expected_volname' (為包 '$W_PACKAGE 所需')" ;;
     *)  _W_mountmsg="Please insert volume '$_W_expected_volname' (needed for package '$W_PACKAGE')" ;;
     esac
 
@@ -4199,6 +4130,8 @@ winetricks_init()
         wine-1.4) WINETRICKS_WINE_VERSION="wine-1.4.0"; export WINETRICKS_WINE_VERSION;;
         wine-1.6-*) WINETRICKS_WINE_VERSION="wine-1.6.0"; export WINETRICKS_WINE_VERSION;;
         wine-1.6) WINETRICKS_WINE_VERSION="wine-1.6.0"; export WINETRICKS_WINE_VERSION;;
+        wine-1.8-*) WINETRICKS_WINE_VERSION="wine-1.8.0"; export WINETRICKS_WINE_VERSION;;
+        wine-1.8) WINETRICKS_WINE_VERSION="wine-1.8.0"; export WINETRICKS_WINE_VERSION;;
     esac
     WINETRICKS_WINE_MINOR=`echo $WINETRICKS_WINE_VERSION | sed 's/wine-1\.\([0-9]*\)\..*/\1/'`
     WINETRICKS_WINE_MICRO=`echo $WINETRICKS_WINE_VERSION | sed 's/wine-1.[0-9][0-9]*\.\([0-9]*\).*/\1/'`
@@ -4319,7 +4252,7 @@ then
     # Which GUI helper to use (none/zenity/kdialog).  See winetricks_detect_gui.
     WINETRICKS_GUI=none
     # Default to a shared prefix:
-    WINETRICKS_OPT_SHAREDPREFIX=1
+    WINETRICKS_OPT_SHAREDPREFIX=0
 
     # Handle options before init, to avoid starting wine for --help or --version
     while winetricks_handle_option $1
@@ -4338,8 +4271,7 @@ winetricks_install_app()
     pl*) fail_msg="Niepowodzenie przy instalacji paczki $1" ;;
     uk*) fail_msg="Помилка встановлення пакунка $1" ;;
     zh_CN*)   fail_msg="$1 安装失败" ;;
-    zh_TW*)   fail_msg="$1 裝載失敗" ;;
-    zh_HK*)   fail_msg="$1 裝載失敗" ;;
+    zh_TW*|zh_HK*)   fail_msg="$1 安裝失敗" ;;
     *)   fail_msg="Failed to install package $1" ;;
     esac
 
@@ -4434,9 +4366,9 @@ helper_win7sp1()
 #---------------------------------------------------------
 
 w_metadata  adobeair dlls \
-    title="Adobe AIR 15.0" \
+    title="Adobe AIR 19.0" \
     publisher="Adobe" \
-    year="2014" \
+    year="2015" \
     media="download" \
     file1="AdobeAIRInstaller.exe" \
     installed_file1="$W_COMMONFILES_X86_WIN/Adobe AIR/Versions/1.0/Adobe AIR.dll" \
@@ -4454,7 +4386,8 @@ load_adobeair()
     # http://helpx.adobe.com/en/flash-player/release-note/fp_12_air_4_release_notes.html
     # 2014-09-30: 15.0  sha1sum 46341f1358bc6e0b9ddeae3591662a2ac68dc360
     # 2014-11-24: i15.0.0.356 sha1sum c0e6b8b1ed5ffa282945d21b21f8a5e03febc904
-    w_download http://airdownload.adobe.com/air/win/download/15.0/AdobeAIRInstaller.exe c0e6b8b1ed5ffa282945d21b21f8a5e03febc904
+    # 2015-11-06: 19.x sha1sum 3bc2a568204a3a9b59ca347ab49585f0c5fab279
+    w_download http://airdownload.adobe.com/air/win/download/19.0/AdobeAIRInstaller.exe 3bc2a568204a3a9b59ca347ab49585f0c5fab279
     cd "$W_CACHE"/adobeair
     w_try "$WINE" AdobeAIRInstaller.exe $W_UNATTENDED_DASH_SILENT
 }
@@ -4616,7 +4549,7 @@ load_comctl32ocx()
     # http://www.microsoft.com/downloads/details.aspx?FamilyID=25437D98-51D0-41C1-BB14-64662F5F62FE
     w_download http://download.microsoft.com/download/3/a/5/3a5925ac-e779-4b1c-bb01-af67dc2f96fc/VisualBasic6-KB896559-v1-ENU.exe f52cf2034488235b37a1da837d1c40eb2a1bad84
     # More ActiveX controls. See https://support.microsoft.com/kb/297381
-    w_download http://activex.microsoft.com/controls/vb6/mscomct2.cab 766f9ccf8849a04d757faee379da54d635c8ac71
+    w_download https://web.archive.org/web/20141012205821/http://activex.microsoft.com/controls/vb6/mscomct2.cab 766f9ccf8849a04d757faee379da54d635c8ac71
 
     w_try_cabextract --directory="$W_TMP" "$W_CACHE"/comctl32ocx/VisualBasic6-KB896559-v1-ENU.exe
     w_try cp "$W_TMP"/mscomctl.ocx "$W_SYSTEM32_DLLS"/mscomctl.ocx
@@ -4636,14 +4569,14 @@ w_metadata comdlg32ocx dlls \
     publisher="Microsoft" \
     year="2009" \
     media="download" \
-    file1="comdlg32.cab" \
+    file1="ComDlg32.cab" \
     installed_file1="$W_SYSTEM32_DLLS_WIN/comdlg32.ocx"
 
 load_comdlg32ocx()
 {
     # By analogy with vb5 version in http://support.microsoft.com/kb/168917
-    w_download http://activex.microsoft.com/controls/vb6/comdlg32.cab d4f3e193c6180eccd73bad53a8500beb5b279cbf
-    w_try_cabextract --directory="$W_TMP" "$W_CACHE"/comdlg32ocx/comdlg32.cab
+    w_download https://web.archive.org/web/20141227220748/http://activex.microsoft.com/controls/vb6/ComDlg32.cab d4f3e193c6180eccd73bad53a8500beb5b279cbf
+    w_try_cabextract --directory="$W_TMP" "$W_CACHE"/comdlg32ocx/${file1}
     w_try cp "$W_TMP"/comdlg32.ocx "$W_SYSTEM32_DLLS"/comdlg32.ocx
     w_try_regsvr comdlg32.ocx
 }
@@ -6334,8 +6267,29 @@ load_glidewrapper()
 {
     w_download http://www.zeckensack.de/glide/archive/GlideWrapper084c.exe 7a9d60a18b660473742b476465e9aea7bd5ab6f8
     cd "$W_CACHE/$W_PACKAGE"
+
+    # The installer opens its README in a web-browser, really annoying when doing make check/test:
+    # FIXME: maybe we should back up this key first?
+    if test ${W_OPT_UNATTENDED}
+    then
+        cat > "$W_TMP"/disable-browser.reg <<_EOF_
+REGEDIT4
+
+[HKEY_CURRENT_USER\Software\Wine\WineBrowser]
+"Browsers"=""
+
+_EOF_
+        w_try_regedit "$W_TMP_WIN"\\disable-browser.reg
+
+    fi
+
     # NSIS installer
     w_try "$WINE" $file1 ${W_OPT_UNATTENDED:+ /S}
+
+    if test ${W_OPT_UNATTENDED}
+    then
+        "$WINE" reg delete "HKEY_CURRENT_USER\Software\Wine\WineBrowser" /v Browsers /f || true
+    fi
 }
 
 #----------------------------------------------------------------
@@ -6596,13 +6550,13 @@ w_metadata kindle apps \
     publisher="Amazon" \
     year="2015" \
     media="download" \
-    file1="KindleForPC-installer-1.12.40996.exe" \
+    file1="KindleForPC-installer-1.13.42039.exe" \
     installed_exe1="$W_PROGRAMS_WIN/Amazon/Kindle/Kindle.exe" \
     homepage="http://www.amazon.com/gp/feature.html/?docId=1000426311"
 
 load_kindle()
 {
-    w_download http://kindleforpc.amazon.com/40996/KindleForPC-installer-1.12.40996.exe bda4bcbcf905da2f900a99e09fffe44dec060131
+    w_download http://kindleforpc.amazon.com/42039/KindleForPC-installer-1.13.42039.exe 2316102823d295fb346062e03a8bb594b93cb536
     cd "$W_CACHE"/kindle
     w_try "$WINE" $file1 ${W_OPT_UNATTENDED:+ /S}
     w_declare_exe "$W_PROGRAMS_WIN\\Amazon\\Kindle" Kindle.exe
@@ -6793,7 +6747,7 @@ w_metadata mfc40 dlls \
 
 load_mfc40()
 {
-    w_download http://activex.microsoft.com/controls/vc/mfc40.cab 53c570e2c811674d6e4fa46cff5a3a04cd0ffc24
+    w_download https://web.archive.org/web/20070316220826/http://activex.microsoft.com/controls/vc/mfc40.cab 53c570e2c811674d6e4fa46cff5a3a04cd0ffc24
     w_try_cabextract -d "$W_TMP" "$W_CACHE"/mfc40/mfc40.cab
     w_try_cabextract -d "$W_SYSTEM32_DLLS" -F *40.dll "$W_TMP"/mfc40.exe
 }
@@ -6868,23 +6822,45 @@ load_msctf()
 
 #----------------------------------------------------------------
 
+w_metadata msdxmocx dlls \
+    title="MS Windows Media Player 2 ActiveX control for VB6" \
+    publisher="Microsoft" \
+    year="1999" \
+    media="download" \
+    file1="mpfull.exe" \
+    installed_file1="$W_SYSTEM32_DLLS_WIN/msdxm.ocx"
+
+load_msdxmocx()
+{
+    # http://www.oldapps.com/windows_media_player.php?old_windows_media_player=3?download
+    # Iceweasel gives a security warning (!), but clamscan and virustotal.com report it as clean:
+    w_download http://download.oldapps.com/Windows_Media/mpfull.exe 44aef252a660612a01ee13271d84d2da3885e58d
+
+    w_try_cabextract --directory="$W_SYSTEM32_DLLS" "$W_CACHE/$W_PACKAGE/${file1}"
+    w_try_regsvr msdxm.ocx
+}
+
+#----------------------------------------------------------------
+
 w_metadata msflxgrd dlls \
     title="MS FlexGrid Control (msflxgrd.ocx)" \
     publisher="Microsoft" \
     year="2009" \
     media="download" \
-    file1="msflxgrd.cab" \
-    installed_file1="$W_SYSTEM32_DLLS_WIN/MSFlxGrd.Ocx"
+    file1="MsFlxGrd.cab" \
+    installed_file1="$W_SYSTEM32_DLLS_WIN/MSFLXGRD.OCX"
 
 load_msflxgrd()
 {
     # http://msdn.microsoft.com/en-us/library/aa240864(VS.60).aspx
     # may 2011: f497c3b390cd80d5bcd1f13d5c0c68b206369aa7
-    w_download http://activex.microsoft.com/controls/vb6/msflxgrd.cab f497c3b390cd80d5bcd1f13d5c0c68b206369aa7
+    # 2015/11/09: Removed from Microsoft.com, archive.org has an older copy:
+    # 2015/11/09: 3d6c04e923781d4ce0d3ab62189b8de352ab25d5
+    w_download https://web.archive.org/web/20070127040448/http://activex.microsoft.com/controls/vb6/MsFlxGrd.cab 3d6c04e923781d4ce0d3ab62189b8de352ab25d5
 
-    w_try_cabextract --directory="$W_TMP" "$W_CACHE"/msflxgrd/msflxgrd.cab
+    w_try_cabextract --directory="$W_TMP" "$W_CACHE"/msflxgrd/${file1}
     w_try cp -f "$W_TMP"/[Mm][Ss][Ff][Ll][Xx][Gg][Rr][Dd].[Oo][Cc][Xx] "$W_SYSTEM32_DLLS"
-    w_try_regsvr MSFlxGrd.Ocx
+    w_try_regsvr MSFLXGRD.OCX
 }
 
 #----------------------------------------------------------------
@@ -6895,7 +6871,7 @@ w_metadata mshflxgd dlls \
     year="2009" \
     media="download" \
     file1="MSHFLXGD.CAB" \
-    installed_file1="$W_SYSTEM32_DLLS_WIN/mshflxgd.ocx"
+    installed_file1="$W_SYSTEM32_DLLS_WIN/MSHFLXGD.OCX"
 
 load_mshflxgd()
 {
@@ -6903,11 +6879,13 @@ load_mshflxgd()
     # orig: 5f9c7a81022949bfe39b50f2bbd799c448bb7377
     # Jan 2009: 7ad74e589d5eefcee67fa14e65417281d237a6b6
     # May 2009: bd8aa796e16e5f213414af78931e0379d9cbe292
-    w_download http://activex.microsoft.com/controls/vb6/MSHFLXGD.CAB bd8aa796e16e5f213414af78931e0379d9cbe292
+    # 2015/11/09: Removed from Microsoft.com, archive.org has the original copy:
+    # 2015/11/09: 5f9c7a81022949bfe39b50f2bbd799c448bb7377
+    w_download https://web.archive.org/web/20061011041549/http://activex.microsoft.com/controls/vb6/MSHFLXGD.CAB 5f9c7a81022949bfe39b50f2bbd799c448bb7377
 
     w_try_cabextract --directory="$W_TMP" "$W_CACHE"/mshflxgd/MSHFLXGD.CAB
     w_try cp -f "$W_TMP"/[Mm][Ss][Hh][Ff][Ll][Xx][Gg][Dd].[Oo][Cc][Xx] "$W_SYSTEM32_DLLS"
-    w_try_regsvr mshflxgd.ocx
+    w_try_regsvr MSHFLXGD.OCX
 }
 
 #----------------------------------------------------------------
@@ -6982,7 +6960,9 @@ load_msmask()
     # http://bugs.winehq.org/show_bug.cgi?id=2934
     # old: 3c6b26f68053364ea2e09414b615dbebafb9d5c3
     # May 2009: 30e55679e4a13fe4d9620404476f215f93239292
-    w_download http://activex.microsoft.com/controls/vb6/MSMASK32.CAB 30e55679e4a13fe4d9620404476f215f93239292
+    # 2015/11/09: Removed from Microsoft.com, archive.org has an older copy:
+    # 2015/11/09: bdd2bb3a32d18926a048f302aff18b1e6d250d9d
+    w_download https://web.archive.org/web/20061011040848/http://activex.microsoft.com/controls/vb6/MSMASK32.CAB bdd2bb3a32d18926a048f302aff18b1e6d250d9d
     w_try_cabextract --directory="$W_TMP" "$W_CACHE"/msmask/MSMASK32.CAB
     w_try cp -f "$W_TMP"/[Mm][Ss][Mm][Aa][Ss][Kk]32.[Oo][Cc][Xx] "$W_SYSTEM32_DLLS"/msmask32.ocx
     w_try_regsvr msmask32.ocx
@@ -7519,7 +7499,7 @@ w_metadata richtx32 dlls \
 
 load_richtx32()
 {
-    w_download http://activex.microsoft.com/controls/vb6/richtx32.cab da404b566df3ad74fe687c39404a36c3e7cadc07
+    w_download https://web.archive.org/web/20150815181727/http://activex.microsoft.com/controls/vb6/richtx32.cab da404b566df3ad74fe687c39404a36c3e7cadc07
     w_try_cabextract "$W_CACHE"/richtx32/richtx32.cab -d "$W_SYSTEM32_DLLS" -F RichTx32.ocx
     w_try_regsvr RichTx32.ocx
 }
@@ -7613,8 +7593,9 @@ load_shockwave() {
     # 2015-03-30 sha1sum: 9f2d4d929e7210ae9fb633881127b21586ffd8ce
     # 2015-04-27 sha1sum: 244e6a5c5fa2dd26c136bc5b402f6cad588763d7
     # 2015-08-02 sha1sum: e2efa2eb7db0a6de08905cd61bb3efcf58fda994
+    # 2015-11-09 sha1sum: d13420a6fdc4f8d9c45c5ee6767974f0f0054cdc
 
-    w_download http://fpdownload.macromedia.com/get/shockwave/default/english/win95nt/latest/sw_lic_full_installer.msi e2efa2eb7db0a6de08905cd61bb3efcf58fda994
+    w_download http://fpdownload.macromedia.com/get/shockwave/default/english/win95nt/latest/sw_lic_full_installer.msi d13420a6fdc4f8d9c45c5ee6767974f0f0054cdc
     cd "$W_CACHE"/shockwave
     w_try "$WINE" msiexec /i sw_lic_full_installer.msi $W_UNATTENDED_SLASH_Q
 }
@@ -7652,16 +7633,16 @@ w_metadata tabctl32 dlls \
     publisher="Microsoft" \
     year="2009" \
     media="download" \
-    file1="tabctl32.cab" \
+    file1="TABCTL32.CAB" \
     installed_file1="$W_SYSTEM32_DLLS_WIN/tabctl32.ocx"
 
 load_tabctl32()
 {
     # http://msdn.microsoft.com/en-us/library/aa240864(VS.60).aspx
     # Nov 2012: tabctl32
-    w_download http://activex.microsoft.com/controls/vb6/tabctl32.cab beca51d05924a5466ab80eb0f8d0cdf8bc1ac697
+    w_download https://web.archive.org/web/20110818064708/http://activex.microsoft.com/controls/vb6/TABCTL32.CAB beca51d05924a5466ab80eb0f8d0cdf8bc1ac697
 
-    w_try_cabextract --directory="$W_TMP" "$W_CACHE"/tabctl32/tabctl32.cab
+    w_try_cabextract --directory="$W_TMP" "$W_CACHE"/tabctl32/${file1}
     w_try cp -f "$W_TMP"/[Tt][Aa][Bb][Cc][Tt][Ll][3][2].[Oo][Cc][Xx] "$W_SYSTEM32_DLLS"
     w_try_regsvr tabctl32.ocx
 }
@@ -8090,6 +8071,29 @@ load_vcrun2012()
     else
         w_try "$WINE" vcredist_x86.exe $W_UNATTENDED_SLASH_Q
     fi
+
+    case "$W_ARCH" in
+    win64)
+        # Also install the 64 bit version
+        # 2015/10/19: 1a5d93dddbc431ab27b1da711cd3370891542797
+        w_download http://download.microsoft.com/download/1/6/B/16B06F60-3B20-4FF2-B699-5E9B7962F9AE/VSU_4/vcredist_x64.exe 1a5d93dddbc431ab27b1da711cd3370891542797
+        if w_workaround_wine_bug 30713 "Manually extracting the 64-bit dlls"
+        then
+            rm -f "$W_TMP"/*  # Avoid permission error
+            w_try_cabextract --directory="$W_TMP" vcredist_x64.exe
+            w_try_cabextract --directory="$W_TMP" "$W_TMP/a2"
+            w_try_cabextract --directory="$W_TMP" "$W_TMP/a3"
+            cp "$W_TMP"/F_CENTRAL_atl110_x64 "$W_SYSTEM64_DLLS"/atl110.dll
+            cp "$W_TMP"/F_CENTRAL_mfc110_x64 "$W_SYSTEM64_DLLS"/mfc110.dll
+            cp "$W_TMP"/F_CENTRAL_mfc110u_x64 "$W_SYSTEM64_DLLS"/mfc110u.dll
+            cp "$W_TMP"/F_CENTRAL_msvcp110_x64 "$W_SYSTEM64_DLLS"/msvcp110.dll
+            cp "$W_TMP"/F_CENTRAL_msvcr110_x64 "$W_SYSTEM64_DLLS"/msvcr110.dll
+            cp "$W_TMP"/F_CENTRAL_vcomp110_x64 "$W_SYSTEM64_DLLS"/vcomp110.dll
+        else
+            w_try "$WINE" vcredist_x64.exe $W_UNATTENDED_SLASH_Q
+        fi
+        ;;
+    esac
 }
 
 #----------------------------------------------------------------
@@ -8124,6 +8128,107 @@ load_vcrun2013()
     else
         w_try "$WINE" vcredist_x86.exe $W_UNATTENDED_SLASH_Q
     fi
+
+    case "$W_ARCH" in
+    win64)
+        # Also install the 64 bit version
+        # 2015/10/19: 8bf41ba9eef02d30635a10433817dbb6886da5a2
+        w_download http://download.microsoft.com/download/2/E/6/2E61CFA4-993B-4DD4-91DA-3737CD5CD6E3/vcredist_x64.exe 8bf41ba9eef02d30635a10433817dbb6886da5a2
+        if w_workaround_wine_bug 30713 "Manually extracting the 64-bit dlls"
+        then
+            rm -f "$W_TMP"/*  # Avoid permission error
+            w_try_cabextract --directory="$W_TMP" vcredist_x64.exe
+            w_try_cabextract --directory="$W_TMP" "$W_TMP/a2"
+            w_try_cabextract --directory="$W_TMP" "$W_TMP/a3"
+            cp "$W_TMP"/F_CENTRAL_mfc120_x64 "$W_SYSTEM64_DLLS"/mfc120.dll
+            cp "$W_TMP"/F_CENTRAL_mfc120u_x64 "$W_SYSTEM64_DLLS"/mfc120u.dll
+            cp "$W_TMP"/F_CENTRAL_msvcp120_x64 "$W_SYSTEM64_DLLS"/msvcp120.dll
+            cp "$W_TMP"/F_CENTRAL_msvcr120_x64 "$W_SYSTEM64_DLLS"/msvcr120.dll
+            cp "$W_TMP"/F_CENTRAL_vcomp120_x64 "$W_SYSTEM64_DLLS"/vcomp120.dll
+        else
+            w_try "$WINE" vcredist_x64.exe $W_UNATTENDED_SLASH_Q
+        fi
+        ;;
+    esac
+}
+
+#----------------------------------------------------------------
+
+w_metadata vcrun2015 dlls \
+    title="Visual C++ 2015 libraries (concrt140.dll,mfc140.dll,mfc140u.dll,mfcm140.dll,mfcm140u.dll,msvcp140.dll,vcamp140.dll,vccorlib140.dll,vcomp140.dll,vcruntime140.dll)" \
+    publisher="Microsoft" \
+    year="2015" \
+    media="download" \
+    file1="vc_redist.x86.exe" \
+    installed_file1="$W_SYSTEM32_DLLS_WIN/mfc140.dll"
+
+load_vcrun2015()
+{
+    # https://www.microsoft.com/en-us/download/details.aspx?id=48145
+    # 2015/10/12: bfb74e498c44d3a103ca3aa2831763fb417134d1
+    w_download https://download.microsoft.com/download/9/3/F/93FCF1E7-E6A4-478B-96E7-D4B285925B00/vc_redist.x86.exe bfb74e498c44d3a103ca3aa2831763fb417134d1
+
+    w_override_dlls native,builtin atl140 msvcp140 msvcr140 vcomp140
+    cd "$W_CACHE"/vcrun2015
+    if w_workaround_wine_bug 17273 "Manually extracting dlls"
+    then
+        w_try_cabextract --directory="$W_TMP" vc_redist.x86.exe
+        w_try_cabextract --directory="$W_TMP" "$W_TMP/a10"
+        w_try_cabextract --directory="$W_TMP" "$W_TMP/a11"
+        cp "$W_TMP"/concrt140.dll "$W_SYSTEM32_DLLS"/concrt140.dll
+        cp "$W_TMP"/mfc140.dll "$W_SYSTEM32_DLLS"/mfc140.dll
+        cp "$W_TMP"/mfc140u.dll "$W_SYSTEM32_DLLS"/mfc140u.dll
+        cp "$W_TMP"/mfcm140.dll "$W_SYSTEM32_DLLS"/mfcm140.dll
+        cp "$W_TMP"/mfcm140u.dll "$W_SYSTEM32_DLLS"/mfcm140u.dll
+        cp "$W_TMP"/msvcp140.dll "$W_SYSTEM32_DLLS"/msvcp140.dll
+        cp "$W_TMP"/vcamp140.dll "$W_SYSTEM32_DLLS"/vcamp140.dll
+        cp "$W_TMP"/vccorlib140.dll "$W_SYSTEM32_DLLS"/vccorlib140.dll
+        cp "$W_TMP"/vcomp140.dll "$W_SYSTEM32_DLLS"/vcomp140.dll
+        cp "$W_TMP"/vcruntime140.dll "$W_SYSTEM32_DLLS"/vcruntime140.dll
+
+        w_override_dlls native,builtin api-ms-win-crt-heap-l1-1-0 api-ms-win-crt-locale-l1-1-0 api-ms-win-crt-runtime-l1-1-0 api-ms-win-crt-stdio-l1-1-0 ucrtbase vcruntime140
+        cp "$W_TMP"/api_ms_win_crt_heap_l1_1_0.dll "$W_SYSTEM32_DLLS"/api-ms-win-crt-heap-l1-1-0.dll
+        cp "$W_TMP"/api_ms_win_crt_locale_l1_1_0.dll "$W_SYSTEM32_DLLS"/api-ms-win-crt-locale-l1-1-0.dll
+        cp "$W_TMP"/api_ms_win_crt_runtime_l1_1_0.dll "$W_SYSTEM32_DLLS"/api-ms-win-crt-runtime-l1-1-0.dll
+        cp "$W_TMP"/api_ms_win_crt_stdio_l1_1_0.dll "$W_SYSTEM32_DLLS"/api-ms-win-crt-stdio-l1-1-0.dll
+        cp "$W_TMP"/ucrtbase.dll "$W_SYSTEM32_DLLS"/ucrtbase.dll
+    else
+        w_try "$WINE" vc_redist.x86.exe $W_UNATTENDED_SLASH_Q
+    fi
+
+    case "$W_ARCH" in
+    win64)
+        # Also install the 64 bit version
+        # 2015/10/12: 3155cb0f146b927fcc30647c1a904cd162548c8c
+        w_download https://download.microsoft.com/download/9/3/F/93FCF1E7-E6A4-478B-96E7-D4B285925B00/vc_redist.x64.exe 3155cb0f146b927fcc30647c1a904cd162548c8c
+        if w_workaround_wine_bug 30713 "Manually extracting the 64-bit dlls"
+        then
+            rm -f "$W_TMP"/*  # Avoid permission error
+            w_try_cabextract --directory="$W_TMP" vc_redist.x64.exe
+            w_try_cabextract --directory="$W_TMP" "$W_TMP/a10"
+            w_try_cabextract --directory="$W_TMP" "$W_TMP/a11"
+            cp "$W_TMP"/concrt140.dll "$W_SYSTEM64_DLLS"/concrt140.dll
+            cp "$W_TMP"/mfc140.dll "$W_SYSTEM64_DLLS"/mfc140.dll
+            cp "$W_TMP"/mfc140u.dll "$W_SYSTEM64_DLLS"/mfc140u.dll
+            cp "$W_TMP"/mfcm140.dll "$W_SYSTEM64_DLLS"/mfcm140.dll
+            cp "$W_TMP"/mfcm140u.dll "$W_SYSTEM64_DLLS"/mfcm140u.dll
+            cp "$W_TMP"/msvcp140.dll "$W_SYSTEM64_DLLS"/msvcp140.dll
+            cp "$W_TMP"/vcamp140.dll "$W_SYSTEM64_DLLS"/vcamp140.dll
+            cp "$W_TMP"/vccorlib140.dll "$W_SYSTEM64_DLLS"/vccorlib140.dll
+            cp "$W_TMP"/vcomp140.dll "$W_SYSTEM64_DLLS"/vcomp140.dll
+            cp "$W_TMP"/vcruntime140.dll "$W_SYSTEM64_DLLS"/vcruntime140.dll
+
+            w_override_dlls native,builtin api-ms-win-crt-heap-l1-1-0 api-ms-win-crt-locale-l1-1-0 api-ms-win-crt-runtime-l1-1-0 api-ms-win-crt-stdio-l1-1-0 ucrtbase vcruntime140
+            cp "$W_TMP"/api_ms_win_crt_heap_l1_1_0.dll "$W_SYSTEM64_DLLS"/api-ms-win-crt-heap-l1-1-0.dll
+            cp "$W_TMP"/api_ms_win_crt_locale_l1_1_0.dll "$W_SYSTEM64_DLLS"/api-ms-win-crt-locale-l1-1-0.dll
+            cp "$W_TMP"/api_ms_win_crt_runtime_l1_1_0.dll "$W_SYSTEM64_DLLS"/api-ms-win-crt-runtime-l1-1-0.dll
+            cp "$W_TMP"/api_ms_win_crt_stdio_l1_1_0.dll "$W_SYSTEM64_DLLS"/api-ms-win-crt-stdio-l1-1-0.dll
+            cp "$W_TMP"/ucrtbase.dll "$W_SYSTEM64_DLLS"/ucrtbase.dll
+        else
+            w_try "$WINE" vc_redist.x64.exe $W_UNATTENDED_SLASH_Q
+        fi
+        ;;
+    esac
 }
 
 #----------------------------------------------------------------
@@ -8453,10 +8558,6 @@ load_xinput()
             w_try_cabextract -d "$W_SYSTEM64_DLLS" -L -F 'xinput*.dll' "$x"
         done
     fi
-    w_try_regsvr xinput1_1.dll
-    w_try_regsvr xinput1_2.dll
-    w_try_regsvr xinput1_3.dll
-    w_try_regsvr xinput9_1_0.dll
     w_override_dlls native xinput1_1
     w_override_dlls native xinput1_2
     w_override_dlls native xinput1_3
@@ -8483,6 +8584,9 @@ load_xmllite()
     *) w_die "sorry, xmllite install not yet implemented for language $LANG" ;;
     esac
 
+    # Doesn't install in newer versions:
+    w_set_winver winxp
+
     if w_workaround_wine_bug 16013
     then
         # Find instructions to create this file in dlls/wintrust/tests/crypt.c
@@ -8504,6 +8608,8 @@ load_xmllite()
     de*) w_try "$WINE" WindowsXP-KB915865-v11-x86-DEU.exe $W_UNATTENDED_SLASH_Q ;;
     ja*) w_try "$WINE" WindowsXP-KB915865-v11-x86-JPN.exe $W_UNATTENDED_SLASH_Q ;;
     esac
+
+    w_unset_winver
 }
 
 #----------------------------------------------------------------
@@ -8893,6 +8999,40 @@ load_fakejapanese()
 
 #----------------------------------------------------------------
 
+w_metadata fakejapanese_ipamona fonts \
+    title="Creates aliases for Japanese fonts using IPAMona fonts" \
+    publisher="Jun Kobayashi" \
+    year="2008"
+
+load_fakejapanese_ipamona()
+{
+    w_call ipamona
+
+    # Aliases to set:
+    # MS UI Gothic --> IPAMonaUIGothic
+    # MS Gothic (ＭＳ ゴシック) --> IPAMonaGothic
+    # MS PGothic (ＭＳ Ｐゴシック) --> IPAMonaPGothic
+    # MS Mincho (ＭＳ 明朝) --> IPAMonaMincho
+    # MS PMincho (ＭＳ Ｐ明朝) --> IPAMonaPMincho
+
+    jpname_msgothic="$(echo "ＭＳ ゴシック" | iconv -f utf8 -t cp932)"
+    jpname_mspgothic="$(echo "ＭＳ Ｐゴシック" | iconv -f utf8 -t cp932)"
+    jpname_msmincho="$(echo "ＭＳ 明朝" | iconv -f utf8 -t cp932)"
+    jpname_mspmincho="$(echo "ＭＳ Ｐ明朝" | iconv -f utf8 -t cp932)"
+
+    w_register_font_replacement "MS UI Gothic" "IPAMonaUIGothic"
+    w_register_font_replacement "MS Gothic" "IPAMonaGothic"
+    w_register_font_replacement "MS PGothic" "IPAMonaPGothic"
+    w_register_font_replacement "MS Mincho" "IPAMonaMincho"
+    w_register_font_replacement "MS PMincho" "IPAMonaPMincho"
+    w_register_font_replacement "$jpname_msgothic" "IPAMonaGothic"
+    w_register_font_replacement "$jpname_mspgothic" "IPAMonaPGothic"
+    w_register_font_replacement "$jpname_msmincho" "IPAMonaMincho"
+    w_register_font_replacement "$jpname_mspmincho" "IPAMonaPMincho"
+}
+
+#----------------------------------------------------------------
+
 w_metadata fakekorean fonts \
     title="Creates aliases for Korean fonts using Baekmuk fonts" \
     publisher="Wooderart Inc. / kldp.net" \
@@ -8951,10 +9091,37 @@ load_fontfix()
     # SDKSetup encountered an error: The type initializer for 'Microsoft.WizardFramework.WizardSettings' threw an exception
     # and WINEDEBUG=+relay,+seh shows an exception very quickly after
     # Call KERNEL32.CreateFileW(0c83b36c L"Z:\\USR\\SHARE\\FONTS\\TRUETYPE\\TTF-ORIYA-FONTS\\SAMYAK-ORIYA.TTF",80000000,00000001,00000000,00000003,00000080,00000000) ret=70d44091
-    if xlsfonts 2>/dev/null | egrep -i "samyak|oriya"
+    if xlsfonts 2>/dev/null | egrep -i "samyak.*oriya"
     then
         w_die "Please uninstall the Samyak/Oriya font, e.g. 'sudo dpkg -r ttf-oriya-fonts', then log out and log in again.  That font causes strange crashes in .net programs."
     fi
+}
+
+#----------------------------------------------------------------
+
+w_metadata ipamona fonts \
+    title="IPAMona Japanese fonts" \
+    publisher="Jun Kobayashi" \
+    year="2008" \
+    media="download" \
+    file1="opfc-ModuleHP-1.1.1_withIPAMonaFonts-1.0.8.tar.gz" \
+    installed_file1="$W_FONTSDIR_WIN/ipag-mona.ttf" \
+    homepage="http://www.geocities.jp/ipa_mona/"
+
+load_ipamona()
+{
+    w_download http://www.geocities.jp/ipa_mona/$file1 57dd13ab58c0005d3ee2932539e4987ab0242bc7
+
+    cd "$W_TMP"
+
+    gunzip -dc "$W_CACHE/$W_PACKAGE/$file1" | tar -xf -
+    w_try mv *IPAMonaFonts*/fonts/*.ttf "$W_FONTSDIR_UNIX"
+
+    w_register_font ipagui-mona.ttf "IPAMonaUIGothic"
+    w_register_font ipag-mona.ttf "IPAMonaGothic"
+    w_register_font ipagp-mona.ttf "IPAMonaPGothic"
+    w_register_font ipam-mona.ttf "IPAMonaMincho"
+    w_register_font ipamp-mona.ttf "IPAMonaPMincho"
 }
 
 #----------------------------------------------------------------
@@ -9186,60 +9353,6 @@ load_allfonts()
 # Apps
 #----------------------------------------------------------------
 
-w_metadata 163mail apps\
-    title="163 MailMaster（网易邮箱大师）" \
-    publisher="NetEase" \
-    year="2015" \
-    media="download" \
-    file1="mail.exe" \
-    installed_exe1="$W_PROGRAMS_X86_WIN/MailMaster/Start.exe" \
-    homepage="http://mail.163.com/dashi/?from=mail46" \
-    unattended="no"
-
-load_163mail()
-{
-w_download http://client.dl.126.net/pcmail/dashi/mail.exe ee242fda1bcee6348ee9d8811784932cb57a458a
-cd "$W_CACHE/$W_PACKAGE"
-
-    # uses vcrun2005
-    w_call vcrun2005
-
-w_try "$WINE" "$file1"
-w_declare_exe "$W_PROGRAMS_X86_WIN\\MailMaster" "Start.exe"
-}
-
-#----------------------------------------------------------------
-
-w_metadata 163music apps\
-    title="NetEase Cloud Music" \
-    publisher="NetEase" \
-    year="2015" \
-    media="download" \
-    file1="cloudmusicsetup_1_9_3[116167].exe" \
-    installed_exe1="$W_PROGRAMS_X86_WIN/Netease/CloudMusic/cloudmusic.exe" \
-    homepage="http://music.163.com/" \
-    unattended="no"
-
-load_163music()
-{
-w_download http://s1.music.126.net/download/pc/cloudmusicsetup_1_9_3[116167].exe 75b7f7d82d874cdd1bcf78f8edda6d574cd630bb
-cd "$W_CACHE/$W_PACKAGE"
-
-    if w_workaround_wine_bug 38028 "Installing native directx9 to work around playback bug"
-    then
-        w_call directx9
-    fi
-
-    # Make sure chinese fonts are available
-    w_call fakechinese
-
-w_try "$WINE" "$file1"
-w_declare_exe "$W_PROGRAMS_X86_WIN\\Netease\CloudMusic" "cloudmusic.exe"
-}
-
-
-#----------------------------------------------------------------
-
 w_metadata 3m_library apps \
     title="3M Cloud Library" \
     publisher="3M Company" \
@@ -9296,7 +9409,7 @@ load_abiword()
 #----------------------------------------------------------------
 
 w_metadata adobe_diged apps \
-    title="Adobe Digital Editions" \
+    title="Adobe Digital Editions 1.7" \
     publisher="Adobe" \
     year="2011" \
     media="download" \
@@ -9311,6 +9424,43 @@ load_adobe_diged()
     w_try "$WINE" "$W_CACHE"/$W_PACKAGE/setup.exe ${W_OPT_UNATTENDED:+ /S}
     w_declare_exe "$W_PROGRAMS_X86_WIN\\Adobe\\Adobe Digital Editions" \
         digitaleditions.exe
+}
+
+#----------------------------------------------------------------
+
+w_metadata adobe_diged4 apps \
+    title="Adobe Digital Editions 4.5" \
+    publisher="Adobe" \
+    year="2015" \
+    media="download" \
+    file1="ADE_4.5_Installer.exe" \
+    installed_exe1="$W_PROGRAMS_X86_WIN/Adobe/Adobe Digital Editions 4.5/DigitalEditions.exe" \
+    homepage="http://www.adobe.com/products/digitaleditions/"
+
+load_adobe_diged4()
+{
+    w_download http://download.adobe.com/pub/adobe/digitaleditions/ADE_4.5_Installer.exe
+
+    if w_workaround_wine_bug 32323
+    then
+        w_call corefonts
+    fi
+    if [ ! -x "`which winbindd 2>/dev/null`" ]
+    then
+        w_warn "Adobe Digital Editions 4.5 requires winbind (part of samba) to be installed, but winbind was not detected."
+    fi
+
+    w_call dotnet40
+
+    #w_call win7
+    cd "$W_CACHE/$W_PACKAGE"
+    w_ahk_do "
+        SetTitleMatchMode, 2
+        run, ${file1} ${W_OPT_UNATTENDED:+ /S}
+        winwait, Installing Adobe Digital Editions
+        ControlClick, Button1 ; Don't install Norton Internet Security
+        ControlClick, Static19 ; Next
+    "
 }
 
 #----------------------------------------------------------------
@@ -9545,27 +9695,6 @@ load_emu8086()
     w_try_unzip "$W_TMP" "$W_CACHE/$W_PACKAGE"/$file1
     w_try "$WINE" "$W_TMP/Setup.exe" $W_UNATTENDED_SLASH_SILENT
     w_declare_exe "c:\\emu8086" "emu8086.exe"
-}
-
-#----------------------------------------------------------------
-
-w_metadata foxit apps \
-   title="FoxitReader" \
-   publisher="Foxit Software Incorporated" \
-   year="2015" \
-   media="download" \
-   file1="FoxitReader720.0722_prom_enu_Setup.exe" \
-   installed_exe1="$W_PROGRAMS_X86_WIN/Foxit Software/Foxit Reader/FoxitReader.exe" \
-   homepage="https://www.foxitsoftware.com" \
-   unattended="no"
-
-load_foxit()
-{
-    w_download http://cdn02.foxitsoftware.com/pub/foxit/reader/desktop/win/7.x/7.2/en_us/FoxitReader720.0722_prom_enu_Setup.exe bebe3c6c814045c95a068d9b2a5609fa4ee3fefb
-
-    cd "$W_CACHE/$W_PACKAGE"
-    w_try "$WINE" "$file1"
-    w_declare_exe "$W_PROGRAMS_X86_WIN\\Foxit Software\\Foxit Reader" FoxitReader.exe
 }
 
 #----------------------------------------------------------------
@@ -10063,29 +10192,6 @@ load_kobo()
 
 #----------------------------------------------------------------
 
-w_metadata line apps\
-    title="LINE" \
-    publisher="LINE" \
-    year="2014" \
-    media="download" \
-    file1="LineInst.exe" \
-    installed_exe1="$W_PROGRAMS_X86_WIN/Naver/LINE/Line.exe" \
-    homepage="http://line.me/" \
-    unattended="no"
-
-load_line()
-{
-w_download http://cdn.line-apps.com/client/win/LineInst.exe aa67d38c07f23792401b31892bbe3f098d6d0d61
-cd "$W_CACHE/$W_PACKAGE"
-
-    # Make sure chinese fonts are available
-    w_call fakechinese
-w_try "$WINE" "$file1"
-w_declare_exe "$W_PROGRAMS_X86_WIN\\Naver\LINE" "Line.exe"
-}
-
-#----------------------------------------------------------------
-
 w_metadata mingw apps \
     title="Minimalist GNU for Windows, including GCC for Windows" \
     publisher="GNU" \
@@ -10384,6 +10490,25 @@ load_picasa39()
 
 #----------------------------------------------------------------
 
+w_metadata protectionid apps \
+    title="Protection ID" \
+    publisher="CDKiLLER & TippeX" \
+    year="2015" \
+    media="download" \
+    file1="ProtectionId.670.halloween.2015.rar" \
+    installed_file1="$W_SYSTEM32_DLLS_WIN/protection_id.exe"
+
+load_protectionid()
+{
+    w_download http://pid.gamecopyworld.com/dl.php?f=ProtectionId.670.halloween.2015.rar a307e15f28d00959cffddd8fda073aac6df943c8 "$file1"
+    cd "$W_SYSTEM32_DLLS"
+    w_try_unrar "${W_CACHE}/${W_PACKAGE}/${file1}"
+    # ProtectionId.670.halloween.2015 has a different executable name than usual, this may need to be disabled on next update:
+    mv Protection_ID.eXe protection_id.exe
+}
+
+#----------------------------------------------------------------
+
 w_metadata psdk2003 apps \
     title="MS Platform SDK 2003" \
     publisher="Microsoft" \
@@ -10605,7 +10730,8 @@ load_python26_setuptools()
 {
     w_call python26
 
-    w_download https://bootstrap.pypa.io/ez_setup.py 90b05e9298b7963eaec6de050c8fc751ce6a2a29
+    # Not checking sha1sum, script frequently updates and there aren't stable versions
+    w_download https://bootstrap.pypa.io/ez_setup.py
 
     cd "$W_CACHE/$W_PACKAGE"
     w_try "$WINE" "C:\Python26\python.exe" ${file1}
@@ -10824,35 +10950,6 @@ load_steam()
     fi
 
     w_declare_exe "$W_PROGRAMS_X86_WIN\\Steam" "Steam.exe"
-}
-
-#----------------------------------------------------------------
-
-w_metadata thunder apps\
-    title="Thunder 7(迅雷7, a Chinese download manager)" \
-    publisher="Thunder Network" \
-    year="2015" \
-    media="download" \
-    file1="Thunder_dl_7.9.40.5006.exe" \
-    installed_exe1="$W_PROGRAMS_X86_WIN/KuGou/KGMusic/KuGou.exe" \
-    homepage="http://www.xunlei.com/" \
-    unattended="no"
-
-load_thunder()
-{
-    w_download http://down.sandai.net/thunder7/Thunder_dl_7.9.40.5006.exe 73ab5034efb418251c17a0e49bbf1dc4190e5bfe
-
-    cd "$W_CACHE/$W_PACKAGE"
-
-    if w_workaround_wine_bug 39342 "Installing native riched20 to work around crash bug"
-    then
-    w_call riched20
-    fi
-
-    # Make sure chinese fonts are available
-    w_call fakechinese
-    w_try "$WINE" "$file1"
-    w_declare_exe "$W_PROGRAMS_X86_WIN\\Thunder Network\Thunder\Program" "Thunder.exe"
 }
 
 #----------------------------------------------------------------
@@ -14151,30 +14248,6 @@ load_eve()
 
 #----------------------------------------------------------------
 
-w_metadata evernote apps \
- title="Evernote" \
- publisher="Evernote Corporation" \
- year="2015" \
- media="download" \
- file1="Evernote_5.8.3.6507.exe" \
- installed_exe1="$W_PROGRAMS_X86_WIN/Evernote/Evernote/Evernote.exe" \
- homepage="http://www.evernote.com" \
- unattended="no"
-
-load_evernote()
-{
-    w_download https://cdn1.evernote.com/win5/public/Evernote_5.8.3.6507.exe 9b84ffeb842db7848e7b2688aa1b7a581c80c6c8
-
-    # Make sure chinese fonts are available
-    w_call fakechinese
-
-    cd "$W_CACHE/$W_PACKAGE"
-    w_try "$WINE" "$file1"
-    w_declare_exe "$W_PROGRAMS_X86_WIN\\Evernote\Evernote" Evernote.exe
-}
-
-#----------------------------------------------------------------
-
 w_metadata fable_tlc games \
     title="Fable: The Lost Chapters" \
     publisher="Microsoft" \
@@ -15137,39 +15210,6 @@ load_kotor1()
 
 #----------------------------------------------------------------
 
-w_metadata kugou apps\
-    title="KuGou Music" \
-    publisher="KuGou" \
-    year="2015" \
-    media="download" \
-    file1="kugou7680.exe" \
-    installed_exe1="$W_PROGRAMS_X86_WIN/KuGou/KGMusic/KuGou.exe" \
-    homepage="http://www.kugou.com/" \
-    unattended="no"
-
-load_kugou()
-{
-    w_download http://downmini.kugou.com/kugou7680.exe 87a0ebe14e79b2e624c2bed88e2d0c9e57600500
-    cd "$W_CACHE/$W_PACKAGE"
-
-    if w_workaround_wine_bug 38037 "Installing native directmusic to work around playback bug"
-    then
-    w_call directmusic
-    fi
-
-    if w_workaround_wine_bug 38038 "Installing native riched20 to work around typing in search box"
-    then
-    w_call riched20
-    fi
-
-    # Make sure chinese fonts are available
-    w_call fakechinese
-    w_try "$WINE" "$file1"
-    w_declare_exe "$W_PROGRAMS_X86_WIN\\KuGou\KGMusic" "KuGou.exe"
-}
-
-#----------------------------------------------------------------
-
 w_metadata losthorizon_demo games \
     title="Lost Horizon Demo" \
     publisher="Deep Silver" \
@@ -15777,33 +15817,6 @@ load_mdk()
 
 #----------------------------------------------------------------
 
-w_metadata meitu apps \
- title="Meitu XiuXiu" \
- publisher="Meitu" \
- year="2014" \
- media="download" \
- file1="XiuXiu_360Setup_4.0.0.exe" \
- installed_exe1="$W_PROGRAMS_X86_WIN/Meitu/XiuXiu/XiuXiu.exe" \
- homepage="http://xiuxiu.web.meitu.com/" \
- unattended="no"
-
-load_meitu()
-{
-    w_download http://xiuxiu.dl.meitu.com/XiuXiu_360Setup_4.0.0.exe fcf83a61c7587ea775681c55aad388fbf835d646
-
-    # uses mfc42u.dll
-    w_call mfc42
-
-    # Make sure chinese fonts are available
-    w_call fakechinese
-
-    cd "$W_CACHE/$W_PACKAGE"
-    w_try "$WINE" "$file1"
-    w_declare_exe "$W_PROGRAMS_X86_WIN\\Meitu\\XiuXiu" XiuXiu.exe
-}
-
-#----------------------------------------------------------------
-
 w_metadata menofwar games \
     title="Men of War" \
     publisher="Aspyr Media" \
@@ -16021,42 +16034,6 @@ load_myth2_demo()
         winwaitclose
     "
     w_declare_exe "$W_PROGRAMS_X86_WIN\\Myth II Demo" "Myth II Demo.exe"
-}
-
-#----------------------------------------------------------------
-
-w_metadata neoimaging apps\
-    title="光影魔术手 (A Chinese raster graphics editor)" \
-    publisher="Thunder Network" \
-    year="2014" \
-    media="download" \
-    file1="NeoImagingSetup_4.4.1.exe" \
-    installed_exe1="$W_PROGRAMS_X86_WIN/Thunder Network/NeoImaging/Program/nEOiMAGING4.exe" \
-    homepage="http://www.neoimaging.cn/" \
-    unattended="no"
-
-load_neoimaging()
-{
-    w_download http://down.neoimaging.cn/neoimaging/NeoImagingSetup_4.4.1.exe 13d3285601a1e52d0ef719bc7d2eeed994d7c097
-    cd "$W_CACHE/$W_PACKAGE"
-
-    if w_workaround_wine_bug 38038 "Installing native riched20 to work around typing in search box"
-    then
-    w_call riched20
-    fi
-
-# Upstream have fixed this bug in 1.7.37
-    if w_workaround_wine_bug 38080 "Installing native winhttp to work around crash bug" 1.7.37
-    then
-     w_call winhttp
-    fi
-
-    # Make sure chinese fonts are available
-    w_call fakechinese
-
-    w_try "$WINE" "$file1"
-    w_declare_exe "$W_PROGRAMS_X86_WIN\\Thunder Network\NeoImaging\Program" "nEOiMAGING4.exe"
-    w_declare_exe "$W_PROGRAMS_X86_WIN\\Thunder Network\NeoViewer\Program" "NeoViewer.exe"
 }
 
 #----------------------------------------------------------------
@@ -16451,59 +16428,6 @@ load_popfs()
 
 #----------------------------------------------------------------
 
-w_metadata puzzleagent_demo games \
-    title="Puzzle Agent Demo" \
-    publisher="Telltale Games" \
-    year="2010" \
-    media="download" \
-    file1="PuzzleAgent_PC_Setup.exe" \
-    installed_exe1="$W_PROGRAMS_X86_WIN/Telltale Games/Puzzle Agent/Puzzle Agent/Grickle101.exe"
-
-load_puzzleagent_demo()
-{
-    w_download http://telltale.vo.llnwd.net/o15/games/puzzleagent/100/PuzzleAgent_PC_Setup.exe ac0012889fd80237928207c9d19b02f5968761a4
-
-    cd "$W_CACHE/$W_PACKAGE"
-
-    w_ahk_do "
-        Run, PuzzleAgent_PC_Setup.exe
-        SetTitleMatchMode, 2
-        WinWait,Puzzle Agent Setup, Welcome
-        if ( w_opt_unattended > 0 ) {
-            Sleep 500
-            ControlClick Button2 ; Next
-            WinWait,Puzzle Agent Setup, properly
-            Sleep 500
-            ControlClick Button5 ;DirectX
-            Sleep 500
-            ControlClick Button2 ; Next
-            WinWait,Puzzle Agent Setup, before
-            Sleep 500
-            ControlClick Button2 ; Agree
-            WinWait,Puzzle Agent Setup, different
-            Sleep 500
-            ControlClick Button2 ; Install
-            WinWait,Puzzle Agent Setup, your
-            Sleep 500
-            ControlClick Button4 ; Play
-            Sleep 500
-            ControlClick Button5 ; will
-            Sleep 500
-            ControlClick Button2 ; Finish
-        }
-        WinWaitClose, Puzzle Agent
-    "
-
-    if w_workaround_wine_bug 25210 ""  1.3.8,
-    then
-        w_call vcrun2008
-    fi
-
-    w_declare_exe "$W_PROGRAMS_X86_WIN\\Telltale Games\\Puzzle Agent\\Puzzle Agent" "Grickle101.exe"
-}
-
-#----------------------------------------------------------------
-
 w_metadata qq apps \
  title="QQ 7.9(Chinese chat app)" \
  publisher="Tencent" \
@@ -16511,7 +16435,6 @@ w_metadata qq apps \
  media="download" \
  file1="QQ7.9.exe" \
  file2="QQ.tar.gz"\
- file3="disable-ntoskrnl.exe.reg" \
  installed_exe1="$W_PROGRAMS_X86_WIN/Tencent/QQ/Bin/QQScLauncher.exe" \
  homepage="http://www.qq.com" \
  unattended="no"
@@ -16520,7 +16443,6 @@ load_qq()
 {
     w_download http://dldir1.qq.com/qqfile/qq/QQ7.9/16638/QQ7.9.exe e7ca9724da3d103041b54b5a610489d38871e5da
     w_download http://hillwoodhome.net/wine/QQ.tar.gz 08de45d3e5bb34b22e7c33e1163daec69742db58
-    w_download http://hillwoodhome.net/wine/disable-ntoskrnl.exe.reg 34346deef766c9870d3bfa3123aae034a873e740
 
     if w_workaround_wine_bug 29636 "Installing native riched20 to work around crash bug"
     then
@@ -16552,16 +16474,18 @@ load_qq()
         echo Exec=env WINEPREFIX=$WINEPREFIX $WINE \"$W_PROGRAMS_X86_WIN\\Tencent\\QQ\\bin\\QQScLauncher.exe\">> $HOME/.local/share/applications/wine/Programs/腾讯软件/QQ/腾讯QQ.desktop
     fi
 
-    cd "$W_CACHE/$W_PACKAGE"
-
     if w_workaround_wine_bug 39384 "Disable ntoskrnl.exe to work around can't be started bug"
     then
-#        cd $WINEPREFIX/drive_c/windows/system32/drivers/
-#        touch QQFrmMgr.sys
-#        chmod 000 QQFrmMgr.sys
-        w_try_regedit "$file3"
+        cat > "$W_TMP"/_disable-ntoskrnl.exe.reg <<_EOF_
+REGEDIT4
+
+[HKEY_CURRENT_USER\Software\Wine\DllOverrides]
+"ntoskrnl.exe"=""
+_EOF_
+      w_try_regedit "$W_TMP_WIN"\\_disable-ntoskrnl.exe.reg
     fi
 
+    cd "$W_CACHE/$W_PACKAGE"
     w_try "$WINE" "$file1"
     
     # fix issues#10, fix crash after login
@@ -16569,74 +16493,6 @@ load_qq()
 #    chmod 000 $WINEPREFIX/drive_c/users/$LOGNAME/Application\ Data/Tencent/QQ/Misc/com.tencent.wireless/SDK
 
     w_declare_exe "$W_PROGRAMS_X86_WIN\\Tencent\\QQ\\Bin" QQScLauncher.exe
-}
-
-
-#----------------------------------------------------------------
-
-w_metadata qqeim apps \
- title="QQ Enterpris（企业QQ）" \
- publisher="Tencent" \
- year="2014" \
- media="download" \
- file1="HRTX1.89.2036.exe" \
- installed_exe1="$W_PROGRAMS_X86_WIN/Tencent/QQEIM/Bin/QQEIM.exe" \
- homepage="http://www.qq.com" \
- unattended="no"
-
-load_qqeim()
-{
-    w_download http://dldir1.qq.com/qqfile/crm/hrtx/HRTX1.89.2036.exe 3fc06b519d50b990212dd12d729f450c1d364f3f
-
-    if w_workaround_wine_bug 29636 "Installing native riched20 to work around crash bug"
-    then
-        w_call riched20
-    fi
-
-    if w_workaround_wine_bug 34566 "Installing native ctf to work around crash"
-    then
-        w_call msctf
-    fi
-
-    # Make sure chinese fonts are available
-    w_call fakechinese
-
-
-    cd "$W_CACHE/$W_PACKAGE"
-    w_try "$WINE" "$file1"
-    w_declare_exe "$W_PROGRAMS_X86_WIN\\Tencent\\QQEIM\\Bin" QQEIM.exe
-}
-
-#----------------------------------------------------------------
-
-w_metadata QQGame games\
-    title="QQGame2013" \
-    publisher="Tencent" \
-    year="2013" \
-    media="download" \
-    file1="QQGame2013Beta5P1_setup_guanjia.EXE" \
-    installed_exe1="$W_PROGRAMS_X86_WIN/Tencent/QQGame/QQGame.exe" \
-    homepage="http://www.qq.com" \
-    unattended="no"
-
-load_QQGame()
-{
-w_download http://dldir3.qq.com/minigamefile/QQGame2013Beta5P1_setup_guanjia.EXE 398642cff730a858e37a0448a5e4bf5a4a3b63d8
-cd "$W_CACHE/$W_PACKAGE"
-    if w_workaround_wine_bug 33086 "Installing native riched20 to allow typing in username"
-    then
-        w_call riched20
-    fi
-    if w_workaround_wine_bug 30083 "Installing native ie8 to avoid crash in settings and other dialogs"
-    then
-        w_call ie8
-    fi
-    # uses mfc42u.dll
-    w_call mfc42
-    # Make sure chinese fonts are available
-    w_call fakechinese
-w_try "$WINE" "$file1"
-w_declare_exe "$W_PROGRAMS_X86_WIN\\Tencent\\QQGame" "QQGame.exe"
 }
 
 #----------------------------------------------------------------
@@ -16682,66 +16538,6 @@ load_qqintl()
 }
 
 #----------------------------------------------------------------
-
-w_metadata qqlight apps \
- title="QQ Light (QQ 轻聊,a Chinese chat app)" \
- publisher="Tencent" \
- year="2015" \
- media="download" \
- file1="QQ7.5Light.exe" \
- file2="QQLight.tar.gz"\
- installed_exe1="$W_PROGRAMS_X86_WIN/Tencent/QQ/Bin/QQScLauncher.exe" \
- homepage="http://www.qq.com" \
- unattended="no"
-
-load_qqlight()
-{
-    w_download http://dldir1.qq.com/qqfile/qq/QQ7.5Light/15462/QQ7.5Light.exe e75a0a7ee9ae00283ca5cf18221409c3acf60695
-    w_download http://hillwoodhome.net/wine/QQLight.tar.gz db04deb656c0cce7b223cc3358a8af98b0deed52
-
-    if w_workaround_wine_bug 29636 "Installing native riched20 to work around crash bug"
-    then
-        w_call riched20
-    fi
-
-    if w_workaround_wine_bug 34566 "Installing native ctf to work around crash"
-    then
-        w_call msctf
-    fi
-
-    # Make sure chinese fonts are available
-    w_call fakechinese
-
-    # uses mfc42u.dll
-    w_call mfc42
-
-    if w_workaround_wine_bug 38171 "Installing desktop file to work around bug"
-    then
-        cd "$W_TMP/"
-        tar -zxf "$W_CACHE/qqlight/QQLight.tar.gz"
-        w_try mkdir -p $HOME/.local/share/applications/wine/Programs/腾讯软件/QQ轻聊版/
-        w_try mkdir -p $HOME/.local/share/icons/hicolor/48x48/apps
-        w_try mkdir -p $HOME/.local/share/icons/hicolor/256x256/apps
-        w_try mv QQLight/QQ轻聊版.desktop $HOME/.local/share/applications/wine/Programs/腾讯软件/QQ轻聊版
-        w_try mv QQLight/48x48/QQLight.png $HOME/.local/share/icons/hicolor/48x48/apps
-        w_try mv QQLight/256x256/QQLight.png $HOME/.local/share/icons/hicolor/256x256/apps
-        w_try echo Exec=env WINEPREFIX=$WINEPREFIX $WINE \"$W_PROGRAMS_X86_WIN\\Tencent\\QQLite\\bin\\QQScLauncher.exe\" >> $HOME/.local/share/applications/wine/Programs/腾讯软件/QQ轻聊版/QQ轻聊版.desktop
-    fi
-
-    if w_workaround_wine_bug 39384 "Set permission as 000 for QQFrmMgr.sys to work around can't be started bug"
-    then
-        cd $WINEPREFIX/drive_c/windows/system32/drivers/
-        touch QQFrmMgr.sys
-        chmod 000 QQFrmMgr.sys
-    fi
-
-    cd "$W_CACHE/$W_PACKAGE"
-    w_try "$WINE" "$file1"
-    w_declare_exe "$W_PROGRAMS_X86_WIN\\Tencent\\QQ\\Bin" QQScLauncher.exe
-}
-
-#----------------------------------------------------------------
-
 
 w_metadata ragnarok games \
     title="Ragnarok" \
@@ -17725,99 +17521,11 @@ load_tmnationsforever()
             Sleep 1000
             Send {Space} ; don't start game
             ControlClick TNewButton4 ; Finish
-        }F
+        }
         WinWaitClose
     "
 
     w_declare_exe "$W_PROGRAMS_X86_WIN\\TmNationsForever" "TmForever.exe"
-}
-
-#----------------------------------------------------------------
-
-w_metadata THS apps\
-    title="同花顺免费版 (A Chinese stock app)" \
-    publisher="Zhejiang Hithink Flush Information Network Co." \
-    year="2013" \
-    media="download" \
-    file1="THS_v8.50.55_20150207.exe" \
-    installed_exe1="$W_PROGRAMS_X86_WIN/同花顺/zdsj.exe" \
-    homepage="http://www.10jqka.com.cn/" \
-    unattended="no"
-
-load_THS()
-{
-w_download http://zjcmpp.hexin.com.cn/download/THS_v8.50.55_20150207.exe dfad0bc243302646571f07bf94f995e2cb895d1e
-cd "$W_CACHE/$W_PACKAGE"
-    w_call ie8
-    # Make sure chinese fonts are available
-    w_call fakechinese
-w_try "$WINE" "$file1"
-w_declare_exe "$W_PROGRAMS_X86_WIN\\同花顺" "zdsj.exe"
-}
-
-#----------------------------------------------------------------
-
-w_metadata TM2013P1 apps\
-    title="TM 2013 Preview1" \
-    publisher="Tencent" \
-    year="2013" \
-    media="download" \
-    file1="TM2013Preview1.exe" \
-    installed_exe1="$W_PROGRAMS_X86_WIN/Tencent/TM/Bin/TM.exe" \
-    homepage="http://www.qq.com" \
-    unattended="no"
-
-load_TM2013P1()
-{
-w_download http://dldir1.qq.com/qqfile/tm/TM2013Preview1.exe 9c18ac5a2c214c53ddf3f55a098354e41ba8d66b
-cd "$W_CACHE/$W_PACKAGE"
-    if w_workaround_wine_bug 33086 "Installing native riched20 to allow typing in username"
-    then
-        w_call riched20
-    fi
-    if w_workaround_wine_bug 30083 "Installing native ie8 to avoid crash in settings and other dialogs"
-    then
-        w_call ie8
-    fi
-    # Make sure chinese fonts are available
-    w_call fakechinese
-w_try "$WINE" "$file1"
-w_declare_exe "$W_PROGRAMS_X86_WIN\\Tencent\\TM\\Bin" "TM.exe"
-}
-
-#----------------------------------------------------------------
-
-w_metadata TM2013P2 apps\
-    title="TM 2013 Preview2" \
-    publisher="Tencent" \
-    year="2013" \
-    media="download" \
-    file1="TM2013Preview2.exe" \
-    installed_exe1="$W_PROGRAMS_X86_WIN/Tencent/TM/Bin/TM.exe" \
-    homepage="http://www.qq.com" \
-    unattended="no"
-
-load_TM2013P2()
-{
-w_download http://dldir1.qq.com/qqfile/qq/tm/2013Preview2/10913/TM2013Preview2.exe 88f26ff2a5852f5332f46e5e1e440d198db69803
-cd "$W_CACHE/$W_PACKAGE"
-    if w_workaround_wine_bug 29636 "Installing native riched20 to work around crash bug"
-    then
-        w_call riched20
-    fi
-
-    if w_workaround_wine_bug 34566 "Installing native ctf to work around crash"
-    then
-        w_call msctf
-    fi
-
-    # Make sure chinese fonts are available
-    w_call fakechinese
-
-    # uses mfc42u.dll
-    w_call mfc42
-w_try "$WINE" "$file1"
-w_declare_exe "$W_PROGRAMS_X86_WIN\\Tencent\\TM\\Bin" "TM.exe"
 }
 
 #----------------------------------------------------------------
@@ -19163,6 +18871,42 @@ _EOF_
 
 #----------------------------------------------------------------
 
+w_metadata hidewineexports=enable settings \
+    title="Enable hiding wine exports from applications (wine-staging)"
+w_metadata hidewineexports=disable settings \
+    title="Disable hiding wine exports from applications (wine-staging)"
+
+load_hidewineexports()
+{
+    # Wine exports some functions allowing apps to query the wine version and
+    # information about the host environment. Using these functions, some apps
+    # will intentionally terminate if they can detect that they are running in
+    # a wine environment.
+    #
+    # Hiding these wine exports is only available in wine-staging.
+    # See https://bugs.winehq.org/show_bug.cgi?id=38656
+    case $arg in
+        enable)
+            local registry_value="\"Y\""
+            ;;
+        disable)
+            local registry_value="-"
+            ;;
+        *) w_die "Unexpected argument, $arg";;
+    esac
+
+    cat > "$W_TMP"/set-wineexports.reg <<_EOF_
+REGEDIT4
+
+[HKEY_CURRENT_USER\Software\Wine]
+"HideWineExports"=$registry_value
+
+_EOF_
+    w_try_regedit "$W_TMP"/set-wineexports.reg
+}
+
+#----------------------------------------------------------------
+
 w_metadata hosts settings \
     title_uk="Додати порожні файли у C:\windows\system32\drivers\etc\{hosts,services}" \
     title="Add empty C:\windows\system32\drivers\etc\{hosts,services} files"
@@ -19302,6 +19046,9 @@ w_metadata sound=disabled settings \
 w_metadata sound=oss settings \
     title_uk="Поставити звуковий драйвер OSS" \
     title="Set sound driver to OSS"
+w_metadata sound=pulse settings \
+    title_uk="Поставити звуковий драйвер PulseAudio" \
+    title="Set sound driver to PulseAudio"
 
 load_sound()
 {
@@ -19527,6 +19274,437 @@ w_metadata winxp settings \
 load_winxp()
 {
     w_set_winver winxp
+}
+
+#----------------------------------------------------------------
+
+# Chinese apps addition
+#----------------------------------------------------------------
+
+w_metadata 163mail apps\
+    title="163 MailMaster（网易邮箱大师）" \
+    publisher="NetEase" \
+    year="2015" \
+    media="download" \
+    file1="mail.exe" \
+    installed_exe1="$W_PROGRAMS_X86_WIN/MailMaster/Start.exe" \
+    homepage="http://mail.163.com/dashi/?from=mail46" \
+    unattended="no"
+
+load_163mail()
+{
+w_download http://client.dl.126.net/pcmail/dashi/mail.exe ee242fda1bcee6348ee9d8811784932cb57a458a
+cd "$W_CACHE/$W_PACKAGE"
+
+    # uses vcrun2005
+    w_call vcrun2005
+
+w_try "$WINE" "$file1"
+w_declare_exe "$W_PROGRAMS_X86_WIN\\MailMaster" "Start.exe"
+}
+
+#----------------------------------------------------------------
+
+w_metadata 163music apps\
+    title="NetEase Cloud Music" \
+    publisher="NetEase" \
+    year="2015" \
+    media="download" \
+    file1="cloudmusicsetup_1_9_3[116167].exe" \
+    installed_exe1="$W_PROGRAMS_X86_WIN/Netease/CloudMusic/cloudmusic.exe" \
+    homepage="http://music.163.com/" \
+    unattended="no"
+
+load_163music()
+{
+w_download http://s1.music.126.net/download/pc/cloudmusicsetup_1_9_3[116167].exe 75b7f7d82d874cdd1bcf78f8edda6d574cd630bb
+cd "$W_CACHE/$W_PACKAGE"
+
+    if w_workaround_wine_bug 38028 "Installing native directx9 to work around playback bug"
+    then
+        w_call directx9
+    fi
+
+    # Make sure chinese fonts are available
+    w_call fakechinese
+
+w_try "$WINE" "$file1"
+w_declare_exe "$W_PROGRAMS_X86_WIN\\Netease\CloudMusic" "cloudmusic.exe"
+}
+
+#----------------------------------------------------------------
+
+w_metadata evernote apps \
+ title="Evernote" \
+ publisher="Evernote Corporation" \
+ year="2015" \
+ media="download" \
+ file1="Evernote_5.8.3.6507.exe" \
+ installed_exe1="$W_PROGRAMS_X86_WIN/Evernote/Evernote/Evernote.exe" \
+ homepage="http://www.evernote.com" \
+ unattended="no"
+
+load_evernote()
+{
+    w_download https://cdn1.evernote.com/win5/public/Evernote_5.8.3.6507.exe 9b84ffeb842db7848e7b2688aa1b7a581c80c6c8
+
+    # Make sure chinese fonts are available
+    w_call fakechinese
+
+    cd "$W_CACHE/$W_PACKAGE"
+    w_try "$WINE" "$file1"
+    w_declare_exe "$W_PROGRAMS_X86_WIN\\Evernote\Evernote" Evernote.exe
+}
+
+#----------------------------------------------------------------
+
+w_metadata foxit apps \
+ title="FoxitReader" \
+ publisher="Foxit Software Incorporated" \
+ year="2015" \
+ media="download" \
+ file1="FoxitReader720.0722_prom_enu_Setup.exe" \
+ installed_exe1="$W_PROGRAMS_X86_WIN/Foxit Software/Foxit Reader/FoxitReader.exe" \
+ homepage="https://www.foxitsoftware.com" \
+ unattended="no"
+
+load_foxit()
+{
+    w_download http://cdn02.foxitsoftware.com/pub/foxit/reader/desktop/win/7.x/7.2/en_us/FoxitReader720.0722_prom_enu_Setup.exe bebe3c6c814045c95a068d9b2a5609fa4ee3fefb
+
+    cd "$W_CACHE/$W_PACKAGE"
+    w_try "$WINE" "$file1"
+    w_declare_exe "$W_PROGRAMS_X86_WIN\\Foxit Software\\Foxit Reader" FoxitReader.exe
+}
+
+#----------------------------------------------------------------
+
+w_metadata kugou apps\
+    title="KuGou Music" \
+    publisher="KuGou" \
+    year="2015" \
+    media="download" \
+    file1="kugou7680.exe" \
+    installed_exe1="$W_PROGRAMS_X86_WIN/KuGou/KGMusic/KuGou.exe" \
+    homepage="http://www.kugou.com/" \
+    unattended="no"
+
+load_kugou()
+{
+    w_download http://downmini.kugou.com/kugou7680.exe 87a0ebe14e79b2e624c2bed88e2d0c9e57600500
+    cd "$W_CACHE/$W_PACKAGE"
+
+    if w_workaround_wine_bug 38037 "Installing native directmusic to work around playback bug"
+    then
+    w_call directmusic
+    fi
+
+    if w_workaround_wine_bug 38038 "Installing native riched20 to work around typing in search box"
+    then
+    w_call riched20
+    fi
+
+    # Make sure chinese fonts are available
+    w_call fakechinese
+    w_try "$WINE" "$file1"
+    w_declare_exe "$W_PROGRAMS_X86_WIN\\KuGou\KGMusic" "KuGou.exe"
+}
+
+#----------------------------------------------------------------
+
+w_metadata line apps\
+    title="LINE" \
+    publisher="LINE" \
+    year="2014" \
+    media="download" \
+    file1="LineInst.exe" \
+    installed_exe1="$W_PROGRAMS_X86_WIN/Naver/LINE/Line.exe" \
+    homepage="http://line.me/" \
+    unattended="no"
+
+load_line()
+{
+w_download http://cdn.line-apps.com/client/win/LineInst.exe 215f5f1551b76c1a86e1da62406bd868f281d81e
+cd "$W_CACHE/$W_PACKAGE"
+
+    # Make sure chinese fonts are available
+    w_call fakechinese
+w_try "$WINE" "$file1"
+w_declare_exe "$W_PROGRAMS_X86_WIN\\Naver\LINE" "Line.exe"
+}
+
+#----------------------------------------------------------------
+
+w_metadata meitu apps \
+ title="Meitu XiuXiu" \
+ publisher="Meitu" \
+ year="2014" \
+ media="download" \
+ file1="XiuXiu_360Setup_4.0.0.exe" \
+ installed_exe1="$W_PROGRAMS_X86_WIN/Meitu/XiuXiu/XiuXiu.exe" \
+ homepage="http://xiuxiu.web.meitu.com/" \
+ unattended="no"
+
+load_meitu()
+{
+    w_download http://xiuxiu.dl.meitu.com/XiuXiu_360Setup_4.0.0.exe fcf83a61c7587ea775681c55aad388fbf835d646
+
+    # uses mfc42u.dll
+    w_call mfc42
+
+    # Make sure chinese fonts are available
+    w_call fakechinese
+
+    cd "$W_CACHE/$W_PACKAGE"
+    w_try "$WINE" "$file1"
+    w_declare_exe "$W_PROGRAMS_X86_WIN\\Meitu\\XiuXiu" XiuXiu.exe
+}
+
+#----------------------------------------------------------------
+
+w_metadata qqeim apps \
+ title="QQ Enterpris（企业QQ）" \
+ publisher="Tencent" \
+ year="2014" \
+ media="download" \
+ file1="HRTX1.89.2036.exe" \
+ installed_exe1="$W_PROGRAMS_X86_WIN/Tencent/QQEIM/Bin/QQEIM.exe" \
+ homepage="http://www.qq.com" \
+ unattended="no"
+
+load_qqeim()
+{
+    w_download http://dldir1.qq.com/qqfile/crm/hrtx/HRTX1.89.2036.exe 3fc06b519d50b990212dd12d729f450c1d364f3f
+
+    if w_workaround_wine_bug 29636 "Installing native riched20 to work around crash bug"
+    then
+        w_call riched20
+    fi
+
+    if w_workaround_wine_bug 34566 "Installing native ctf to work around crash"
+    then
+        w_call msctf
+    fi
+
+    # Make sure chinese fonts are available
+    w_call fakechinese
+
+
+    cd "$W_CACHE/$W_PACKAGE"
+    w_try "$WINE" "$file1"
+    w_declare_exe "$W_PROGRAMS_X86_WIN\\Tencent\\QQEIM\\Bin" QQEIM.exe
+}
+
+#----------------------------------------------------------------
+
+w_metadata QQGame games\
+    title="QQGame2013" \
+    publisher="Tencent" \
+    year="2013" \
+    media="download" \
+    file1="QQGame2013Beta5P1_setup_guanjia.EXE" \
+    installed_exe1="$W_PROGRAMS_X86_WIN/Tencent/QQGame/QQGame.exe" \
+    homepage="http://www.qq.com" \
+    unattended="no"
+
+load_QQGame()
+{
+w_download http://dldir3.qq.com/minigamefile/QQGame2013Beta5P1_setup_guanjia.EXE 398642cff730a858e37a0448a5e4bf5a4a3b63d8
+cd "$W_CACHE/$W_PACKAGE"
+    if w_workaround_wine_bug 33086 "Installing native riched20 to allow typing in username"
+    then
+        w_call riched20
+    fi
+    if w_workaround_wine_bug 30083 "Installing native ie8 to avoid crash in settings and other dialogs"
+    then
+        w_call ie8
+    fi
+    # uses mfc42u.dll
+    w_call mfc42
+    # Make sure chinese fonts are available
+    w_call fakechinese
+w_try "$WINE" "$file1"
+w_declare_exe "$W_PROGRAMS_X86_WIN\\Tencent\\QQGame" "QQGame.exe"
+}
+
+#----------------------------------------------------------------
+
+w_metadata qqlight apps \
+ title="QQ Light (QQ 轻聊,a Chinese chat app)" \
+ publisher="Tencent" \
+ year="2015" \
+ media="download" \
+ file1="QQ7.9Light.exe" \
+ file2="QQLight.tar.gz"\
+ installed_exe1="$W_PROGRAMS_X86_WIN/Tencent/QQ/Bin/QQScLauncher.exe" \
+ homepage="http://www.qq.com" \
+ unattended="no"
+
+load_qqlight()
+{
+    w_download http://dldir1.qq.com/qqfile/qq/QQ7.9Light/14308/QQ7.9Light.exe 00c27b5f0c621f82efdf29f0f9120cd9965b9e15
+    w_download http://hillwoodhome.net/wine/QQLight.tar.gz db04deb656c0cce7b223cc3358a8af98b0deed52
+
+    if w_workaround_wine_bug 29636 "Installing native riched20 to work around crash bug"
+    then
+        w_call riched20
+    fi
+
+#    if w_workaround_wine_bug 34566 "Installing native ctf to work around crash"
+#    then
+#        w_call msctf
+#    fi
+
+    # Make sure chinese fonts are available
+    w_call fakechinese
+
+    # uses mfc42u.dll
+#    w_call mfc42
+
+    if w_workaround_wine_bug 38171 "Installing desktop file to work around bug"
+    then
+        cd "$W_TMP/"
+        tar -zxf "$W_CACHE/qqlight/QQLight.tar.gz"
+        w_try mkdir -p $HOME/.local/share/applications/wine/Programs/腾讯软件/QQ轻聊版/
+        w_try mkdir -p $HOME/.local/share/icons/hicolor/48x48/apps
+        w_try mkdir -p $HOME/.local/share/icons/hicolor/256x256/apps
+        w_try mv QQLight/QQ轻聊版.desktop $HOME/.local/share/applications/wine/Programs/腾讯软件/QQ轻聊版
+        w_try mv QQLight/48x48/QQLight.png $HOME/.local/share/icons/hicolor/48x48/apps
+        w_try mv QQLight/256x256/QQLight.png $HOME/.local/share/icons/hicolor/256x256/apps
+        echo Exec=env WINEPREFIX=$WINEPREFIX $WINE \"$W_PROGRAMS_X86_WIN\\Tencent\\QQLite\\bin\\QQScLauncher.exe\" >> $HOME/.local/share/applications/wine/Programs/腾讯软件/QQ轻聊版/QQ轻聊版.desktop
+    fi
+
+    if w_workaround_wine_bug 39384 "Disable ntoskrnl.exe to work around can't be started bug"
+    then
+        cat > "$W_TMP"/_disable-ntoskrnl.exe.reg <<_EOF_
+REGEDIT4
+
+[HKEY_CURRENT_USER\Software\Wine\DllOverrides]
+"ntoskrnl.exe"=""
+_EOF_
+        w_try_regedit "$W_TMP_WIN"\\_disable-ntoskrnl.exe.reg
+    fi
+
+    cd "$W_CACHE/$W_PACKAGE"
+    w_try "$WINE" "$file1"
+    w_declare_exe "$W_PROGRAMS_X86_WIN\\Tencent\\QQ\\Bin" QQScLauncher.exe
+}
+
+#----------------------------------------------------------------
+
+w_metadata THS apps\
+    title="同花顺免费版 (A Chinese stock app)" \
+    publisher="Zhejiang Hithink Flush Information Network Co." \
+    year="2013" \
+    media="download" \
+    file1="THS_v8.50.55_20150207.exe" \
+    installed_exe1="$W_PROGRAMS_X86_WIN/同花顺/zdsj.exe" \
+    homepage="http://www.10jqka.com.cn/" \
+    unattended="no"
+
+load_THS()
+{
+w_download http://zjcmpp.hexin.com.cn/download/THS_v8.50.55_20150207.exe dfad0bc243302646571f07bf94f995e2cb895d1e
+cd "$W_CACHE/$W_PACKAGE"
+    w_call ie8
+    # Make sure chinese fonts are available
+    w_call fakechinese
+w_try "$WINE" "$file1"
+w_declare_exe "$W_PROGRAMS_X86_WIN\\同花顺" "zdsj.exe"
+}
+
+#----------------------------------------------------------------
+
+w_metadata thunder apps\
+    title="Thunder 7(迅雷7, a Chinese download manager)" \
+    publisher="Thunder Network" \
+    year="2015" \
+    media="download" \
+    file1="Thunder_dl_7.9.40.5006.exe" \
+    installed_exe1="$W_PROGRAMS_X86_WIN/KuGou/KGMusic/KuGou.exe" \
+    homepage="http://www.xunlei.com/" \
+    unattended="no"
+
+load_thunder()
+{
+    w_download http://down.sandai.net/thunder7/Thunder_dl_7.9.40.5006.exe 73ab5034efb418251c17a0e49bbf1dc4190e5bfe
+
+    cd "$W_CACHE/$W_PACKAGE"
+
+    if w_workaround_wine_bug 39342 "Installing native riched20 to work around crash bug"
+    then
+    w_call riched20
+    fi
+
+    # Make sure chinese fonts are available
+    w_call fakechinese
+    w_try "$WINE" "$file1"
+    w_declare_exe "$W_PROGRAMS_X86_WIN\\Thunder Network\Thunder\Program" "Thunder.exe"
+}
+
+#----------------------------------------------------------------
+
+w_metadata TM2013P1 apps\
+    title="TM 2013 Preview1" \
+    publisher="Tencent" \
+    year="2013" \
+    media="download" \
+    file1="TM2013Preview1.exe" \
+    installed_exe1="$W_PROGRAMS_X86_WIN/Tencent/TM/Bin/TM.exe" \
+    homepage="http://www.qq.com" \
+    unattended="no"
+
+load_TM2013P1()
+{
+w_download http://dldir1.qq.com/qqfile/tm/TM2013Preview1.exe 9c18ac5a2c214c53ddf3f55a098354e41ba8d66b
+cd "$W_CACHE/$W_PACKAGE"
+    if w_workaround_wine_bug 33086 "Installing native riched20 to allow typing in username"
+    then
+        w_call riched20
+    fi
+    if w_workaround_wine_bug 30083 "Installing native ie8 to avoid crash in settings and other dialogs"
+    then
+        w_call ie8
+    fi
+    # Make sure chinese fonts are available
+    w_call fakechinese
+w_try "$WINE" "$file1"
+w_declare_exe "$W_PROGRAMS_X86_WIN\\Tencent\\TM\\Bin" "TM.exe"
+}
+
+#----------------------------------------------------------------
+
+w_metadata TM2013P2 apps\
+    title="TM 2013 Preview2" \
+    publisher="Tencent" \
+    year="2013" \
+    media="download" \
+    file1="TM2013Preview2.exe" \
+    installed_exe1="$W_PROGRAMS_X86_WIN/Tencent/TM/Bin/TM.exe" \
+    homepage="http://www.qq.com" \
+    unattended="no"
+
+load_TM2013P2()
+{
+w_download http://dldir1.qq.com/qqfile/qq/tm/2013Preview2/10913/TM2013Preview2.exe 88f26ff2a5852f5332f46e5e1e440d198db69803
+cd "$W_CACHE/$W_PACKAGE"
+    if w_workaround_wine_bug 29636 "Installing native riched20 to work around crash bug"
+    then
+        w_call riched20
+    fi
+
+    if w_workaround_wine_bug 34566 "Installing native ctf to work around crash"
+    then
+        w_call msctf
+    fi
+
+    # Make sure chinese fonts are available
+    w_call fakechinese
+
+    # uses mfc42u.dll
+    w_call mfc42
+w_try "$WINE" "$file1"
+w_declare_exe "$W_PROGRAMS_X86_WIN\\Tencent\\TM\\Bin" "TM.exe"
 }
 
 #----------------------------------------------------------------
