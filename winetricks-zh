@@ -16457,8 +16457,8 @@ load_qq()
     # Make sure chinese fonts are available
     w_call fakechinese
 
-    # uses mfc42u.dll
-#    w_call mfc42
+    uses mfc42u.dll
+    w_call mfc42
 
 
     if w_workaround_wine_bug 38171 "Installing desktop file to work around bug"
@@ -16476,13 +16476,12 @@ load_qq()
 
     if w_workaround_wine_bug 39384 "Disable ntoskrnl.exe to work around can't be started bug"
     then
-        cat > "$W_TMP"/_disable-ntoskrnl.exe.reg <<_EOF_
-REGEDIT4
+        w_override_dlls disabled ntoskrnl.exe
+    fi
 
-[HKEY_CURRENT_USER\Software\Wine\DllOverrides]
-"ntoskrnl.exe"=""
-_EOF_
-      w_try_regedit "$W_TMP_WIN"\\_disable-ntoskrnl.exe.reg
+    if w_workaround_wine_bug 37680 "Disable txplatform.exe to fix QQ can't be quit cleanly"
+    then
+        w_override_dlls disabled txplatform.exe
     fi
 
     cd "$W_CACHE/$W_PACKAGE"
@@ -16525,6 +16524,12 @@ load_qqintl()
     then
         w_call wininet
     fi
+
+    if w_workaround_wine_bug 37680 "Disable txplatform.exe to fix QQ can't be quit cleanly"
+    then
+        w_override_dlls disabled txplatform.exe
+    fi
+
 
     # Make sure chinese fonts are available
     w_call fakechinese
@@ -19396,12 +19401,12 @@ load_kugou()
 
     if w_workaround_wine_bug 38037 "Installing native directmusic to work around playback bug"
     then
-    w_call directmusic
+        w_call directmusic
     fi
 
     if w_workaround_wine_bug 38038 "Installing native riched20 to work around typing in search box"
     then
-    w_call riched20
+        w_call riched20
     fi
 
     # Make sure chinese fonts are available
@@ -19486,6 +19491,11 @@ load_qqeim()
         w_call msctf
     fi
 
+    if w_workaround_wine_bug 37680 "Disable txplatform.exe to fix QQ can't be quit cleanly"
+    then
+        w_override_dlls disabled txplatform.exe
+    fi
+    
     # Make sure chinese fonts are available
     w_call fakechinese
 
@@ -19558,8 +19568,8 @@ load_qqlight()
     # Make sure chinese fonts are available
     w_call fakechinese
 
-    # uses mfc42u.dll
-#    w_call mfc42
+     uses mfc42u.dll
+    w_call mfc42
 
     if w_workaround_wine_bug 38171 "Installing desktop file to work around bug"
     then
@@ -19576,14 +19586,14 @@ load_qqlight()
 
     if w_workaround_wine_bug 39384 "Disable ntoskrnl.exe to work around can't be started bug"
     then
-        cat > "$W_TMP"/_disable-ntoskrnl.exe.reg <<_EOF_
-REGEDIT4
-
-[HKEY_CURRENT_USER\Software\Wine\DllOverrides]
-"ntoskrnl.exe"=""
-_EOF_
-        w_try_regedit "$W_TMP_WIN"\\_disable-ntoskrnl.exe.reg
+        w_override_dlls disabled ntoskrnl.exe
     fi
+
+    if w_workaround_wine_bug 37680 "Disable txplatform.exe to fix QQ can't be quit cleanly"
+    then
+        w_override_dlls disabled txplatform.exe
+    fi
+
 
     cd "$W_CACHE/$W_PACKAGE"
     w_try "$WINE" "$file1"

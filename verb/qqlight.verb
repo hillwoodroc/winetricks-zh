@@ -27,8 +27,8 @@ load_qqlight()
     # Make sure chinese fonts are available
     w_call fakechinese
 
-    # uses mfc42u.dll
-#    w_call mfc42
+     uses mfc42u.dll
+    w_call mfc42
 
     if w_workaround_wine_bug 38171 "Installing desktop file to work around bug"
     then
@@ -45,26 +45,14 @@ load_qqlight()
 
     if w_workaround_wine_bug 39384 "Disable ntoskrnl.exe to work around can't be started bug"
     then
-        cat > "$W_TMP"/_disable-ntoskrnl.exe.reg <<_EOF_
-REGEDIT4
-
-[HKEY_CURRENT_USER\Software\Wine\DllOverrides]
-"ntoskrnl.exe"=""
-_EOF_
-        w_try_regedit "$W_TMP_WIN"\\_disable-ntoskrnl.exe.reg
-    fi
-
-    if w_workaround_wine_bug 37680 "Disable txplatform.exe to fix QQ can't be quit cleanly"
-    then
-        cat > "$W_TMP"/_disable-txplatform.exe.reg <<_EOF_
-REGEDIT4
-
-[HKEY_CURRENT_USER\Software\Wine\DllOverrides]
-"txplatform.exe"=""
-_EOF_
-        w_try_regedit "$W_TMP_WIN"\\_disable-txplatform.exe.reg
+        w_override_dlls disabled ntoskrnl.exe
     fi
     
+    if w_workaround_wine_bug 37680 "Disable txplatform.exe to fix QQ can't be quit cleanly"
+    then
+        w_override_dlls disabled txplatform.exe
+    fi   
+  
     cd "$W_CACHE/$W_PACKAGE"
     w_try "$WINE" "$file1"
     w_declare_exe "$W_PROGRAMS_X86_WIN\\Tencent\\QQ\\Bin" QQScLauncher.exe

@@ -21,6 +21,11 @@ load_qqeim()
     then
         w_call msctf
     fi
+    
+    if w_workaround_wine_bug 37680 "Disable txplatform.exe to fix QQ can't be quit cleanly"
+    then
+        w_override_dlls disabled txplatform.exe
+    fi   
 
     # Make sure chinese fonts are available
     w_call fakechinese
