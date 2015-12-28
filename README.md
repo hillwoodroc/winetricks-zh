@@ -65,6 +65,8 @@ winetricks-zh
 17.网易邮箱大师
 对应的 verb 文件：163mail.verb
 
+18.QQ音乐
+对应的 verb 文件：qqmusic.verb
 
 ## 使用方法
 
