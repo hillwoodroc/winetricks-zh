@@ -27,7 +27,7 @@ load_qqlight()
     # Make sure chinese fonts are available
     w_call fakechinese
 
-     uses mfc42u.dll
+    # uses mfc42u.dll
     w_call mfc42
 
     if w_workaround_wine_bug 38171 "Installing desktop file to work around bug"

@@ -16457,7 +16457,7 @@ load_qq()
     # Make sure chinese fonts are available
     w_call fakechinese
 
-    uses mfc42u.dll
+    # uses mfc42u.dll
     w_call mfc42
 
 
