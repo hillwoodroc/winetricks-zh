@@ -1,0 +1,33 @@
+w_metadata qqmusic apps\
+    title="QQ Music" \
+    publisher="Tencent" \
+    year="2015" \
+    media="download" \
+    file1="QQMusicV12.24.3323.1216YQQ.exe" \
+    installed_exe1="$W_PROGRAMS_X86_WIN/Tencent/QQMusic/QQMusic1224.0.5.38/QQMusic.exe" \
+    homepage="http://y.qq.com" \
+    unattended="no"
+
+load_qqmusic()
+{
+w_download http://dldir1.qq.com/music/clntupate/QQMusicV12.24.3323.1216YQQ.exe 89a88ec5056c3e85a84790c6ba8ab7e597775de3
+cd "$W_CACHE/$W_PACKAGE"
+
+    if w_workaround_wine_bug 5162 "Installing native riched20 to fix can not input username bug"
+    then
+        w_call riched20
+    fi
+
+    # uses vcrun2010
+    w_call vcrun2010
+    
+    # uses mfc42u.dll
+    w_call mfc42
+    
+    # Make sure chinese fonts are available
+    w_call fakechinese
+
+w_try "$WINE" "$file1"
+w_declare_exe "$W_PROGRAMS_X86_WIN\\Tencent\QQMusic\QQMusic1224.0.5.38" "QQMusic.exe"
+}
+

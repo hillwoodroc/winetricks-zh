@@ -1,5 +1,10 @@
 -------------------------------------------
-Thu Dec 25 2015 - hillwood@opensuse.org
+Mon Dec 28 2015 - hillwood@opensuse.org
+
+- Add QQMusic support.
+
+-------------------------------------------
+Fri Dec 25 2015 - hillwood@opensuse.org
 
 - Merge changs from upstream.
 - Fix QQ can't be quit cleanly.
