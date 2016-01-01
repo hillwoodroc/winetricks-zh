@@ -16429,11 +16429,11 @@ load_popfs()
 #----------------------------------------------------------------
 
 w_metadata qq apps \
- title="QQ 7.9(Chinese chat app)" \
+ title="QQ 8.0(Chinese chat app)" \
  publisher="Tencent" \
  year="2015" \
  media="download" \
- file1="QQ7.9.exe" \
+ file1="QQ8.0.exe" \
  file2="QQ.tar.gz"\
  installed_exe1="$W_PROGRAMS_X86_WIN/Tencent/QQ/Bin/QQScLauncher.exe" \
  homepage="http://www.qq.com" \
@@ -16441,7 +16441,7 @@ w_metadata qq apps \
 
 load_qq()
 {
-    w_download http://dldir1.qq.com/qqfile/qq/QQ7.9/16638/QQ7.9.exe e7ca9724da3d103041b54b5a610489d38871e5da
+    w_download http://dldir1.qq.com/qqfile/qq/QQ8.0/16968/QQ8.0.exe ef92f3863113971c95a79aa75e601893d803826c
     w_download http://hillwoodhome.net/wine/QQ.tar.gz 08de45d3e5bb34b22e7c33e1163daec69742db58
 
     if w_workaround_wine_bug 29636 "Installing native riched20 to work around crash bug"
@@ -16478,18 +16478,14 @@ load_qq()
     then
         w_override_dlls disabled ntoskrnl.exe
     fi
-
+    
     if w_workaround_wine_bug 37680 "Disable txplatform.exe to fix QQ can't be quit cleanly"
     then
         w_override_dlls disabled txplatform.exe
-    fi
+    fi    
 
     cd "$W_CACHE/$W_PACKAGE"
     w_try "$WINE" "$file1"
-    
-    # fix issues#10, fix crash after login
-#    mkdir -p $WINEPREFIX/drive_c/users/$LOGNAME/Application\ Data/Tencent/QQ/Misc/com.tencent.wireless/SDK
-#    chmod 000 $WINEPREFIX/drive_c/users/$LOGNAME/Application\ Data/Tencent/QQ/Misc/com.tencent.wireless/SDK
 
     w_declare_exe "$W_PROGRAMS_X86_WIN\\Tencent\\QQ\\Bin" QQScLauncher.exe
 }
