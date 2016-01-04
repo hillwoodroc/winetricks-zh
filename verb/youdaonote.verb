@@ -1,0 +1,20 @@
+w_metadata youdaonote apps\
+    title="Youdao Note (有道云笔记)" \
+    publisher="NetEase" \
+    year="2015" \
+    media="download" \
+    file1="YNote.exe" \
+    installed_exe1="$W_PROGRAMS_X86_WIN/Youdao/YoudaoNote/RunYNote.exe" \
+    homepage="http://note.youdao.com/" \
+
+load_youdaonote()
+{
+w_download http://download.ydstatic.com/notewebsite/downloads/YNote.exe 33801211c710fa9ab2f9bc5d8e0d9a7b2b2322f0
+cd "$W_CACHE/$W_PACKAGE"
+
+    # Make sure chinese fonts are available
+    w_call fakechinese
+    
+w_try "$WINE" "$file1"
+w_declare_exe "$W_PROGRAMS_X86_WIN\\Youdao\YoudaoNote" "RunYNote.exe"
+}
