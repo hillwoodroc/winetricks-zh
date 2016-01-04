@@ -68,6 +68,15 @@ winetricks-zh
 18.QQ音乐
 对应的 verb 文件：qqmusic.verb
 
+19.有道云笔记
+对应的 verb 文件：youdaonote.verb
+
+20.爱奇艺
+对应的 verb 文件：iqiyi.verb
+
+21.优酷客户端
+对应的 verb 文件：youku.verb
+
 ## 使用方法
 
 ###已安装有旧版 winetricks
