@@ -1,0 +1,22 @@
+w_metadata youku apps\
+    title="Youku Client(优酷客户端)" \
+    publisher="Youku" \
+    year="2015" \
+    media="download" \
+    file1="youkuclient_setup_ywebtop1_6.7.7.12257.exe" \
+    installed_exe1="$W_PROGRAMS_X86_WIN/YouKu/YoukuClient/YoukuDesktop.exe" \
+    homepage="http://www.youku.com/" \
+    unattended="no"
+
+load_youku()
+{
+w_download http://desktop.youku.com/youkuclient/youkuclient_setup_ywebtop1_6.7.7.12257.exe ee250a3b1ac9634d8d3d4e9d4e8050a4dca50d7d
+cd "$W_CACHE/$W_PACKAGE"
+
+    # Make sure chinese fonts are available
+    w_call fakechinese
+
+w_try "$WINE" "$file1"
+w_declare_exe "$W_PROGRAMS_X86_WIN\\YouKu\YoukuClient" "YoukuDesktop.exe"
+}
+
