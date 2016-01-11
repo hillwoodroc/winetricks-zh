@@ -56,8 +56,8 @@ winetricks-zh
 14.LINE（连我）
 对应的 verb 文件：line.verb
 
-15.迅雷（请不要调整窗口大小，可能崩溃）
-对应的 verb 文件：thunder.verb
+~~15.迅雷（请不要调整窗口大小，可能崩溃）~~
+~~对应的 verb 文件：thunder.verb~~
 
 16.福昕阅读器
 对应的 verb 文件：foxit.verb
