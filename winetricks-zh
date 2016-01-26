@@ -19336,18 +19336,18 @@ w_declare_exe "$W_PROGRAMS_X86_WIN\\Netease\CloudMusic" "cloudmusic.exe"
 #----------------------------------------------------------------
 
 w_metadata evernote apps \
- title="Evernote" \
- publisher="Evernote Corporation" \
- year="2015" \
- media="download" \
- file1="Evernote_5.8.3.6507.exe" \
- installed_exe1="$W_PROGRAMS_X86_WIN/Evernote/Evernote/Evernote.exe" \
- homepage="http://www.evernote.com" \
- unattended="no"
+    title="Evernote" \
+    publisher="Evernote Corporation" \
+    year="2016" \
+    media="download" \
+    file1="Evernote_5.9.6.9494.exe" \
+    installed_exe1="$W_PROGRAMS_X86_WIN/Evernote/Evernote/Evernote.exe" \
+    homepage="http://www.evernote.com" \
+    unattended="no"
 
 load_evernote()
 {
-    w_download https://cdn1.evernote.com/win5/public/Evernote_5.8.3.6507.exe 9b84ffeb842db7848e7b2688aa1b7a581c80c6c8
+    w_download https://cdn1.evernote.com/win5/public/Evernote_5.9.6.9494.exe
 
     # Make sure chinese fonts are available
     w_call fakechinese
