@@ -10,7 +10,7 @@ w_metadata evernote apps \
 
 load_evernote()
 {
-    w_download https://cdn1.evernote.com/win5/public/Evernote_5.9.6.9494.exe
+    w_download https://cdn1.evernote.com/win5/public/Evernote_5.9.6.9494.exe 2c1620312ff305defd8959ad4775deda432f8a44
 
     # Make sure chinese fonts are available
     w_call fakechinese
