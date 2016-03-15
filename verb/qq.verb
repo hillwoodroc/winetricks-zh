@@ -1,9 +1,9 @@
 w_metadata qq apps \
- title="QQ 8.0(Chinese chat app)" \
+ title="QQ 8.1(Chinese chat app)" \
  publisher="Tencent" \
- year="2015" \
+ year="2016" \
  media="download" \
- file1="QQ8.0.exe" \
+ file1="QQ8.1.exe" \
  file2="QQ.tar.gz"\
  installed_exe1="$W_PROGRAMS_X86_WIN/Tencent/QQ/Bin/QQScLauncher.exe" \
  homepage="http://www.qq.com" \
@@ -11,25 +11,19 @@ w_metadata qq apps \
 
 load_qq()
 {
-    w_download http://dldir1.qq.com/qqfile/qq/QQ8.0/16968/QQ8.0.exe ef92f3863113971c95a79aa75e601893d803826c
+    w_download http://dldir1.qq.com/qqfile/qq/QQ8.1/17283/QQ8.1.exe 071a1018bf142e012ac96d0eeb4f122b85580e65
     w_download http://hillwoodhome.net/wine/QQ.tar.gz 08de45d3e5bb34b22e7c33e1163daec69742db58
 
-    if w_workaround_wine_bug 29636 "Installing native riched20 to work around crash bug"
+    if w_workaround_wine_bug 5162 "Installing native riched20 to work around crash bug"
     then
         w_call riched20
     fi
-
-#    if w_workaround_wine_bug 34566 "Installing native ctf to work around crash"
-#    then
-#        w_call msctf
-#    fi
 
     # Make sure chinese fonts are available
     w_call fakechinese
 
     # uses mfc42u.dll
     w_call mfc42
-
 
     if w_workaround_wine_bug 38171 "Installing desktop file to work around bug"
     then
@@ -44,12 +38,12 @@ load_qq()
         echo Exec=env WINEPREFIX=$WINEPREFIX $WINE \"$W_PROGRAMS_X86_WIN\\Tencent\\QQ\\bin\\QQScLauncher.exe\">> $HOME/.local/share/applications/wine/Programs/腾讯软件/QQ/腾讯QQ.desktop
     fi
 
-    if w_workaround_wine_bug 39384 "Disable ntoskrnl.exe to work around can't be started bug"
+    if w_workaround_wine_bug 39657 "Disable ntoskrnl.exe to work around can't be started bug"
     then
         w_override_dlls disabled ntoskrnl.exe
     fi
     
-    if w_workaround_wine_bug 37680 "Disable txplatform.exe to fix QQ can't be quit cleanly"
+    if w_workaround_wine_bug 37680 "Disable txplatform.exe to work around QQ can't be quit cleanly"
     then
         w_override_dlls disabled txplatform.exe
     fi    
