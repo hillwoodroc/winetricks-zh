@@ -1,9 +1,9 @@
 w_metadata qq apps \
- title="QQ 8.1(Chinese chat app)" \
+ title="QQ 8.3(Chinese chat app)" \
  publisher="Tencent" \
  year="2016" \
  media="download" \
- file1="QQ8.1.exe" \
+ file1="QQ8.3.exe" \
  file2="QQ.tar.gz"\
  installed_exe1="$W_PROGRAMS_X86_WIN/Tencent/QQ/Bin/QQScLauncher.exe" \
  homepage="http://www.qq.com" \
@@ -11,7 +11,7 @@ w_metadata qq apps \
 
 load_qq()
 {
-    w_download http://dldir1.qq.com/qqfile/qq/QQ8.1/17283/QQ8.1.exe 071a1018bf142e012ac96d0eeb4f122b85580e65
+    w_download http://dldir1.qq.com/qqfile/qq/QQ8.3/18038/QQ8.3.exe ee0a4f62a409deb22b270274b1934ebc21231b59
     w_download http://hillwoodhome.net/wine/QQ.tar.gz 08de45d3e5bb34b22e7c33e1163daec69742db58
 
     if w_workaround_wine_bug 5162 "Installing native riched20 to work around crash bug"

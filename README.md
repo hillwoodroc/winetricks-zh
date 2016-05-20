@@ -14,77 +14,77 @@ winetricks-zh
 
 ##目前支持的应用
 
-1.QQ国际版2.11 
+1.QQ国际版2.11  
 对应的 verb 文件：qqintl.verb
 
-2.QQ 7.9
+2.QQ 8.3 
 对应的 verb 文件：qq.verb
 
-3.同花顺股票软件
+3.同花顺股票软件  
 对应的 verb 文件：THS.verb
 
-4.QQ游戏2013
+4.QQ游戏2013  
 对应的 verb 文件：QQGame.verb
 
-5.TM2013 Preview1
+5.TM2013 Preview1  
 对应的 verb 文件：TM2013P1.verb
 
-6.TM2013 Preview2
+6.TM2013 Preview2  
 对应的 verb 文件：TM2013P2.verb
 
-7.网易云音乐
+7.网易云音乐  
 对应的 verb 文件：163music.verb
 
-8.Kugou 音乐
+8.Kugou 音乐  
 对应的 verb 文件：kugou.verb
 
-9.QQ企业版 
+9.QQ企业版  
 对应的 verb 文件：qqeim.verb
 
-10.美图秀秀
+10.美图秀秀  
 对应的 verb 文件：meitu.verb
 
-11.印象笔记
+11.印象笔记  
 对应的 verb 文件：evernote.verb
 
-12.光影魔术手
+12.光影魔术手  
 对应的 verb 文件：neoimaging.verb
 
-13.QQ轻聊版 7.9
+13.QQ轻聊版 7.9  
 对应的 verb 文件：qqlight.verb
 
-14.LINE（连我）
+14.LINE（连我）  
 对应的 verb 文件：line.verb
 
-~~15.迅雷（请不要调整窗口大小，可能崩溃）~~
+~~15.迅雷（请不要调整窗口大小，可能崩溃）~~  
 ~~对应的 verb 文件：thunder.verb~~
 
-16.福昕阅读器
+16.福昕阅读器  
 对应的 verb 文件：foxit.verb
 
-17.网易邮箱大师
+17.网易邮箱大师  
 对应的 verb 文件：163mail.verb
 
-18.QQ音乐
+18.QQ音乐  
 对应的 verb 文件：qqmusic.verb
 
-19.有道云笔记
+19.有道云笔记  
 对应的 verb 文件：youdaonote.verb
 
-20.爱奇艺
+20.爱奇艺  
 对应的 verb 文件：iqiyi.verb
 
-21.优酷客户端
+21.优酷客户端  
 对应的 verb 文件：youku.verb
 
-22.阿里旺旺（支持浏览器协议关联）
+22.阿里旺旺（支持浏览器协议关联）  
 对应的 verb 文件：aliww.verb
 
 ## 使用方法
 
 ###已安装有旧版 winetricks
 
-打开终端进入 verb 文件夹，运行命令： `winetricks --isolate <文件名>` (--isolate 参数起到将应用安装到单独容器中的作用，winetricks-zh 不需要此参数)
+打开终端进入 verb 文件夹，运行命令： `winetricks --isolate <文件名>` (--isolate 参数起到将应用安装到单独容器中的作用，winetricks-zh 默认将应用安装到单独容器，不需要此参数)
 
 ###未安装 winetricks 
 
