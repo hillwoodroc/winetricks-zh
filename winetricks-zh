@@ -18420,6 +18420,9 @@ _EOF_
     echo Exec=env WINEPREFIX=$WINEPREFIX $WINE \"$W_PROGRAMS_X86_WIN\\AliWangWang\\8.60.00C\\wwcmd.exe\" %u >> $HOME/.local/share/applications/wine-extension-aliim.desktop
     xdg-mime default wine-extension-aliim.desktop x-scheme-handler/aliim
     ###################################
+    
+    # Make sure chinese fonts are available
+    w_call fakechinese
 
 w_try "$WINE" "$file1"
 w_declare_exe "$W_PROGRAMS_X86_WIN\\AliWangWang" "AliIM.exe"
