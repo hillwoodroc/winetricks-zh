@@ -40,7 +40,7 @@ load_qqlight()
         w_try mv QQLight/QQ轻聊版.desktop $HOME/.local/share/applications/wine/Programs/腾讯软件/QQ轻聊版
         w_try mv QQLight/48x48/QQLight.png $HOME/.local/share/icons/hicolor/48x48/apps
         w_try mv QQLight/256x256/QQLight.png $HOME/.local/share/icons/hicolor/256x256/apps
-        echo Exec=env WINEPREFIX=$WINEPREFIX $WINE \"$W_PROGRAMS_X86_WIN\\Tencent\\QQLite\\bin\\QQScLauncher.exe\" >> $HOME/.local/share/applications/wine/Programs/腾讯软件/QQ轻聊版/QQ轻聊版.desktop
+        echo Exec=env WINEPREFIX=$WINEPREFIX $WINE '"'$W_PROGRAMS_X86_WIN'\Tencent\QQLite\Bin\QQScLauncher.exe"'>> $HOME/.local/share/applications/wine/Programs/腾讯软件/QQ轻聊版/QQ轻聊版.desktop
     fi
 
     if w_workaround_wine_bug 39384 "Disable ntoskrnl.exe to work around can't be started bug"
