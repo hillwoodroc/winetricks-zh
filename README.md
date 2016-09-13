@@ -80,6 +80,9 @@ winetricks-zh
 22.阿里旺旺（支持浏览器协议关联）  
 对应的 verb 文件：aliww.verb
 
+23.微信  
+对应的 verb 文件：wechat.verb
+
 ## 使用方法
 
 ###已安装有旧版 winetricks

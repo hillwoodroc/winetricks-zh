@@ -18784,35 +18784,6 @@ w_declare_exe "$W_PROGRAMS_X86_WIN\\同花顺" "zdsj.exe"
 
 #----------------------------------------------------------------
 
-w_metadata thunder apps\
-    title="Thunder 7(迅雷7, a Chinese download manager)" \
-    publisher="Thunder Network" \
-    year="2015" \
-    media="download" \
-    file1="Thunder_dl_7.9.40.5006.exe" \
-    installed_exe1="$W_PROGRAMS_X86_WIN/KuGou/KGMusic/KuGou.exe" \
-    homepage="http://www.xunlei.com/" \
-    unattended="no"
-
-load_thunder()
-{
-    w_download http://down.sandai.net/thunder7/Thunder_dl_7.9.40.5006.exe 73ab5034efb418251c17a0e49bbf1dc4190e5bfe
-
-    cd "$W_CACHE/$W_PACKAGE"
-
-    if w_workaround_wine_bug 39342 "Installing native riched20 to work around crash bug"
-    then
-    w_call riched20
-    fi
-
-    # Make sure chinese fonts are available
-    w_call fakechinese
-    w_try "$WINE" "$file1"
-    w_declare_exe "$W_PROGRAMS_X86_WIN\\Thunder Network\Thunder\Program" "Thunder.exe"
-}
-
-#----------------------------------------------------------------
-
 w_metadata TM2013P1 apps\
     title="TM 2013 Preview1" \
     publisher="Tencent" \
@@ -18874,6 +18845,34 @@ cd "$W_CACHE/$W_PACKAGE"
     w_call mfc42
 w_try "$WINE" "$file1"
 w_declare_exe "$W_PROGRAMS_X86_WIN\\Tencent\\TM\\Bin" "TM.exe"
+}
+
+#----------------------------------------------------------------
+
+w_metadata wechat apps \
+ title="WeChat 2.2" \
+ publisher="Tencent" \
+ year="2016" \
+ media="download" \
+ file1="WeChatSetup.exe" \
+ installed_exe1="$W_PROGRAMS_X86_WIN/Tencent/WeChat/WeChat.exe" \
+ homepage="http://weixin.qq.com/" \
+ unattended="no"
+
+load_wechat()
+{
+    w_download http://dldir1.qq.com/weixin/Windows/WeChatSetup.exe 466175efee555382218512f50510ecf6aa3cc971
+
+    if w_workaround_wine_bug 38038 "Installing native riched20 to work around typing bug"
+    then
+    w_call riched20
+    fi
+
+    w_call fakechinese
+    cd "$W_CACHE/$W_PACKAGE"
+    w_try "$WINE" "$file1"
+
+    w_declare_exe "$W_PROGRAMS_X86_WIN\\Tencent\\WeChat" WeChat.exe
 }
 
 #----------------------------------------------------------------
