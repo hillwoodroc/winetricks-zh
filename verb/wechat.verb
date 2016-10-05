@@ -1,0 +1,25 @@
+w_metadata wechat apps \
+ title="WeChat 2.2" \
+ publisher="Tencent" \
+ year="2016" \
+ media="download" \
+ file1="WeChatSetup.exe" \
+ installed_exe1="$W_PROGRAMS_X86_WIN/Tencent/WeChat/WeChat.exe" \
+ homepage="http://weixin.qq.com/" \
+ unattended="no"
+
+load_wechat()
+{
+    w_download http://dldir1.qq.com/weixin/Windows/WeChatSetup.exe eccd76ab0b36829d42b5d73ecf48448c54a13c8a
+
+    if w_workaround_wine_bug 38038 "Installing native riched20 to work around typing bug"
+    then
+    w_call riched20
+    fi
+
+    w_call fakechinese
+    cd "$W_CACHE/$W_PACKAGE"
+    w_try "$WINE" "$file1"
+
+    w_declare_exe "$W_PROGRAMS_X86_WIN\\Tencent\\WeChat" WeChat.exe
+}
