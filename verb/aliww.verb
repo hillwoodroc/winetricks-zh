@@ -35,7 +35,6 @@ _EOF_
     w_call fakechinese
     
     # Disable auto update
-    # Disable auto update
     mkdir -p $WINEPREFIX/drive_c/Program\ Files/AliWangWang/8.60.01C/update
     chmod 000 $WINEPREFIX/drive_c/Program\ Files/AliWangWang/8.60.01C/update
     
