@@ -18392,16 +18392,16 @@ w_declare_exe "$W_PROGRAMS_X86_WIN\\Netease\CloudMusic" "cloudmusic.exe"
 w_metadata aliww apps\
     title="AliWangWang(阿里旺旺)" \
     publisher="Taobao.com" \
-    year="2015" \
+    year="2016" \
     media="download" \
-    file1="AliIM2015_taobao(8.60.00C).exe" \
+    file1="AliIM2016_taobao(8.60.01C).exe" \
     installed_exe1="$W_PROGRAMS_X86_WIN/AliWangWang/AliIM.exe" \
     homepage="https://www.taobao.com/go/market/seller/aliclient/ww/index.php" \
     unattended="no"
 
 load_aliww()
 {
-w_download "http://download.taobaocdn.com/wangwang/AliIM2015_taobao(8.60.00C).exe" c07c5d2848e861254796c15a573ba0a88f6c2acb
+w_download "https://download.alicdn.com/wangwang/AliIM2016_taobao(8.60.01C).exe" fa312a62935ae0fec45ce3031017838918541d44
 cd "$W_CACHE/$W_PACKAGE"
 
     # Make sure chinese fonts are available
@@ -18418,13 +18418,18 @@ NoDisplay=true
 StartupNotify=true
 Icon=A767_AliIM.0
 _EOF_
-    echo Exec=env WINEPREFIX=$WINEPREFIX $WINE \"$W_PROGRAMS_X86_WIN\\AliWangWang\\8.60.00C\\wwcmd.exe\" %u >> $HOME/.local/share/applications/wine-extension-aliim.desktop
+    echo Exec=env WINEPREFIX=$WINEPREFIX $WINE \"$W_PROGRAMS_X86_WIN\\AliWangWang\\8.60.01C\\wwcmd.exe\" %u >> $HOME/.local/share/applications/wine-extension-aliim.desktop
     xdg-mime default wine-extension-aliim.desktop x-scheme-handler/aliim
     ###################################
-    
+
     # Make sure chinese fonts are available
     w_call fakechinese
+    
+    # Disable auto update
+    mkdir -p $WINEPREFIX/drive_c/Program\ Files/AliWangWang/8.60.01C/update
+    chmod 000 $WINEPREFIX/drive_c/Program\ Files/AliWangWang/8.60.01C/update
 
+    
 w_try "$WINE" "$file1"
 w_declare_exe "$W_PROGRAMS_X86_WIN\\AliWangWang" "AliIM.exe"
 }
