@@ -7075,7 +7075,7 @@ w_metadata msls31 dlls \
 load_msls31()
 {
     # Needed by native richedit and internet explorer
-    w_download http://www.marxmeier.com/download/sqlr/A0200/win32/InstMsiW.exe 53820efbc952107ee1a38be6cd5aa3f0
+    w_download http://www.marxmeier.com/download/sqlr/A0200/win32/InstMsiW.exe 4fc3bf0dc96b5cf5ab26430fac1c33c5c50bd142
     w_try_cabextract --directory="$W_TMP" "$W_CACHE"/msls31/InstMsiW.exe
     w_try cp -f "$W_TMP"/msls31.dll "$W_SYSTEM32_DLLS"
 }
