@@ -1,5 +1,5 @@
 w_metadata wechat apps \
- title="WeChat 2.2" \
+ title="WeChat 2.3" \
  publisher="Tencent" \
  year="2016" \
  media="download" \
@@ -10,7 +10,7 @@ w_metadata wechat apps \
 
 load_wechat()
 {
-    w_download http://dldir1.qq.com/weixin/Windows/WeChatSetup.exe eccd76ab0b36829d42b5d73ecf48448c54a13c8a
+    w_download http://dldir1.qq.com/weixin/Windows/WeChatSetup.exe 86ab6e26dfa90f6af59bfa6507693fb35f0a6df6
 
     if w_workaround_wine_bug 38038 "Installing native riched20 to work around typing bug"
     then
