@@ -83,6 +83,9 @@ winetricks-zh
 23.微信  
 对应的 verb 文件：wechat.verb
 
+23.金山词霸  
+对应的 verb 文件：iciba.verb
+
 ## 使用方法
 
 ###已安装有旧版 winetricks

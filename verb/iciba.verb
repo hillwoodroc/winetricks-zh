@@ -1,0 +1,21 @@
+w_metadata iciba apps\
+    title="金山词霸" \
+    publisher="Kingsoft" \
+    year="2017" \
+    media="download" \
+    file1="PowerWord.800.12012.exe" \
+    installed_exe1="c:/users/$LOGNAME/Local Settings/Application Data/Kingsoft/Power Word 2016/2016.3.2.0294/PowerWord.exe"
+    homepage="http://cp.iciba.com/" \
+    unattended="no"
+
+load_iciba()
+{
+    w_download http://download.iciba.com/pc/personal2016/PowerWord.800.12012.exe 210cb4793d227734de2aea5e77960a84ecbcccaf
+    cd "$W_CACHE/$W_PACKAGE"
+
+    # uses quartz
+    w_call quartz
+
+    w_try "$WINE" "$file1"
+    w_declare_exe "c:/users/$LOGNAME/Local Settings/Application Data/Kingsoft/Power Word 2016/2016.3.2.0294/" "PowerWord.exe"
+}
