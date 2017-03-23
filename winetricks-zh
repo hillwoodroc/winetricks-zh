@@ -16338,11 +16338,11 @@ load_popfs()
 #----------------------------------------------------------------
 
 w_metadata qq apps \
- title="QQ 8.9(Chinese chat app)" \
+ title="QQ 8.9.1(Chinese chat app)" \
  publisher="Tencent" \
- year="2016" \
+ year="2017" \
  media="download" \
- file1="QQ8.9.exe" \
+ file1="QQ8.9.1.exe" \
  file2="QQ.tar.gz"\
  installed_exe1="$W_PROGRAMS_X86_WIN/Tencent/QQ/Bin/QQScLauncher.exe" \
  homepage="http://www.qq.com" \
@@ -16350,7 +16350,7 @@ w_metadata qq apps \
 
 load_qq()
 {
-    w_download http://dldir1.qq.com/qqfile/qq/QQ8.9/20026/QQ8.9.exe e3a430e9a069ded386e4382e9b94af3323e19932
+    w_download http://dldir1.qq.com/qqfile/qq/QQ8.9.1/20437/QQ8.9.1.exe f883a26a398deeb128fd3f5a0bd6f5440340938a
     w_download http://hillwoodhome.net/wine/QQ.tar.gz 08de45d3e5bb34b22e7c33e1163daec69742db58
 
     if w_workaround_wine_bug 5162 "Installing native riched20 to work around crash bug" 2.2
