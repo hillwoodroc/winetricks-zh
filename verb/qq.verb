@@ -14,7 +14,7 @@ load_qq()
     w_download http://dldir1.qq.com/qqfile/qq/QQ8.9.1/20437/QQ8.9.1.exe f883a26a398deeb128fd3f5a0bd6f5440340938a
     w_download http://hillwoodhome.net/wine/QQ.tar.gz 08de45d3e5bb34b22e7c33e1163daec69742db58
 
-    if w_workaround_wine_bug 5162 "Installing native riched20 to work around crash bug" 2.2
+    if w_workaround_wine_bug 5162 "Installing native riched20 to work around crash bug"
     then
         w_call riched20
     fi
