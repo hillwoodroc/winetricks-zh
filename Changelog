@@ -1,4 +1,10 @@
 -------------------------------------------
+Thu Mar 23 2017 - hillwood@opensuse.org
+
+- Add support for TIM.
+_ Merge changes form upsteam version 20170316.
+
+-------------------------------------------
 Mon Apr 11 2016 - hillwood@opensuse.org
 
 - Add support for AliWangWang（阿里旺旺）.

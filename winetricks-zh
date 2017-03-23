@@ -16338,11 +16338,11 @@ load_popfs()
 #----------------------------------------------------------------
 
 w_metadata qq apps \
- title="QQ 8.0 (Chinese chat app)" \
+ title="QQ 8.9(Chinese chat app)" \
  publisher="Tencent" \
- year="2015" \
+ year="2016" \
  media="download" \
- file1="QQ8.0.exe" \
+ file1="QQ8.9.exe" \
  file2="QQ.tar.gz"\
  installed_exe1="$W_PROGRAMS_X86_WIN/Tencent/QQ/Bin/QQScLauncher.exe" \
  homepage="http://www.qq.com" \
@@ -16350,10 +16350,10 @@ w_metadata qq apps \
 
 load_qq()
 {
-    w_download https://dldir1.qq.com/qqfile/qq/QQ8.0/16968/QQ8.0.exe 3af11db606ea9f8358db5c9eb12398da3464de020b7da7cbf3e13662ee33d228
-    w_download http://hillwoodhome.net/wine/QQ.tar.gz eb5cd6371eb75ec9e2fc0271199df05cbb9f38a60c2e81d5d8ac7daeb40aba62
+    w_download http://dldir1.qq.com/qqfile/qq/QQ8.9/20026/QQ8.9.exe e3a430e9a069ded386e4382e9b94af3323e19932
+    w_download http://hillwoodhome.net/wine/QQ.tar.gz 08de45d3e5bb34b22e7c33e1163daec69742db58
 
-    if w_workaround_wine_bug 5162 "Installing native riched20 to work around can't input username."
+    if w_workaround_wine_bug 5162 "Installing native riched20 to work around crash bug" 2.2
     then
         w_call riched20
     fi
@@ -16366,30 +16366,31 @@ load_qq()
 
     if w_workaround_wine_bug 38171 "Installing desktop file to work around bug"
     then
-        w_try_cd "$W_TMP/"
+        cd "$W_TMP/"
         tar -zxf "$W_CACHE/qq/QQ.tar.gz"
-        mkdir -p "$HOME/.local/share/applications/wine/Programs/腾讯软件/QQ"
-        mkdir -p "$HOME/.local/share/icons/hicolor/48x48/apps"
-        mkdir -p "$HOME/.local/share/icons/hicolor/256x256/apps"
+        mkdir -p $HOME/.local/share/applications/wine/Programs/腾讯软件/QQ
+        mkdir -p $HOME/.local/share/icons/hicolor/48x48/apps
+        mkdir -p $HOME/.local/share/icons/hicolor/256x256/apps
         w_try mv QQ/腾讯QQ.desktop ~/.local/share/applications/wine/Programs/腾讯软件/QQ
         w_try mv QQ/48x48/QQ.png ~/.local/share/icons/hicolor/48x48/apps
         w_try mv QQ/256x256/QQ.png ~/.local/share/icons/hicolor/256x256/apps
-        # shellcheck disable=SC1001
-        echo Exec=env WINEPREFIX="$WINEPREFIX" "$WINE" "$W_PROGRAMS_X86_WIN"\/Tencent\/QQ\/bin\/QQScLauncher.exe >> "$HOME/.local/share/applications/wine/Programs/腾讯软件/QQ/腾讯QQ.desktop"
+        echo Exec=env WINEPREFIX=$WINEPREFIX $WINE '"'$W_PROGRAMS_X86_WIN'\Tencent\QQ\Bin\QQScLauncher.exe"'>> $HOME/.local/share/applications/wine/Programs/腾讯软件/QQ/腾讯QQ.desktop
     fi
 
     if w_workaround_wine_bug 39657 "Disable ntoskrnl.exe to work around can't be started bug"
     then
         w_override_dlls disabled ntoskrnl.exe
     fi
-
+    
     if w_workaround_wine_bug 37680 "Disable txplatform.exe to work around QQ can't be quit cleanly"
     then
         w_override_dlls disabled txplatform.exe
-    fi
+    fi    
 
-    w_try_cd "$W_CACHE/$W_PACKAGE"
+    cd "$W_CACHE/$W_PACKAGE"
     w_try "$WINE" "$file1"
+
+    w_declare_exe "$W_PROGRAMS_X86_WIN\\Tencent\\QQ\\Bin" QQScLauncher.exe
 }
 
 #----------------------------------------------------------------
@@ -19466,6 +19467,64 @@ cd "$W_CACHE/$W_PACKAGE"
     w_call fakechinese
 w_try "$WINE" "$file1"
 w_declare_exe "$W_PROGRAMS_X86_WIN\\同花顺" "zdsj.exe"
+}
+
+#----------------------------------------------------------------
+
+w_metadata tim apps \
+ title="TIM (Chinese chat app)" \
+ publisher="Tencent" \
+ year="2017" \
+ media="download" \
+ file1="TIM1.0.4.exe" \
+ file2="TIM.tar.gz"\
+ installed_exe1="$W_PROGRAMS_X86_WIN/Tencent/TIM/Bin/QQScLauncher.exe" \
+ homepage="http://www.qq.com" \
+ unattended="no"
+
+load_tim()
+{
+    w_download https://dldir1.qq.com/qqfile/qq/TIM1.0.4/20222/TIM1.0.4.exe 61126cfe4c797b66abf835f03d8d982f28e827d3
+    w_download http://hillwoodhome.net/wine/TIM.tar.gz 5f90989b4ef34ad7f898577e10b10195f32fe459
+
+    if w_workaround_wine_bug 5162 "Installing native riched20 to work around crash bug"
+    then
+        w_call riched20
+    fi
+
+    # Make sure chinese fonts are available
+    w_call fakechinese
+
+    # uses mfc42u.dll
+    w_call mfc42
+
+    if w_workaround_wine_bug 38171 "Installing desktop file to work around bug"
+    then
+        cd "$W_TMP/"
+        tar -zxf "$W_CACHE/tim/TIM.tar.gz"
+        mkdir -p $HOME/.local/share/applications/wine/Programs/腾讯软件/TIM
+        mkdir -p $HOME/.local/share/icons/hicolor/48x48/apps
+        mkdir -p $HOME/.local/share/icons/hicolor/256x256/apps
+        w_try mv TIM/腾讯TIM.desktop ~/.local/share/applications/wine/Programs/腾讯软件/TIM
+        w_try mv TIM/48x48/TIM.png ~/.local/share/icons/hicolor/48x48/apps
+        w_try mv TIM/256x256/TIM.png ~/.local/share/icons/hicolor/256x256/apps
+        echo Exec=env WINEPREFIX=$WINEPREFIX $WINE '"'$W_PROGRAMS_X86_WIN'\Tencent\TIM\Bin\QQScLauncher.exe"'>> $HOME/.local/share/applications/wine/Programs/腾讯软件/TIM/腾讯TIM.desktop
+    fi
+
+    if w_workaround_wine_bug 39657 "Disable ntoskrnl.exe to work around can't be started bug"
+    then
+        w_override_dlls disabled ntoskrnl.exe
+    fi
+    
+    if w_workaround_wine_bug 37680 "Disable txplatform.exe to work around QQ can't be quit cleanly"
+    then
+        w_override_dlls disabled txplatform.exe
+    fi    
+
+    cd "$W_CACHE/$W_PACKAGE"
+    w_try "$WINE" "$file1"
+
+    w_declare_exe "$W_PROGRAMS_X86_WIN\\Tencent\\TIM\\Bin" QQScLauncher.exe
 }
 
 #----------------------------------------------------------------
