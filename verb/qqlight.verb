@@ -5,7 +5,7 @@ w_metadata qqlight apps \
  media="download" \
  file1="QQ7.9Light.exe" \
  file2="QQLight.tar.gz"\
- installed_exe1="$W_PROGRAMS_X86_WIN/Tencent/QQ/Bin/QQScLauncher.exe" \
+ installed_exe1="$W_PROGRAMS_X86_WIN/Tencent/QQLite/Bin/QQScLauncher.exe" \
  homepage="http://www.qq.com" \
  unattended="no"
 
@@ -55,5 +55,5 @@ load_qqlight()
   
     cd "$W_CACHE/$W_PACKAGE"
     w_try "$WINE" "$file1"
-    w_declare_exe "$W_PROGRAMS_X86_WIN\\Tencent\\QQ\\Bin" QQScLauncher.exe
+    w_declare_exe "$W_PROGRAMS_X86_WIN\\Tencent\\QQLite\\Bin" QQScLauncher.exe
 }
