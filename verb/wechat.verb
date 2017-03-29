@@ -10,14 +10,25 @@ w_metadata wechat apps \
 
 load_wechat()
 {
-    w_download http://dldir1.qq.com/weixin/Windows/WeChatSetup.exe 86ab6e26dfa90f6af59bfa6507693fb35f0a6df6
+    w_download http://dldir1.qq.com/weixin/Windows/WeChatSetup.exe 5f9232709e30dfcbe8025c3f7b10368fb50f9d978581bf33ffdc789c65e207f6
 
     if w_workaround_wine_bug 38038 "Installing native riched20 to work around typing bug"
     then
-    w_call riched20
+        w_call riched20
+    fi
+    
+    if w_workaround_wine_bug 42710 "Installing native ole32 to work around sending files bug"
+    then
+        w_call ole32
     fi
 
     w_call fakechinese
+    
+    for i in ole32.dll oleaut32.dll olepro32.dll
+    do
+        "$WINE" regsvr32 /i $i > /dev/null 2>&1
+    done
+    
     cd "$W_CACHE/$W_PACKAGE"
     w_try "$WINE" "$file1"
 
