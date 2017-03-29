@@ -19023,11 +19023,6 @@ load_wechat()
 
     w_call fakechinese
     
-    for i in ole32.dll oleaut32.dll olepro32.dll
-    do
-        "$WINE" regsvr32 /i $i > /dev/null 2>&1
-    done
-    
     cd "$W_CACHE/$W_PACKAGE"
     w_try "$WINE" "$file1"
 
