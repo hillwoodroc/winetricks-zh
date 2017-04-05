@@ -1,16 +1,16 @@
 w_metadata evernote apps \
  title="Evernote" \
  publisher="Evernote Corporation" \
- year="2015" \
+ year="2017" \
  media="download" \
- file1="Evernote_5.8.3.6507.exe" \
+ file1="Evernote_6.5.4.4720.exe" \
  installed_exe1="$W_PROGRAMS_X86_WIN/Evernote/Evernote/Evernote.exe" \
  homepage="http://www.evernote.com" \
  unattended="no"
 
 load_evernote()
 {
-    w_download https://cdn1.evernote.com/win5/public/Evernote_5.8.3.6507.exe 9b84ffeb842db7848e7b2688aa1b7a581c80c6c8
+    w_download https://cdn1.evernote.com/win6/public/Evernote_6.5.4.4720.exe 2a0a4d133197650ef8506ca26ce86927e4e3191a044ea2a08bfe696b1f18a9a2
 
     # Make sure chinese fonts are available
     w_call fakechinese
