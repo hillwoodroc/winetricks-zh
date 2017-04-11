@@ -15916,6 +15916,11 @@ load_qq()
     # uses mfc42u.dll
     w_call mfc42
 
+    if w_workaround_wine_bug 42810 "Setting Windows version as XP to work around launch native browser bug"
+    then
+        w_call winxp
+    fi
+
     if w_workaround_wine_bug 38171 "Installing desktop file to work around bug"
     then
         w_try_cd "$W_TMP/"
@@ -18710,6 +18715,11 @@ load_qqeim()
     then
         w_override_dlls disabled txplatform.exe
     fi
+
+    if w_workaround_wine_bug 42810 "Setting Windows version as XP to work around launch native browser bug"
+    then
+        w_call winxp
+    fi
     
     # Make sure chinese fonts are available
     w_call fakechinese
@@ -18807,7 +18817,12 @@ load_qqlight()
     if w_workaround_wine_bug 37680 "Disable txplatform.exe to fix QQ can't be quit cleanly"
     then
         w_override_dlls disabled txplatform.exe
-    fi   
+    fi
+
+    if w_workaround_wine_bug 42810 "Setting Windows version as XP to work around launch native browser bug"
+    then
+        w_call winxp
+    fi
   
     cd "$W_CACHE/$W_PACKAGE"
     w_try "$WINE" "$file1"
@@ -18901,6 +18916,11 @@ load_tim()
     # uses mfc42u.dll
     w_call mfc42
 
+    if w_workaround_wine_bug 42810 "Setting Windows version as XP to work around launch native browser bug"
+    then
+        w_call winxp
+    fi
+
     if w_workaround_wine_bug 38171 "Installing desktop file to work around bug"
     then
         cd "$W_TMP/"
@@ -18984,6 +19004,11 @@ cd "$W_CACHE/$W_PACKAGE"
     if w_workaround_wine_bug 34566 "Installing native ctf to work around crash"
     then
         w_call msctf
+    fi
+    
+    if w_workaround_wine_bug 42810 "Setting Windows version as XP to work around launch native browser bug"
+    then
+        w_call winxp
     fi
 
     # Make sure chinese fonts are available

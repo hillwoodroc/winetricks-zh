@@ -24,6 +24,12 @@ load_qq()
 
     # uses mfc42u.dll
     w_call mfc42
+    
+    # uses native browser
+    if w_workaround_wine_bug 42810 "Setting Windows version as XP to work around launch native browser bug"
+    then
+        w_call winxp
+    fi
 
     if w_workaround_wine_bug 38171 "Installing desktop file to work around bug"
     then

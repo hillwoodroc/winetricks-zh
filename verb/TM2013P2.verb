@@ -25,7 +25,12 @@ cd "$W_CACHE/$W_PACKAGE"
     if w_workaround_wine_bug 37680 "Disable txplatform.exe to fix QQ can't be quit cleanly"
     then
         w_override_dlls disabled txplatform.exe
-    fi    
+    fi
+
+    if w_workaround_wine_bug 42810 "Setting Windows version as XP to work around launch native browser bug"
+    then
+        w_call winxp
+    fi
 
     # Make sure chinese fonts are available
     w_call fakechinese
