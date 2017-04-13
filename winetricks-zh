@@ -18780,7 +18780,7 @@ w_metadata QQGame games\
 
 load_QQGame()
 {
-w_download http://dldir3.qq.com/minigamefile/QQGame2013Beta5P1_setup_guanjia.EXE 398642cff730a858e37a0448a5e4bf5a4a3b63d8
+w_download http://dldir3.qq.com/minigamefile/QQGame2013Beta5P1_setup_guanjia.EXE 2a1f6c54eefe4e7006bf4841310fe9422f1c0e5d53019ff8b92df60e00f2fd9b
 cd "$W_CACHE/$W_PACKAGE"
     if w_workaround_wine_bug 33086 "Installing native riched20 to allow typing in username"
     then
