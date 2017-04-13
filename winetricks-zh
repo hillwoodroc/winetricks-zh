@@ -18914,7 +18914,7 @@ w_metadata THS apps\
 
 load_THS()
 {
-w_download http://zjcmpp.hexin.com.cn/download/THS_v8.50.55_20150207.exe dfad0bc243302646571f07bf94f995e2cb895d1e
+w_download http://zjcmpp.hexin.com.cn/download/THS_v8.50.55_20150207.exe 45527cc5cbbd70bea51c817e34cfc5efdf618de96adce5b44d8512c72dd61bc5
 cd "$W_CACHE/$W_PACKAGE"
     w_call ie8
     # Make sure chinese fonts are available
