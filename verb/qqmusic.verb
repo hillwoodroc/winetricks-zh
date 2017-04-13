@@ -10,7 +10,7 @@ w_metadata qqmusic apps\
 
 load_qqmusic()
 {
-w_download http://dldir1.qq.com/music/clntupate/QQMusicV12.24.3323.1216YQQ.exe 89a88ec5056c3e85a84790c6ba8ab7e597775de3
+w_download http://dldir1.qq.com/music/clntupate/QQMusicV12.24.3323.1216YQQ.exe e971d2218e8dedbd18e5f397beb46a92f7f1c420a4bd0daa0fa3c4bcde67648d
 cd "$W_CACHE/$W_PACKAGE"
 
     if w_workaround_wine_bug 5162 "Installing native riched20 to fix can not input username bug"
