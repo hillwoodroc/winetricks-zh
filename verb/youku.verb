@@ -10,7 +10,7 @@ w_metadata youku apps\
 
 load_youku()
 {
-w_download http://desktop.youku.com/youkuclient/youkuclient_setup_ywebtop1_6.7.7.12257.exe ee250a3b1ac9634d8d3d4e9d4e8050a4dca50d7d
+w_download http://desktop.youku.com/youkuclient/youkuclient_setup_ywebtop1_6.7.7.12257.exe 4f2417841dc71ce4ac1fc4fd1ae496c63658f175cdc6db51c7cfb6639fa6df77
 cd "$W_CACHE/$W_PACKAGE"
 
     # Make sure chinese fonts are available

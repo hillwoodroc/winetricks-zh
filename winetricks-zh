@@ -19057,29 +19057,6 @@ w_declare_exe "$W_PROGRAMS_X86_WIN\\Tencent\\TM\\Bin" "TM.exe"
 }
 
 #----------------------------------------------------------------
-
-w_metadata youdaonote apps\
-    title="Youdao Note (有道云笔记)" \
-    publisher="NetEase" \
-    year="2015" \
-    media="download" \
-    file1="YNote.exe" \
-    installed_exe1="$W_PROGRAMS_X86_WIN/Youdao/YoudaoNote/RunYNote.exe" \
-    homepage="http://note.youdao.com/" \
-
-load_youdaonote()
-{
-w_download http://download.ydstatic.com/notewebsite/downloads/YNote.exe 8f3d33249099a252aeb75094fda391a5dc40084187ade893d943dadb58d58e7a
-cd "$W_CACHE/$W_PACKAGE"
-
-    # Make sure chinese fonts are available
-    w_call fakechinese
-    
-w_try "$WINE" "$file1"
-w_declare_exe "$W_PROGRAMS_X86_WIN\\Youdao\YoudaoNote" "RunYNote.exe"
-}
-
-#----------------------------------------------------------------
 w_metadata wechat apps \
  title="WeChat 2.3" \
  publisher="Tencent" \
@@ -19126,7 +19103,7 @@ w_metadata youku apps\
 
 load_youku()
 {
-w_download http://desktop.youku.com/youkuclient/youkuclient_setup_ywebtop1_6.7.7.12257.exe ee250a3b1ac9634d8d3d4e9d4e8050a4dca50d7d
+w_download http://desktop.youku.com/youkuclient/youkuclient_setup_ywebtop1_6.7.7.12257.exe 4f2417841dc71ce4ac1fc4fd1ae496c63658f175cdc6db51c7cfb6639fa6df77
 cd "$W_CACHE/$W_PACKAGE"
 
     # Make sure chinese fonts are available
@@ -19141,7 +19118,7 @@ w_declare_exe "$W_PROGRAMS_X86_WIN\\YouKu\YoukuClient" "YoukuDesktop.exe"
 w_metadata youdaonote apps\
     title="Youdao Note (有道云笔记)" \
     publisher="NetEase" \
-    year="2016" \
+    year="2015" \
     media="download" \
     file1="YNote.exe" \
     installed_exe1="$W_PROGRAMS_X86_WIN/Youdao/YoudaoNote/RunYNote.exe" \
@@ -19149,7 +19126,7 @@ w_metadata youdaonote apps\
 
 load_youdaonote()
 {
-w_download http://download.ydstatic.com/notewebsite/downloads/YNote.exe da88b10b655f6411483b8eb787e1ddb6d3151d86
+w_download http://download.ydstatic.com/notewebsite/downloads/YNote.exe 8f3d33249099a252aeb75094fda391a5dc40084187ade893d943dadb58d58e7a
 cd "$W_CACHE/$W_PACKAGE"
 
     # Make sure chinese fonts are available
@@ -19159,7 +19136,6 @@ w_try "$WINE" "$file1"
 w_declare_exe "$W_PROGRAMS_X86_WIN\\Youdao\YoudaoNote" "RunYNote.exe"
 }
 
-#----------------------------------------------------------------
 #----------------------------------------------------------------
 
 # Not really a setting, just a fake verb, that shouldn't count as 'installed',
