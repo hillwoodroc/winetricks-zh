@@ -10,7 +10,7 @@ w_metadata meitu apps \
 
 load_meitu()
 {
-    w_download http://xiuxiu.dl.meitu.com/XiuXiu_360Setup_4.0.0.exe fcf83a61c7587ea775681c55aad388fbf835d646
+    w_download http://xiuxiu.dl.meitu.com/XiuXiu_360Setup_4.0.0.exe 40d5824f2f05e884dbe3133942dc5d4020f289a7b5d6ca7782631ea30cb090c1
 
     # uses mfc42u.dll
     w_call mfc42
