@@ -10,7 +10,7 @@ w_metadata 163music apps\
 
 load_163music()
 {
-w_download http://s1.music.126.net/download/pc/cloudmusicsetup_2_0_3[131777].exe 59c6a6c2eff1626c6be85ae99a2ca06399c7b880
+w_download http://s1.music.126.net/download/pc/cloudmusicsetup_2_0_3[131777].exe 158bb46259d3dca6f346e60575813ed0b053541f81e357de57443afc2319dce3
 cd "$W_CACHE/$W_PACKAGE"
 
     if w_workaround_wine_bug 38028 "Installing native directx9 to work around playback bug"
