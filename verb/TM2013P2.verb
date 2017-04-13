@@ -10,7 +10,7 @@ w_metadata TM2013P2 apps\
 
 load_TM2013P2()
 {
-w_download http://dldir1.qq.com/qqfile/qq/tm/2013Preview2/10913/TM2013Preview2.exe 88f26ff2a5852f5332f46e5e1e440d198db69803
+w_download http://dldir1.qq.com/qqfile/qq/tm/2013Preview2/10913/TM2013Preview2.exe 43f021773e7b7346cc51849f904f9ddd0eaf44bf0be337c5e0fad7d12cc949e1
 cd "$W_CACHE/$W_PACKAGE"
     if w_workaround_wine_bug 29636 "Installing native riched20 to work around crash bug"
     then
