@@ -18813,8 +18813,8 @@ w_metadata qqlight apps \
 
 load_qqlight()
 {
-    w_download http://dldir1.qq.com/qqfile/qq/QQ7.9Light/14308/QQ7.9Light.exe 00c27b5f0c621f82efdf29f0f9120cd9965b9e15
-    w_download http://hillwoodhome.net/wine/QQLight.tar.gz db04deb656c0cce7b223cc3358a8af98b0deed52
+    w_download http://dldir1.qq.com/qqfile/qq/QQ7.9Light/14308/QQ7.9Light.exe 4758cea5cc140d018f487865983e4b13c71c96c8f864f250db3ff0a956681489
+    w_download http://hillwoodhome.net/wine/QQLight.tar.gz e6ee5c5dbe524c96d2b96eed343160423b023d38cf2d4dcbc2baea660eae5374
 
     if w_workaround_wine_bug 29636 "Installing native riched20 to work around crash bug"
     then
