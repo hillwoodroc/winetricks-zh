@@ -10,7 +10,7 @@ w_metadata neoimaging apps\
 
 load_neoimaging()
 {
-    w_download http://down.neoimaging.cn/neoimaging/NeoImagingSetup_4.4.1.exe 13d3285601a1e52d0ef719bc7d2eeed994d7c097
+    w_download http://down.neoimaging.cn/neoimaging/NeoImagingSetup_4.4.1.exe 1c74ca53e1578bcbf0147747bd97636b3ce25f28d20e73a06da2eb8c38f7405e
     cd "$W_CACHE/$W_PACKAGE"
 
     if w_workaround_wine_bug 38038 "Installing native riched20 to work around typing in search box"
