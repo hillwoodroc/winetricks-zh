@@ -19000,7 +19000,7 @@ w_metadata TM2013P1 apps\
 
 load_TM2013P1()
 {
-w_download http://dldir1.qq.com/qqfile/tm/TM2013Preview1.exe 9c18ac5a2c214c53ddf3f55a098354e41ba8d66b
+w_download http://dldir1.qq.com/qqfile/tm/TM2013Preview1.exe 0881475acbb9af453ed399840fd5af680a04d90652fd10e2e899774f3f6c2406
 cd "$W_CACHE/$W_PACKAGE"
     if w_workaround_wine_bug 33086 "Installing native riched20 to allow typing in username"
     then
