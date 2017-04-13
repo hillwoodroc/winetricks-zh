@@ -18491,7 +18491,7 @@ w_metadata aliww apps\
 
 load_aliww()
 {
-w_download "https://download.alicdn.com/wangwang/AliIM2016_taobao(8.60.01C).exe" fa312a62935ae0fec45ce3031017838918541d44
+w_download "https://download.alicdn.com/wangwang/AliIM2016_taobao(8.60.01C).exe" 04116dd351d80eb70f151712cef4a4acb6e0d549ef1597d6243a6fde2879ecd7
 cd "$W_CACHE/$W_PACKAGE"
 
     # Make sure chinese fonts are available
@@ -18562,7 +18562,7 @@ w_metadata foxit apps \
 
 load_foxit()
 {
-    w_download http://cdn02.foxitsoftware.com/pub/foxit/reader/desktop/win/7.x/7.2/en_us/FoxitReader720.0722_prom_enu_Setup.exe bebe3c6c814045c95a068d9b2a5609fa4ee3fefb
+    w_download http://cdn02.foxitsoftware.com/pub/foxit/reader/desktop/win/7.x/7.2/en_us/FoxitReader720.0722_prom_enu_Setup.exe cfb46ac23a4c5a02c641e33441bba4fe128cce3d4c05257199e0d7e029d20141
 
     cd "$W_CACHE/$W_PACKAGE"
     w_try "$WINE" "$file1"
