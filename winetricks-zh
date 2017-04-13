@@ -18616,7 +18616,7 @@ w_metadata kugou apps\
 
 load_kugou()
 {
-    w_download http://downmini.kugou.com/kugou7680.exe 87a0ebe14e79b2e624c2bed88e2d0c9e57600500
+    w_download http://downmini.kugou.com/kugou7680.exe 25a508d0fcc059de29375494a7c418a439a5e79a2df52d2b12fc9972da1c205e
     cd "$W_CACHE/$W_PACKAGE"
 
     if w_workaround_wine_bug 38037 "Installing native directmusic to work around playback bug"
