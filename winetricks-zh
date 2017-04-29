@@ -4683,7 +4683,7 @@ winetricks_init()
     WINETRICKS_OPT_DD=${WINETRICKS_OPT_DD:-dd}
 
     # whether to use shared wineprefix (1) or unique wineprefix for each app (0)
-    WINETRICKS_OPT_SHAREDPREFIX=${WINETRICKS_OPT_SHAREDPREFIX:-0}
+    WINETRICKS_OPT_SHAREDPREFIX=0
 
     WINETRICKS_SOURCEFORGE=https://downloads.sourceforge.net
 
