@@ -18671,6 +18671,11 @@ load_evernote()
 
     # Make sure chinese fonts are available
     w_call fakechinese
+    
+    if w_workaround_wine_bug xxx "workaround can not edit bug"
+    then
+        w_call wininet
+    fi
 
     cd "$W_CACHE/$W_PACKAGE"
     w_try "$WINE" "$file1"

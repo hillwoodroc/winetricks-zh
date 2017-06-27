@@ -11,6 +11,11 @@ w_metadata evernote apps \
 load_evernote()
 {
     w_download https://cdn1.evernote.com/win6/public/Evernote_6.5.4.4720.exe 2a0a4d133197650ef8506ca26ce86927e4e3191a044ea2a08bfe696b1f18a9a2
+    
+    if w_workaround_wine_bug xxx "workaround can not edit bug"
+    then
+        w_call wininet
+    fi
 
     # Make sure chinese fonts are available
     w_call fakechinese
