@@ -11,10 +11,10 @@ w_metadata qq apps \
 
 load_qq()
 {
-    w_download http://dldir1.qq.com/qqfile/qq/QQ8.9.1/20437/QQ8.9.1.exe 8e0d3ff5264da2d77e2fc011c21048edeebcf082f55f68a301f763c3a15c0d3f
-    w_download http://hillwoodhome.net/wine/QQ.tar.gz eb5cd6371eb75ec9e2fc0271199df05cbb9f38a60c2e81d5d8ac7daeb40aba62g
+    w_download http://dldir1.qq.com/qqfile/qq/QQ8.9.3/21169/QQ8.9.3.exe 5932ce06f44cdf141c1ac1ff732ba8cb95fd6283e0a414b1b25a6bb031f3e1de
+    w_download http://hillwoodhome.net/wine/QQ.tar.gz eb5cd6371eb75ec9e2fc0271199df05cbb9f38a60c2e81d5d8ac7daeb40aba62
 
-    if w_workaround_wine_bug 5162 "Installing native riched20 to work around crash bug"
+    if w_workaround_wine_bug 5162 "Installing native riched20 to work around can't input username."
     then
         w_call riched20
     fi
@@ -24,38 +24,31 @@ load_qq()
 
     # uses mfc42u.dll
     w_call mfc42
-    
-    # uses native browser
-    if w_workaround_wine_bug 42810 "Setting Windows version as XP to work around launch native browser bug"
-    then
-        w_call winxp
-    fi
 
     if w_workaround_wine_bug 38171 "Installing desktop file to work around bug"
     then
-        cd "$W_TMP/"
+        w_try_cd "$W_TMP/"
         tar -zxf "$W_CACHE/qq/QQ.tar.gz"
-        mkdir -p $HOME/.local/share/applications/wine/Programs/腾讯软件/QQ
-        mkdir -p $HOME/.local/share/icons/hicolor/48x48/apps
-        mkdir -p $HOME/.local/share/icons/hicolor/256x256/apps
+        mkdir -p "$HOME/.local/share/applications/wine/Programs/腾讯软件/QQ"
+        mkdir -p "$HOME/.local/share/icons/hicolor/48x48/apps"
+        mkdir -p "$HOME/.local/share/icons/hicolor/256x256/apps"
         w_try mv QQ/腾讯QQ.desktop ~/.local/share/applications/wine/Programs/腾讯软件/QQ
         w_try mv QQ/48x48/QQ.png ~/.local/share/icons/hicolor/48x48/apps
         w_try mv QQ/256x256/QQ.png ~/.local/share/icons/hicolor/256x256/apps
-        echo Exec=env WINEPREFIX=$WINEPREFIX $WINE '"'$W_PROGRAMS_X86_WIN'\Tencent\QQ\Bin\QQScLauncher.exe"'>> $HOME/.local/share/applications/wine/Programs/腾讯软件/QQ/腾讯QQ.desktop
+        # shellcheck disable=SC1001
+        echo Exec=env WINEPREFIX="$WINEPREFIX" "$WINE" '"'$W_PROGRAMS_X86_WIN'/Tencent/QQ/bin/QQScLauncher.exe"' >> "$HOME/.local/share/applications/wine/Programs/腾讯软件/QQ/腾讯QQ.desktop"
     fi
 
     if w_workaround_wine_bug 39657 "Disable ntoskrnl.exe to work around can't be started bug"
     then
         w_override_dlls disabled ntoskrnl.exe
     fi
-    
+
     if w_workaround_wine_bug 37680 "Disable txplatform.exe to work around QQ can't be quit cleanly"
     then
         w_override_dlls disabled txplatform.exe
-    fi    
+    fi
 
-    cd "$W_CACHE/$W_PACKAGE"
+    w_try_cd "$W_CACHE/$W_PACKAGE"
     w_try "$WINE" "$file1"
-
-    w_declare_exe "$W_PROGRAMS_X86_WIN\\Tencent\\QQ\\Bin" QQScLauncher.exe
 }
