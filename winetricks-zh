@@ -10223,6 +10223,20 @@ w_metadata fakechinese fonts \
 
 load_fakechinese()
 {
+    fc-list | grep -q "Noto Sans CJK SC" && {
+        w_register_font_replacement "Microsoft JhengHei" "Noto Sans CJK SC"
+        w_register_font_replacement "Microsoft YaHei" "Noto Sans CJK SC"
+        w_register_font_replacement "SimHei" "Noto Sans CJK SC"
+        w_register_font_replacement "DFKai-SB" "Noto Sans CJK SC"
+        w_register_font_replacement "FangSong" "Noto Sans CJK SC"
+        w_register_font_replacement "KaiTi" "Noto Sans CJK SC"
+        w_register_font_replacement "PMingLiU" "Noto Sans CJK SC"
+        w_register_font_replacement "MingLiU" "Noto Sans CJK SC"
+        w_register_font_replacement "NSimSun" "Noto Sans CJK SC"
+        w_register_font_replacement "SimKai" "Noto Sans CJK SC"
+        w_register_font_replacement "SimSun" "Noto Sans CJK SC"
+    } && return
+ 
     w_call wenquanyi
     # Loads Wenquanyi fonts and sets aliases for Microsoft Chinese fonts
     # Reference : https://en.wikipedia.org/wiki/List_of_Microsoft_Windows_fonts
