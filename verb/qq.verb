@@ -1,9 +1,9 @@
 w_metadata qq apps \
- title="QQ 8.9.1(Chinese chat app)" \
+ title="QQ 8.9.4(Chinese chat app)" \
  publisher="Tencent" \
  year="2017" \
  media="download" \
- file1="QQ8.9.1.exe" \
+ file1="QQ8.9.4.exe" \
  file2="QQ.tar.gz"\
  installed_exe1="$W_PROGRAMS_X86_WIN/Tencent/QQ/Bin/QQScLauncher.exe" \
  homepage="http://www.qq.com" \
@@ -11,7 +11,7 @@ w_metadata qq apps \
 
 load_qq()
 {
-    w_download http://dldir1.qq.com/qqfile/qq/QQ8.9.3/21169/QQ8.9.3.exe 5932ce06f44cdf141c1ac1ff732ba8cb95fd6283e0a414b1b25a6bb031f3e1de
+    w_download https://dldir1.qq.com/qqfile/qq/QQ8.9.4/21603/QQ8.9.4.exe 10d3d7b584624563fae525b258a3115c8eff08e00758012f47db7c92f8a96e2e
     w_download http://hillwoodhome.net/wine/QQ.tar.gz eb5cd6371eb75ec9e2fc0271199df05cbb9f38a60c2e81d5d8ac7daeb40aba62
 
     if w_workaround_wine_bug 5162 "Installing native riched20 to work around can't input username."
