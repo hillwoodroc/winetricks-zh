@@ -3,14 +3,14 @@ w_metadata evernote apps \
  publisher="Evernote Corporation" \
  year="2017" \
  media="download" \
- file1="Evernote_6.5.4.4720.exe" \
+ file1="Evernote_6.5.4.5512.exe" \
  installed_exe1="$W_PROGRAMS_X86_WIN/Evernote/Evernote/Evernote.exe" \
  homepage="http://www.evernote.com" \
  unattended="no"
 
 load_evernote()
 {
-    w_download https://cdn1.evernote.com/win6/public/Evernote_6.5.4.4720.exe 2a0a4d133197650ef8506ca26ce86927e4e3191a044ea2a08bfe696b1f18a9a2
+    w_download https://cdn1.evernote.com/win6/public/Evernote_6.6.4.5512.exe d909f785b407cbd57ed2b04ab8e95d6f993d54432a1303f6792f4e296da11b31
     
     if w_workaround_wine_bug xxx "workaround can not edit bug"
     then
