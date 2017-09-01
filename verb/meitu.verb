@@ -1,16 +1,16 @@
 w_metadata meitu apps \
  title="Meitu XiuXiu" \
  publisher="Meitu" \
- year="2014" \
+ year="2016" \
  media="download" \
- file1="XiuXiu_360Setup_4.0.0.exe" \
+ file1="XiuXiu_360Setup_4.0.1.exe" \
  installed_exe1="$W_PROGRAMS_X86_WIN/Meitu/XiuXiu/XiuXiu.exe" \
  homepage="http://xiuxiu.web.meitu.com/" \
  unattended="no"
 
 load_meitu()
 {
-    w_download http://xiuxiu.dl.meitu.com/XiuXiu_360Setup_4.0.0.exe 40d5824f2f05e884dbe3133942dc5d4020f289a7b5d6ca7782631ea30cb090c1
+    w_download http://xiuxiu.dl.meitu.com/XiuXiu_360Setup_4.0.1.exe 3262b09f5addee99abd69f6f8801498005f7e53af7248cc88cc890096c21f350
 
     # uses mfc42u.dll
     w_call mfc42
