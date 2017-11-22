@@ -26,11 +26,11 @@
 4.QQ游戏2013  
 对应的 verb 文件：QQGame.verb
 
-5.TM2013 Preview1  
-对应的 verb 文件：TM2013P1.verb
+~~5.TM2013 Preview1~~  
+~~对应的 verb 文件：TM2013P1.verb~~
 
-6.TM2013 Preview2  
-对应的 verb 文件：TM2013P2.verb
+~~6.TM2013 Preview2~~  
+~~对应的 verb 文件：TM2013P2.verb~~
 
 7.网易云音乐  
 对应的 verb 文件：163music.verb
