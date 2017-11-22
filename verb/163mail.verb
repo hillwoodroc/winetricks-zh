@@ -1,7 +1,7 @@
 w_metadata 163mail apps\
     title="163 MailMaster（网易邮箱大师）" \
     publisher="NetEase" \
-    year="2015" \
+    year="2017" \
     media="download" \
     file1="mail.exe" \
     installed_exe1="$W_PROGRAMS_X86_WIN/MailMaster/Start.exe" \
@@ -10,7 +10,7 @@ w_metadata 163mail apps\
 
 load_163mail()
 {
-w_download http://client.dl.126.net/pcmail/dashi/mail.exe dbe2df9df32230c420bc1b483d61a4d266ba5f9ba6847b1635a089b91cebb75e
+w_download http://client.dl.126.net/pcmail/dashi/mail.exe 9b010b7c2cf8902453c1c6820aae364690188e5448165eaf605ec0961e5b4667
 cd "$W_CACHE/$W_PACKAGE"
 
     # uses vcrun2005
