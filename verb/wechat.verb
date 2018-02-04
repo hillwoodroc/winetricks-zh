@@ -1,7 +1,7 @@
 w_metadata wechat apps \
- title="WeChat 2.4.5" \
+ title="WeChat" \
  publisher="Tencent" \
- year="2017" \
+ year="2018" \
  media="download" \
  file1="WeChatSetup.exe" \
  installed_exe1="$W_PROGRAMS_X86_WIN/Tencent/WeChat/WeChat.exe" \
@@ -10,7 +10,7 @@ w_metadata wechat apps \
 
 load_wechat()
 {
-    w_download http://dldir1.qq.com/weixin/Windows/WeChatSetup.exe 9efd91680c2c0beb35e84195b3cda3e67d9d31f2ed7bbdac88e49f7760f6c3b8
+    w_download http://dldir1.qq.com/weixin/Windows/WeChatSetup.exe 0419d618dfb9fef4edbca98be5fb5b5a2e281578d4a158b40ad906455d1e967e
 
     if w_workaround_wine_bug 38038 "Installing native riched20 to work around typing bug"
     then
