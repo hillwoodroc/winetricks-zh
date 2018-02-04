@@ -19269,16 +19269,16 @@ w_declare_exe "$W_PROGRAMS_X86_WIN\\Tencent\QQMusic\QQMusic1224.0.5.38" "QQMusic
 w_metadata THS apps\
     title="同花顺免费版 (A Chinese stock app)" \
     publisher="Zhejiang Hithink Flush Information Network Co." \
-    year="2013" \
+    year="2017" \
     media="download" \
-    file1="THS_v8.50.55_20150207.exe" \
+    file1="THS_freeldy_8.70.31.exe" \
     installed_exe1="$W_PROGRAMS_X86_WIN/同花顺/zdsj.exe" \
     homepage="http://www.10jqka.com.cn/" \
     unattended="no"
 
 load_THS()
 {
-w_download http://zjcmpp.hexin.com.cn/download/THS_v8.50.55_20150207.exe 45527cc5cbbd70bea51c817e34cfc5efdf618de96adce5b44d8512c72dd61bc5
+w_download http://123.147.165.15:9999/zjcmpp.hexin.com.cn/soft/THS_freeldy_8.70.31.exe 1acc3008135995efad66504332223d786d68bb3e9704df51014d60dc5ecda0bb
 cd "$W_CACHE/$W_PACKAGE"
     w_call ie8
     # Make sure chinese fonts are available
@@ -19352,9 +19352,9 @@ load_tim()
 
 #----------------------------------------------------------------
 w_metadata wechat apps \
- title="WeChat 2.4.5" \
+ title="WeChat" \
  publisher="Tencent" \
- year="2017" \
+ year="2018" \
  media="download" \
  file1="WeChatSetup.exe" \
  installed_exe1="$W_PROGRAMS_X86_WIN/Tencent/WeChat/WeChat.exe" \
@@ -19363,7 +19363,7 @@ w_metadata wechat apps \
 
 load_wechat()
 {
-    w_download http://dldir1.qq.com/weixin/Windows/WeChatSetup.exe 9efd91680c2c0beb35e84195b3cda3e67d9d31f2ed7bbdac88e49f7760f6c3b8
+    w_download http://dldir1.qq.com/weixin/Windows/WeChatSetup.exe 0419d618dfb9fef4edbca98be5fb5b5a2e281578d4a158b40ad906455d1e967e
 
     if w_workaround_wine_bug 38038 "Installing native riched20 to work around typing bug"
     then
