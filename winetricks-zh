@@ -20147,9 +20147,9 @@ w_declare_exe "$W_PROGRAMS_X86_WIN\\同花顺" "zdsj.exe"
 w_metadata tim apps \
  title="TIM (Chinese chat app)" \
  publisher="Tencent" \
- year="2017" \
+ year="2018" \
  media="download" \
- file1="TIM2.1.0.exe" \
+ file1="TIM2.2.5.exe" \
  file2="TIM.tar.gz"\
  installed_exe1="$W_PROGRAMS_X86_WIN/Tencent/TIM/Bin/QQScLauncher.exe" \
  homepage="http://www.qq.com" \
@@ -20157,7 +20157,7 @@ w_metadata tim apps \
 
 load_tim()
 {
-    w_download https://dldir1.qq.com/qqfile/qq/TIM2.1.0/22747/TIM2.1.0.exe de43ec292671c0909e1d03d3200e6b5218d1c81111ec09f577a3958f237ba04b
+    w_download https://dldir1.qq.com/qqfile/qq/TIM2.2.5/20871/TIM2.2.5.exe d987aea1a070e62f5c2fa3601819a83a537c2ec4a63e7faa44b5f305b3f884bf
     w_download http://hillwoodhome.net/wine/TIM.tar.gz 637923c7dc7d4204f786018aab9f6a54e1de0d2c4207b249898330c08afdde38
 
     if w_workaround_wine_bug 5162 "Installing native riched20 to work around can't input username."
