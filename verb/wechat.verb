@@ -10,7 +10,7 @@ w_metadata wechat apps \
 
 load_wechat()
 {
-    w_download http://dldir1.qq.com/weixin/Windows/WeChatSetup.exe f39a97e8acb6f8a4e88ee5b4975a1e050fa87af3ba91fc5e9b43a74227e4e8fc
+    w_download http://dldir1.qq.com/weixin/Windows/WeChatSetup.exe 6148a48b902fce9c62f1121ac2e516f3656c4dc834e4715da1cce392f0c2876d
 
     if w_workaround_wine_bug 38038 "Installing native riched20 to work around typing bug"
     then
