@@ -20089,16 +20089,16 @@ load_qqlight()
 w_metadata qqmusic apps\
     title="QQ Music" \
     publisher="Tencent" \
-    year="2015" \
+    year="2018" \
     media="download" \
-    file1="QQMusicV12.24.3323.1216YQQ.exe" \
-    installed_exe1="$W_PROGRAMS_X86_WIN/Tencent/QQMusic/QQMusic1224.0.5.38/QQMusic.exe" \
+    file1="QQMusicSetup.exe" \
+    installed_exe1="$W_PROGRAMS_X86_WIN/Tencent/QQMusic/QQMusic.exe" \
     homepage="http://y.qq.com" \
     unattended="no"
 
 load_qqmusic()
 {
-w_download http://dldir1.qq.com/music/clntupate/QQMusicV12.24.3323.1216YQQ.exe e971d2218e8dedbd18e5f397beb46a92f7f1c420a4bd0daa0fa3c4bcde67648d
+w_download https://dldir1.qq.com/music/clntupate/QQMusicSetup.exe d89c4e24d816485e8c743a53e07501342c38609ab20275135a485ef21dc64425
 cd "$W_CACHE/$W_PACKAGE"
 
     if w_workaround_wine_bug 5162 "Installing native riched20 to fix can not input username bug"
@@ -20116,7 +20116,7 @@ cd "$W_CACHE/$W_PACKAGE"
     w_call fakechinese
 
 w_try "$WINE" "$file1"
-w_declare_exe "$W_PROGRAMS_X86_WIN\\Tencent\QQMusic\QQMusic1224.0.5.38" "QQMusic.exe"
+w_declare_exe "$W_PROGRAMS_X86_WIN\\Tencent\QQMusic" "QQMusic.exe"
 }
 
 #----------------------------------------------------------------
