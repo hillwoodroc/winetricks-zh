@@ -19667,16 +19667,16 @@ w_declare_exe "$W_PROGRAMS_X86_WIN\\MailMaster" "Start.exe"
 w_metadata 163music apps\
     title="NetEase Cloud Music" \
     publisher="NetEase" \
-    year="2017" \
+    year="2018" \
     media="download" \
-    file1="cloudmusicsetup_2_2_2_195462.exe" \
+    file1="cloudmusicsetup_2.4.0.196505.exe" \
     installed_exe1="$W_PROGRAMS_X86_WIN/Netease/CloudMusic/cloudmusic.exe" \
     homepage="http://music.163.com/" \
     unattended="no"
 
 load_163music()
 {
-w_download https://d1.music.126.net/dmusic/cloudmusicsetup_2_2_2_195462.exe 77f87f055f3f6e6620aab2c9ae233372bbf5c5d48f1d39abbd0809182e313c7b
+w_download https://d1.music.126.net/dmusic/cloudmusicsetup_2.4.0.196505.exe 722ada6abae3cab00bd5ad11a90a8a89083b6eb9b1bf9506af3cbf4dd531ef7e
 cd "$W_CACHE/$W_PACKAGE"
 
     if w_workaround_wine_bug 38028 "Installing native directx9 to work around playback bug"
