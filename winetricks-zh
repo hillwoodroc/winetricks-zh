@@ -20960,7 +20960,7 @@ load_qqlight()
 w_metadata qqmusic apps\
     title="QQ Music" \
     publisher="Tencent" \
-    year="2018" \
+    year="2019" \
     media="download" \
     file1="QQMusicSetup.exe" \
     installed_exe1="$W_PROGRAMS_X86_WIN/Tencent/QQMusic/QQMusic.exe" \
@@ -20969,7 +20969,7 @@ w_metadata qqmusic apps\
 
 load_qqmusic()
 {
-w_download https://dldir1.qq.com/music/clntupate/QQMusicSetup.exe d89c4e24d816485e8c743a53e07501342c38609ab20275135a485ef21dc64425
+w_download https://dldir1.qq.com/music/clntupate/QQMusicSetup.exe 78307058a82adeb186f93886086a98ecec7df8c67b7a3a9a37867df9dfc18537
 cd "$W_CACHE/$W_PACKAGE"
 
     if w_workaround_wine_bug 5162 "Installing native riched20 to fix can not input username bug"
@@ -20982,6 +20982,9 @@ cd "$W_CACHE/$W_PACKAGE"
     
     # uses mfc42u.dll
     w_call mfc42
+    
+    #use ie8
+    w_call ie8
     
     # Make sure chinese fonts are available
     w_call fakechinese
