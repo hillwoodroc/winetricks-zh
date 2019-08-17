@@ -14650,11 +14650,11 @@ _EOF_
 #----------------------------------------------------------------
 
 w_metadata qq apps \
- title="QQ 8.9.4(Chinese chat app)" \
+ title="QQ 8.9.6(Chinese chat app)" \
  publisher="Tencent" \
  year="2017" \
  media="download" \
- file1="QQ8.9.4.exe" \
+ file1="QQ8.9.6.exe" \
  file2="QQ.tar.gz"\
  installed_exe1="$W_PROGRAMS_X86_WIN/Tencent/QQ/Bin/QQScLauncher.exe" \
  homepage="http://www.qq.com" \
@@ -14662,8 +14662,8 @@ w_metadata qq apps \
 
 load_qq()
 {
-    w_download https://dldir1.qq.com/qqfile/qq/QQ8.9.4/21603/QQ8.9.4.exe 10d3d7b584624563fae525b258a3115c8eff08e00758012f47db7c92f8a96e2e
-    w_download http://hillwoodhome.net/wine/QQ.tar.gz eb5cd6371eb75ec9e2fc0271199df05cbb9f38a60c2e81d5d8ac7daeb40aba62
+    w_download https://dldir1.qq.com/qqfile/qq/QQ8.9.6/22404/QQ8.9.6.exe d207f49a642be21c4e1b14fc9f4cf47a6a9a2718afbc8bd0685b607b65424ef6
+    w_download https://hillwoodhome.net/wine/QQ.tar.gz eb5cd6371eb75ec9e2fc0271199df05cbb9f38a60c2e81d5d8ac7daeb40aba62
 
     if w_workaround_wine_bug 5162 "Installing native riched20 to work around can't input username."
     then
@@ -14703,7 +14703,6 @@ load_qq()
     w_try_cd "$W_CACHE/$W_PACKAGE"
     w_try "$WINE" "$file1"
 }
-
 #----------------------------------------------------------------
 
 w_metadata qqintl apps \
