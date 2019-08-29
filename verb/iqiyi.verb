@@ -1,25 +1,20 @@
 w_metadata iqiyi apps\
     title="iQIYI(爱奇艺）" \
     publisher="爱奇艺" \
-    year="2015" \
+    year="2019" \
     media="download" \
-    file1="QIYImedia_0_27.exe" \
+    file1="IQIYIsetup_appstore.exe" \
     installed_exe1="$W_PROGRAMS_X86_WIN/IQIYI Video/LStyle/QyClient.exe" \
     homepage="http://www.iqiyi.com/" 
 
 load_iqiyi()
 {
-w_download http://157.122.96.44/cdn/pcclient/20151218/QIYImedia_0_27.exe 25a4020572d15b9b929430ad3309f27f261c9b67694059910b12a78b6826e271
+w_download http://dl.static.iqiyi.com/hz/IQIYIsetup_appstore.exe 02a0062b86acb27f66f6b1cfbc60b0c85424fe5a577330bb280a387d716300b7
 cd "$W_CACHE/$W_PACKAGE"
 
     if w_workaround_wine_bug 5162 "Installing native riched20 to work around can not input text in search box."
     then
         w_call riched20
-    fi
-    
-    if w_workaround_wine_bug XX "Cannot input Chinese, please paste from clipboard."
-    then
-        w_warn "搜索框无法输入中文，请从其他地方复制。"
     fi
 
     # Make sure chinese fonts are available
