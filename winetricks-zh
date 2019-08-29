@@ -21433,34 +21433,36 @@ w_declare_exe "$W_PROGRAMS_X86_WIN\\IQIYI Video\LStyle" "QyClient.exe"
 w_metadata kugou apps\
     title="KuGou Music" \
     publisher="KuGou" \
-    year="2015" \
+    year="2019" \
     media="download" \
-    file1="kugou7680.exe" \
+    file1="kugou8373.exe" \
     installed_exe1="$W_PROGRAMS_X86_WIN/KuGou/KGMusic/KuGou.exe" \
     homepage="http://www.kugou.com/" \
     unattended="no"
 
 load_kugou()
 {
-    w_download http://downmini.kugou.com/kugou7680.exe 25a508d0fcc059de29375494a7c418a439a5e79a2df52d2b12fc9972da1c205e
+    w_download http://downmini.kugou.com/kugou8373exe d2dcd35229f960026e18ee0c524a38e361a5c5fe7bba14c86b5566b4bb87059f
     cd "$W_CACHE/$W_PACKAGE"
 
     if w_workaround_wine_bug 38037 "Installing native directmusic to work around playback bug"
     then
-        w_call directmusic
+    w_call directmusic
     fi
 
     if w_workaround_wine_bug 38038 "Installing native riched20 to work around typing in search box"
     then
-        w_call riched20
+    w_call riched20
     fi
+    
+    # use ie8
+    
 
     # Make sure chinese fonts are available
     w_call fakechinese
     w_try "$WINE" "$file1"
     w_declare_exe "$W_PROGRAMS_X86_WIN\\KuGou\KGMusic" "KuGou.exe"
 }
-
 #----------------------------------------------------------------
 
 w_metadata line apps\
