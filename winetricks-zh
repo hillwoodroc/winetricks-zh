@@ -21452,7 +21452,7 @@ load_kugou()
     fi
     
     # use ie8
-    
+    w_call ie8
 
     # Make sure chinese fonts are available
     w_call fakechinese
