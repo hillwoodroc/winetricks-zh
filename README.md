@@ -88,19 +88,22 @@
 
 ## 使用方法 ##
 
-### 已安装有旧版 winetricks ###
+### 安装 ###
 
-打开终端进入 verb 文件夹，运行命令： `winetricks --isolate <文件名>` (--isolate 参数起到将应用安装到单独容器中的作用，winetricks-zh 默认将应用安装到单独容器，不需要此参数)
+sudo cp winetricks-zh /usr/bin/
+sudo cp icon/winetricks-zh.svg /usr/share/icons/hicolor/scalable/apps/
+sudo cp winetricks-zh.desktop /usr/share/applications/
 
-### 未安装 winetricks ###
+亦可用 cmake 安装。
 
-将 winetricks-zh 复制到 /usr/bin/ 下，然后在终端中直接运行 `winetricks-zh <verb 名>`。
+### 使用方法 ###
+在终端中输入 winetricks-zh, 或者在应用程序菜单里面通过启动器启动。
 
-### 使用 CrossOver ###
+### 通过 CrossOver 使用 ###
 
 请使用以下格式运行
-`WINE=/opt/cxoffice/bin/wine WINESERVER=/opt/cxoffice/bin/wineserver CX_BOTTLE=<bottle 名> winetricks-zh <verb 名>`
+`WINE=/opt/cxoffice/bin/wine WINESERVER=/opt/cxoffice/bin/wineserver winetricks-zh
 
 ## 注意 ##
 
-winetricks 本身不像 crossover 一样带有一个 wine ，所以由于各个发行版自带的 wine 版本的差异，可能会导致使用该工具安装 windows 应用失败或者程序无法正常起动。所以请先想办法把系统自带的 wine 升级到最新版本。
+winetricks 本身不像 crossover 一样带有一个定制过的 wine ，所以由于各个发行版自带的 wine 版本的差异，可能会导致使用该工具安装 windows 应用失败或者程序无法正常起动。遇到这种情况请安装新版 wine.
