@@ -3,14 +3,14 @@ w_metadata wechat apps \
  publisher="Tencent" \
  year="2019" \
  media="download" \
- file1="WeChatSetup.exe" \
+ file1="WeChat_C1018.exe" \
  installed_exe1="$W_PROGRAMS_X86_WIN/Tencent/WeChat/WeChat.exe" \
  homepage="http://weixin.qq.com/" \
  unattended="no"
 
 load_wechat()
 {
-    w_download http://dldir1.qq.com/weixin/Windows/WeChatSetup.exe 0396a6296c1df0b7f20741a5a2db53aafd0c213bdceafec587f55fa05054f4b3
+    w_download https://dldir1.qq.com/weixin/Windows/WeChat_C1018.exe 404370f1ab66abd3601fe19415b805effaa033d76f32e911743d2e12644b898b
 
     if w_workaround_wine_bug 38038 "Installing native riched20 to work around typing bug"
     then
