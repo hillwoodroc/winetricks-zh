@@ -90,9 +90,9 @@
 
 ### 安装 ###
 
- sudo cp winetricks-zh /usr/bin/
- sudo cp icon/winetricks-zh.svg /usr/share/icons/hicolor/scalable/apps/
- sudo cp winetricks-zh.desktop /usr/share/applications/
+sudo cp winetricks-zh /usr/bin/
+sudo cp icon/winetricks-zh.svg /usr/share/icons/hicolor/scalable/apps/
+sudo cp winetricks-zh.desktop /usr/share/applications/
 
 亦可用 cmake 安装。
 
