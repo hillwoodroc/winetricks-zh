@@ -10104,6 +10104,23 @@ load_ie8_kb2936068()
 
 #----------------------------------------------------------------
 
+w_metadata iphlpapi dlls \
+    title="MS iphlpapi Module (iphlpapi.dll)" \
+    publisher="Microsoft" \
+    year="2004" \
+    media="download" \
+    file1="../winxpsp3/WindowsXP-KB936929-SP3-x86-ENU.exe" \
+    installed_file1="$W_SYSTEM32_DLLS_WIN/iphlpapi.dll"
+
+load_iphlpapi()
+{
+    # Some applications need this, for example Wechat.
+    helper_winxpsp3 i386/iphlpapi.dl_
+    w_try_cabextract --directory="$W_SYSTEM32_DLLS" "$W_TMP"/i386/iphlpapi.dl_
+    w_override_dlls native,builtin iphlpapi
+}
+#----------------------------------------------------------------
+
 w_metadata l3codecx dlls \
     title="MPEG Layer-3 Audio Codec for Microsoft DirectShow" \
     publisher="Microsoft" \
