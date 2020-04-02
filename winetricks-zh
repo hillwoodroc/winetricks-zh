@@ -15097,6 +15097,11 @@ load_qq()
         w_call riched20
     fi
 
+    if w_workaround_wine_bug 37680 "arp.exe bug"
+    then
+        w_call iphlpapi
+    fi
+
     # Make sure chinese fonts are available
     w_call fakechinese
 
@@ -22208,6 +22213,11 @@ load_tim()
     if w_workaround_wine_bug 5162 "Installing native riched20 to work around can't input username."
     then
         w_call riched20
+    fi
+
+    if w_workaround_wine_bug 37680 "arp.exe bug"
+    then
+        w_call iphlpapi
     fi
 
     # Make sure chinese fonts are available

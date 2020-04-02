@@ -18,6 +18,11 @@ load_qq()
     then
         w_call riched20
     fi
+    
+    if w_workaround_wine_bug 37680 "arp.exe bug"
+    then
+        w_call iphlpapi
+    fi
 
     # Make sure chinese fonts are available
     w_call fakechinese
