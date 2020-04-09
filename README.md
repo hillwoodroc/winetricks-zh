@@ -17,7 +17,7 @@
 1.QQ国际版2.11  
 对应的 verb 文件：qqintl.verb
 
-2.QQ 8.3  
+2.QQ 8.9.6  
 对应的 verb 文件：qq.verb
 
 3.同花顺股票软件  
@@ -77,8 +77,8 @@
 21.优酷客户端  
 对应的 verb 文件：youku.verb
 
-22.阿里旺旺（支持浏览器协议关联）  
-对应的 verb 文件：aliww.verb
+~~22.阿里旺旺（支持浏览器协议关联）  ~~
+~~对应的 verb 文件：aliww.verb~~
 
 23.微信  
 对应的 verb 文件：wechat.verb
@@ -90,9 +90,9 @@
 
 ### 安装 ###
 
-sudo cp winetricks-zh /usr/bin/
-sudo cp icon/winetricks-zh.svg /usr/share/icons/hicolor/scalable/apps/
-sudo cp winetricks-zh.desktop /usr/share/applications/
+sudo cp winetricks-zh /usr/bin/  
+sudo cp icon/winetricks-zh.svg /usr/share/icons/hicolor/scalable/apps/  
+sudo cp winetricks-zh.desktop /usr/share/applications/  
 
 亦可用 cmake 安装。
 
@@ -106,4 +106,4 @@ sudo cp winetricks-zh.desktop /usr/share/applications/
 
 ## 注意 ##
 
-winetricks 本身不像 crossover 一样带有一个定制过的 wine ，所以由于各个发行版自带的 wine 版本的差异，可能会导致使用该工具安装 windows 应用失败或者程序无法正常起动。遇到这种情况请安装新版 wine.
+winetricks 只是 wine 的配置工具 ，wine 另行安装。由于各个发行版自带的 wine 版本的差异，可能会导致使用该工具安装 windows 应用失败或者程序无法正常起动。遇到这种情况请安装新版 wine.
