@@ -22351,7 +22351,7 @@ w_metadata iqiyi apps\
 
 load_iqiyi()
 {
-w_download http://dl.static.iqiyi.com/hz/IQIYIsetup_appstore.exe 02a0062b86acb27f66f6b1cfbc60b0c85424fe5a577330bb280a387d716300b7
+w_download http://dl.static.iqiyi.com/hz/IQIYIsetup_appstore.exe af804966a2da139bb823c0f270e3018683907cb1f88d162c9fa6dbf4b10d153c
 cd "$W_CACHE/$W_PACKAGE"
 
     if w_workaround_wine_bug 5162 "Installing native riched20 to work around can not input text in search box."
