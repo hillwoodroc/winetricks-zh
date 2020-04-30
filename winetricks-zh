@@ -22657,7 +22657,7 @@ load_qqlight()
 w_metadata qqmusic apps\
     title="QQ Music" \
     publisher="Tencent" \
-    year="2019" \
+    year="2020" \
     media="download" \
     file1="QQMusicSetup.exe" \
     installed_exe1="$W_PROGRAMS_X86_WIN/Tencent/QQMusic/QQMusic.exe" \
