@@ -1,16 +1,16 @@
 w_metadata kugou apps\
     title="KuGou Music" \
     publisher="KuGou" \
-    year="2019" \
+    year="2020" \
     media="download" \
-    file1="kugou8373.exe" \
+    file1="kugou9132s.exe" \
     installed_exe1="$W_PROGRAMS_X86_WIN/KuGou/KGMusic/KuGou.exe" \
     homepage="http://www.kugou.com/" \
     unattended="no"
 
 load_kugou()
 {
-    w_download http://downmini.kugou.com/kugou8373exe d2dcd35229f960026e18ee0c524a38e361a5c5fe7bba14c86b5566b4bb87059f
+    w_download http://downmini.kugou.com/web/kugou9132s.exe b9716651dc3ef5374adcc0765d87e6c26971686a4b151fda450f6ccf02762081
     cd "$W_CACHE/$W_PACKAGE"
 
     if w_workaround_wine_bug 38037 "Installing native directmusic to work around playback bug"
