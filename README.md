@@ -21,7 +21,7 @@
 对应的 verb 文件：qq.verb
 
 3.同花顺股票软件  
-对应的 verb 文件：THS.verb
+对应的 verb 文件：flush.verb
 
 4.QQ游戏2013  
 对应的 verb 文件：QQGame.verb
