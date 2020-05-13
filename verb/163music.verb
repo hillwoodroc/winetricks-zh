@@ -1,21 +1,23 @@
 w_metadata 163music apps\
     title="NetEase Cloud Music" \
     publisher="NetEase" \
-    year="2018" \
+    year="2020" \
     media="download" \
-    file1="cloudmusicsetup_2.4.0.196505.exe" \
+    file1="cloudmusicsetup2.7.1.198242.exe" \
     installed_exe1="$W_PROGRAMS_X86_WIN/Netease/CloudMusic/cloudmusic.exe" \
     homepage="http://music.163.com/" \
     unattended="no"
 
 load_163music()
 {
-w_download https://d1.music.126.net/dmusic/cloudmusicsetup_2.4.0.196505.exe 722ada6abae3cab00bd5ad11a90a8a89083b6eb9b1bf9506af3cbf4dd531ef7e
+w_download https://d1.music.126.net/dmusic/cloudmusicsetup2.7.1.198242.exe cf94375212a77ec676aac90da0417cb56cfd8c1ecaa96773ce667a5a8e7a8309
 cd "$W_CACHE/$W_PACKAGE"
 
+    w_call winxp
+    
     if w_workaround_wine_bug 38028 "Installing native directx9 to work around playback bug"
     then
-        w_call directx9
+        w_call d3dx9
     fi
 
     # Make sure chinese fonts are available
