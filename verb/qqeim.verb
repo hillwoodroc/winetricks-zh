@@ -12,23 +12,19 @@ load_qqeim()
 {
     w_download http://dldir1.qq.com/qqfile/crm/hrtx/HRTX1.89.2036.exe 2a603e01ba1c7bcaa9d8ead9198a068161e95d04a5928c15d8d223621b6c28c8
 
-    if w_workaround_wine_bug 29636 "Installing native riched20 to work around crash bug"
-    then
+    if w_workaround_wine_bug 29636 "Installing native riched20 to work around crash bug"; then
         w_call riched20
     fi
 
-    if w_workaround_wine_bug 34566 "Installing native ctf to work around crash"
-    then
+    if w_workaround_wine_bug 34566 "Installing native ctf to work around crash"; then
         w_call msctf
     fi
     
-    if w_workaround_wine_bug 37680 "Disable txplatform.exe to fix QQ can't be quit cleanly"
-    then
+    if w_workaround_wine_bug 37680 "Disable txplatform.exe to fix QQ can't be quit cleanly"; then
         w_override_dlls disabled txplatform.exe
     fi
 
-    if w_workaround_wine_bug 42810 "Setting Windows version as XP to work around launch native browser bug"
-    then
+    if w_workaround_wine_bug 42810 "Setting Windows version as XP to work around launch native browser bug"; then
         w_call winxp
     fi
 

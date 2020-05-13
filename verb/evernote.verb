@@ -12,8 +12,7 @@ load_evernote()
 {
     w_download https://cdn1.evernote.com/win6/public/Evernote_6.6.4.5512.exe d909f785b407cbd57ed2b04ab8e95d6f993d54432a1303f6792f4e296da11b31
     
-    if w_workaround_wine_bug xxx "workaround can not edit bug"
-    then
+    if w_workaround_wine_bug xxx "workaround can not edit bug"; then
         w_call wininet
     fi
 

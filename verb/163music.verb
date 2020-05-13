@@ -15,8 +15,7 @@ cd "$W_CACHE/$W_PACKAGE"
 
     w_call winxp
     
-    if w_workaround_wine_bug 38028 "Installing native directx9 to work around playback bug"
-    then
+    if w_workaround_wine_bug 38028 "Installing native directx9 to work around playback bug"; then
         w_call d3dx9
     fi
 

@@ -14,8 +14,7 @@ load_qqlight()
     w_download http://dldir1.qq.com/qqfile/qq/QQ7.9Light/14308/QQ7.9Light.exe 4758cea5cc140d018f487865983e4b13c71c96c8f864f250db3ff0a956681489
     w_download http://hillwoodhome.net/wine/QQLight.tar.gz e6ee5c5dbe524c96d2b96eed343160423b023d38cf2d4dcbc2baea660eae5374
 
-    if w_workaround_wine_bug 29636 "Installing native riched20 to work around crash bug"
-    then
+    if w_workaround_wine_bug 29636 "Installing native riched20 to work around crash bug"; then
         w_call riched20
     fi
 
@@ -30,8 +29,7 @@ load_qqlight()
     # uses mfc42u.dll
     w_call mfc42
 
-    if w_workaround_wine_bug 38171 "Installing desktop file to work around bug"
-    then
+    if w_workaround_wine_bug 38171 "Installing desktop file to work around bug"; then
         cd "$W_TMP/"
         tar -zxf "$W_CACHE/qqlight/QQLight.tar.gz"
         w_try mkdir -p $HOME/.local/share/applications/wine/Programs/腾讯软件/QQ轻聊版/
@@ -43,13 +41,11 @@ load_qqlight()
         echo Exec=env WINEPREFIX=$WINEPREFIX $WINE '"'$W_PROGRAMS_X86_WIN'\Tencent\QQLite\Bin\QQScLauncher.exe"'>> $HOME/.local/share/applications/wine/Programs/腾讯软件/QQ轻聊版/QQ轻聊版.desktop
     fi
 
-    if w_workaround_wine_bug 39384 "Disable ntoskrnl.exe to work around can't be started bug"
-    then
+    if w_workaround_wine_bug 39384 "Disable ntoskrnl.exe to work around can't be started bug"; then
         w_override_dlls disabled ntoskrnl.exe
     fi
     
-    if w_workaround_wine_bug 37680 "Disable txplatform.exe to fix QQ can't be quit cleanly"
-    then
+    if w_workaround_wine_bug 37680 "Disable txplatform.exe to fix QQ can't be quit cleanly"; then
         w_override_dlls disabled txplatform.exe
     fi   
   

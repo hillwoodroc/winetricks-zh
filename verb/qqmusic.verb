@@ -16,8 +16,7 @@ cd "$W_CACHE/$W_PACKAGE"
 
     w_call winxp
     
-    if w_workaround_wine_bug 5162 "Installing native riched20 to fix can not input username bug"
-    then
+    if w_workaround_wine_bug 5162 "Installing native riched20 to fix can not input username bug"; then
         w_call riched20
     fi
 

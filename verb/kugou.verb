@@ -13,13 +13,11 @@ load_kugou()
     w_download http://downmini.kugou.com/web/kugou9132s.exe b9716651dc3ef5374adcc0765d87e6c26971686a4b151fda450f6ccf02762081
     cd "$W_CACHE/$W_PACKAGE"
 
-    if w_workaround_wine_bug 38037 "Installing native directmusic to work around playback bug"
-    then
+    if w_workaround_wine_bug 38037 "Installing native directmusic to work around playback bug"; then
     w_call directmusic
     fi
 
-    if w_workaround_wine_bug 38038 "Installing native riched20 to work around typing in search box"
-    then
+    if w_workaround_wine_bug 38038 "Installing native riched20 to work around typing in search box"; then
     w_call riched20
     fi
     

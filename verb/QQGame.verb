@@ -12,12 +12,10 @@ load_QQGame()
 {
 w_download http://dldir3.qq.com/minigamefile/QQGame2013Beta5P1_setup_guanjia.EXE 2a1f6c54eefe4e7006bf4841310fe9422f1c0e5d53019ff8b92df60e00f2fd9b
 cd "$W_CACHE/$W_PACKAGE"
-    if w_workaround_wine_bug 33086 "Installing native riched20 to allow typing in username"
-    then
+    if w_workaround_wine_bug 33086 "Installing native riched20 to allow typing in username"; then
         w_call riched20
     fi
-    if w_workaround_wine_bug 30083 "Installing native ie8 to avoid crash in settings and other dialogs"
-    then
+    if w_workaround_wine_bug 30083 "Installing native ie8 to avoid crash in settings and other dialogs"; then
         w_call ie8
     fi
     # uses mfc42u.dll

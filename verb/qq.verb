@@ -14,8 +14,7 @@ load_qq()
     w_download https://dldir1.qq.com/qqfile/qq/QQ8.9.6/22404/QQ8.9.6.exe d207f49a642be21c4e1b14fc9f4cf47a6a9a2718afbc8bd0685b607b65424ef6
     w_download https://hillwoodhome.net/wine/QQ.tar.gz eb5cd6371eb75ec9e2fc0271199df05cbb9f38a60c2e81d5d8ac7daeb40aba62
 
-    if w_workaround_wine_bug 5162 "Installing native riched20 to work around can't input username."
-    then
+    if w_workaround_wine_bug 5162 "Installing native riched20 to work around can't input username."; then
         w_call riched20
     fi
 
@@ -25,8 +24,7 @@ load_qq()
     # uses mfc42u.dll
     w_call mfc42
 
-    if w_workaround_wine_bug 38171 "Installing desktop file to work around bug"
-    then
+    if w_workaround_wine_bug 38171 "Installing desktop file to work around bug"; then
         w_try_cd "$W_TMP/"
         tar -zxf "$W_CACHE/qq/QQ.tar.gz"
         mkdir -p "$HOME/.local/share/applications/wine/Programs/腾讯软件/QQ"
@@ -39,13 +37,11 @@ load_qq()
         echo Exec=env WINEPREFIX="$WINEPREFIX" "$WINE" \"$W_PROGRAMS_X86_WIN/Tencent/QQ/bin/QQScLauncher.exe\" >> "$HOME/.local/share/applications/wine/Programs/腾讯软件/QQ/腾讯QQ.desktop"
     fi
 
-    if w_workaround_wine_bug 39657 "Disable ntoskrnl.exe to work around can't be started bug"
-    then
+    if w_workaround_wine_bug 39657 "Disable ntoskrnl.exe to work around can't be started bug"; then
         w_override_dlls disabled ntoskrnl.exe
     fi
 
-    if w_workaround_wine_bug 37680 "Disable txplatform.exe to work around QQ can't be quit cleanly"
-    then
+    if w_workaround_wine_bug 37680 "Disable txplatform.exe to work around QQ can't be quit cleanly"; then
         w_override_dlls disabled txplatform.exe
     fi
     

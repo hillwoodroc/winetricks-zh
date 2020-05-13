@@ -12,13 +12,11 @@ load_wechat()
 {
     w_download https://dldir1.qq.com/weixin/Windows/WeChat_C1018.exe 4eb7fda85532da96b8cb9ddb27b1fcf5f1536b47b1d2ff762dd882fc4e597f06
 
-    if w_workaround_wine_bug 38038 "Installing native riched20 to work around typing bug"
-    then
+    if w_workaround_wine_bug 38038 "Installing native riched20 to work around typing bug"; then
         w_call riched20
     fi
     
-    if w_workaround_wine_bug 42710 "Installing native ole32 to work around sending files bug"
-    then
+    if w_workaround_wine_bug 42710 "Installing native ole32 to work around sending files bug"; then
         w_call ole32
     fi
 

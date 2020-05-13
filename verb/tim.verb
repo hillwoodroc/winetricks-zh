@@ -14,8 +14,7 @@ load_tim()
     w_download https://dldir1.qq.com/qqfile/qq/TIM2.2.5/20871/TIM2.2.5.exe d987aea1a070e62f5c2fa3601819a83a537c2ec4a63e7faa44b5f305b3f884bf
     w_download http://hillwoodhome.net/wine/TIM.tar.gz 637923c7dc7d4204f786018aab9f6a54e1de0d2c4207b249898330c08afdde38
 
-    if w_workaround_wine_bug 5162 "Installing native riched20 to work around can't input username."
-    then
+    if w_workaround_wine_bug 5162 "Installing native riched20 to work around can't input username."; then
         w_call riched20
     fi
 
@@ -25,13 +24,11 @@ load_tim()
     # uses mfc42u.dll
     w_call mfc42
     
-    if w_workaround_wine_bug 42810 "Setting Windows version as XP to work around launch native browser bug"
-    then
+    if w_workaround_wine_bug 42810 "Setting Windows version as XP to work around launch native browser bug"; then
         w_call winxp
     fi
 
-    if w_workaround_wine_bug 38171 "Installing desktop file to work around bug"
-    then
+    if w_workaround_wine_bug 38171 "Installing desktop file to work around bug"; then
         cd "$W_TMP/"
         tar -zxf "$W_CACHE/tim/TIM.tar.gz"
         mkdir -p $HOME/.local/share/applications/wine/Programs/腾讯软件/TIM
@@ -43,13 +40,11 @@ load_tim()
         echo Exec=env WINEPREFIX=$WINEPREFIX $WINE '"'$W_PROGRAMS_X86_WIN'\Tencent\TIM\Bin\QQScLauncher.exe"'>> $HOME/.local/share/applications/wine/Programs/腾讯软件/TIM/腾讯TIM.desktop
     fi
 
-    if w_workaround_wine_bug 39657 "Disable ntoskrnl.exe to work around can't be started bug"
-    then
+    if w_workaround_wine_bug 39657 "Disable ntoskrnl.exe to work around can't be started bug"; then
         w_override_dlls disabled ntoskrnl.exe
     fi
     
-    if w_workaround_wine_bug 37680 "Disable txplatform.exe to work around QQ can't be quit cleanly"
-    then
+    if w_workaround_wine_bug 37680 "Disable txplatform.exe to work around QQ can't be quit cleanly"; then
         w_override_dlls disabled txplatform.exe
     fi    
 
