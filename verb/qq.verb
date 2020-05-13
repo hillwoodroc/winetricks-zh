@@ -6,7 +6,7 @@ w_metadata qq apps \
  file1="QQ8.9.6.exe" \
  file2="QQ.tar.gz"\
  installed_exe1="$W_PROGRAMS_X86_WIN/Tencent/QQ/Bin/QQScLauncher.exe" \
- homepage="http://www.qq.com" \
+ homepage="https://www.qq.com" \
  unattended="no"
 
 load_qq()
