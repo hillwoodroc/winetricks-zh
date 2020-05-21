@@ -11,8 +11,6 @@ w_metadata qqmusic apps\
 load_qqmusic()
 {
 w_download https://dldir1.qq.com/music/clntupate/QQMusicSetup.exe 6c181eb37d91edb7788b2d3dd5f2891a6fa4c3a607317ae8c3cd75f85cf3358c
-cd "$W_CACHE/$W_PACKAGE"
-
 
     w_call winxp
     
@@ -35,4 +33,3 @@ cd "$W_CACHE/$W_PACKAGE"
 w_try "$WINE" "$file1"
 w_declare_exe "$W_PROGRAMS_X86_WIN\\Tencent\QQMusic" "QQMusic.exe"
 }
-

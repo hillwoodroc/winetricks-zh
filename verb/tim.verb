@@ -29,15 +29,15 @@ load_tim()
     fi
 
     if w_workaround_wine_bug 38171 "Installing desktop file to work around bug"; then
-        cd "$W_TMP/"
+        w_try_cd "$W_TMP/"
         tar -zxf "$W_CACHE/tim/TIM.tar.gz"
-        mkdir -p $HOME/.local/share/applications/wine/Programs/腾讯软件/TIM
-        mkdir -p $HOME/.local/share/icons/hicolor/48x48/apps
-        mkdir -p $HOME/.local/share/icons/hicolor/256x256/apps
+        mkdir -p "$HOME/.local/share/applications/wine/Programs/腾讯软件/TIM"
+        mkdir -p "$HOME/.local/share/icons/hicolor/48x48/apps"
+        mkdir -p "$HOME/.local/share/icons/hicolor/256x256/apps"
         w_try mv TIM/腾讯TIM.desktop ~/.local/share/applications/wine/Programs/腾讯软件/TIM
         w_try mv TIM/48x48/TIM.png ~/.local/share/icons/hicolor/48x48/apps
         w_try mv TIM/256x256/TIM.png ~/.local/share/icons/hicolor/256x256/apps
-        echo Exec=env WINEPREFIX=$WINEPREFIX $WINE '"'$W_PROGRAMS_X86_WIN'\Tencent\TIM\Bin\QQScLauncher.exe"'>> $HOME/.local/share/applications/wine/Programs/腾讯软件/TIM/腾讯TIM.desktop
+        echo Exec=env WINEPREFIX="$WINEPREFIX" "$WINE" \""$W_PROGRAMS_X86_WIN"/Tencent/TIM/Bin/QQScLauncher.exe\">> "$HOME/.local/share/applications/wine/Programs/腾讯软件/TIM/腾讯TIM.desktop"
     fi
 
     if w_workaround_wine_bug 39657 "Disable ntoskrnl.exe to work around can't be started bug"; then
@@ -48,8 +48,8 @@ load_tim()
         w_override_dlls disabled txplatform.exe
     fi    
 
-    cd "$W_CACHE/$W_PACKAGE"
     w_try "$WINE" "$file1"
 
     w_declare_exe "$W_PROGRAMS_X86_WIN\\Tencent\\TIM\\Bin" QQScLauncher.exe
 }
+

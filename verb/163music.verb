@@ -11,7 +11,6 @@ w_metadata 163music apps\
 load_163music()
 {
 w_download https://d1.music.126.net/dmusic/cloudmusicsetup2.7.1.198242.exe cf94375212a77ec676aac90da0417cb56cfd8c1ecaa96773ce667a5a8e7a8309
-cd "$W_CACHE/$W_PACKAGE"
 
     w_call winxp
     
@@ -25,4 +24,3 @@ cd "$W_CACHE/$W_PACKAGE"
 w_try "$WINE" "$file1"
 w_declare_exe "$W_PROGRAMS_X86_WIN\\Netease\CloudMusic" "cloudmusic.exe"
 }
-

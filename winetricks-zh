@@ -15490,15 +15490,15 @@ _EOF_
 #----------------------------------------------------------------
 
 w_metadata qq apps \
- title="QQ 8.9.6(Chinese chat app)" \
- publisher="Tencent" \
- year="2017" \
- media="download" \
- file1="QQ8.9.6.exe" \
- file2="QQ.tar.gz"\
- installed_exe1="$W_PROGRAMS_X86_WIN/Tencent/QQ/Bin/QQScLauncher.exe" \
- homepage="https://www.qq.com" \
- unattended="no"
+    title="QQ 8.9.6(Chinese chat app)" \
+    publisher="Tencent" \
+    year="2017" \
+    media="download" \
+    file1="QQ8.9.6.exe" \
+    file2="QQ.tar.gz"\
+    installed_exe1="$W_PROGRAMS_X86_WIN/Tencent/QQ/Bin/QQScLauncher.exe" \
+    homepage="https://www.qq.com/" \
+    unattended="no"
 
 load_qq()
 {
@@ -15525,7 +15525,7 @@ load_qq()
         w_try mv QQ/48x48/QQ.png ~/.local/share/icons/hicolor/48x48/apps
         w_try mv QQ/256x256/QQ.png ~/.local/share/icons/hicolor/256x256/apps
         # shellcheck disable=SC1001
-        echo Exec=env WINEPREFIX="$WINEPREFIX" "$WINE" \"$W_PROGRAMS_X86_WIN/Tencent/QQ/bin/QQScLauncher.exe\" >> "$HOME/.local/share/applications/wine/Programs/腾讯软件/QQ/腾讯QQ.desktop"
+        echo Exec=env WINEPREFIX="$WINEPREFIX" "$WINE" \""$W_PROGRAMS_X86_WIN"/Tencent/QQ/bin/QQScLauncher.exe\" >> "$HOME/.local/share/applications/wine/Programs/腾讯软件/QQ/腾讯QQ.desktop"
     fi
 
     if w_workaround_wine_bug 39657 "Disable ntoskrnl.exe to work around can't be started bug"; then
@@ -15535,7 +15535,7 @@ load_qq()
     if w_workaround_wine_bug 37680 "Disable txplatform.exe to work around QQ can't be quit cleanly"; then
         w_override_dlls disabled txplatform.exe
     fi
-    
+
     # Disable update, stay on the version.
     w_override_dlls disabled txupd.exe
 
@@ -21101,7 +21101,6 @@ w_metadata 163mail apps\
 load_163mail()
 {
 w_download http://client.dl.126.net/pcmail/dashi/mail.exe 72dbb4fa3fb147207e32d4e7b38d508dff6252a6e943fe228b88e4436314d02f
-cd "$W_CACHE/$W_PACKAGE"
 
     # uses vcrun2005
     w_call vcrun2005
@@ -21125,7 +21124,6 @@ w_metadata 163music apps\
 load_163music()
 {
 w_download https://d1.music.126.net/dmusic/cloudmusicsetup2.7.1.198242.exe cf94375212a77ec676aac90da0417cb56cfd8c1ecaa96773ce667a5a8e7a8309
-cd "$W_CACHE/$W_PACKAGE"
 
     w_call winxp
     
@@ -21163,9 +21161,30 @@ load_evernote()
     # Make sure chinese fonts are available
     w_call fakechinese
 
-    cd "$W_CACHE/$W_PACKAGE"
     w_try "$WINE" "$file1"
     w_declare_exe "$W_PROGRAMS_X86_WIN\\Evernote\Evernote" Evernote.exe
+}
+
+#----------------------------------------------------------------
+
+w_metadata flush apps\
+    title="同花顺免费版 (A Chinese stock app)" \
+    publisher="Zhejiang Hithink Flush Information Network Co." \
+    year="2017" \
+    media="download" \
+    file1="THS_freeldy_8.70.31.exe" \
+    installed_exe1="$W_PROGRAMS_X86_WIN/同花顺/zdsj.exe" \
+    homepage="http://www.10jqka.com.cn/" \
+    unattended="no"
+
+load_flush()
+{
+w_download http://zjcmpp.hexin.com.cn/soft/THS_freeldy_8.80.70.0421.exe ac08b7e76fb049cf77fd19bed97903227dc2f9026c33497660dcfba601969bc8
+    w_call ie8
+    # Make sure chinese fonts are available
+    w_call fakechinese
+w_try "$WINE" "$file1"
+w_declare_exe "$W_PROGRAMS_X86_WIN\\同花顺" "zdsj.exe"
 }
 
 #----------------------------------------------------------------
@@ -21184,7 +21203,6 @@ load_foxit()
 {
     w_download http://cdn02.foxitsoftware.com/pub/foxit/reader/desktop/win/7.x/7.2/en_us/FoxitReader720.0722_prom_enu_Setup.exe cfb46ac23a4c5a02c641e33441bba4fe128cce3d4c05257199e0d7e029d20141
 
-    cd "$W_CACHE/$W_PACKAGE"
     w_try "$WINE" "$file1"
     w_declare_exe "$W_PROGRAMS_X86_WIN\\Foxit Software\\Foxit Reader" FoxitReader.exe
 }
@@ -21203,7 +21221,6 @@ w_metadata iqiyi apps\
 load_iqiyi()
 {
 w_download http://dl.static.iqiyi.com/hz/IQIYIsetup_appstore.exe af804966a2da139bb823c0f270e3018683907cb1f88d162c9fa6dbf4b10d153c
-cd "$W_CACHE/$W_PACKAGE"
 
     if w_workaround_wine_bug 5162 "Installing native riched20 to work around can not input text in search box."; then
         w_call riched20
@@ -21232,7 +21249,6 @@ w_metadata kugou apps\
 load_kugou()
 {
     w_download http://downmini.kugou.com/web/kugou9132s.exe b9716651dc3ef5374adcc0765d87e6c26971686a4b151fda450f6ccf02762081
-    cd "$W_CACHE/$W_PACKAGE"
 
     if w_workaround_wine_bug 38037 "Installing native directmusic to work around playback bug"; then
     w_call directmusic
@@ -21266,7 +21282,6 @@ w_metadata line apps\
 load_line()
 {
 w_download http://cdn.line-apps.com/client/win/LineInst.exe 3208f74cecdfe55bfa67d0a00abeed63f41810abbbf6a371a0e3460156a073fe
-cd "$W_CACHE/$W_PACKAGE"
 
     # Make sure chinese fonts are available
     w_call fakechinese
@@ -21296,7 +21311,6 @@ load_meitu()
     # Make sure chinese fonts are available
     w_call fakechinese
 
-    cd "$W_CACHE/$W_PACKAGE"
     w_try "$WINE" "$file1"
     w_declare_exe "$W_PROGRAMS_X86_WIN\\Meitu\\XiuXiu" XiuXiu.exe
 }
@@ -21316,7 +21330,6 @@ w_metadata neoimaging apps\
 load_neoimaging()
 {
     w_download https://dlc2.pconline.com.cn/filedown_50795_6911045/l7YfyGZZ/NeoImagingSetup_4.4.1.exe 1c74ca53e1578bcbf0147747bd97636b3ce25f28d20e73a06da2eb8c38f7405e
-    cd "$W_CACHE/$W_PACKAGE"
 
     if w_workaround_wine_bug 38038 "Installing native riched20 to work around typing in search box"; then
     w_call riched20
@@ -21370,8 +21383,6 @@ load_qqeim()
     # Make sure chinese fonts are available
     w_call fakechinese
 
-
-    cd "$W_CACHE/$W_PACKAGE"
     w_try "$WINE" "$file1"
     w_declare_exe "$W_PROGRAMS_X86_WIN\\Tencent\\QQEIM\\Bin" QQEIM.exe
 }
@@ -21391,7 +21402,7 @@ w_metadata QQGame games\
 load_QQGame()
 {
 w_download http://dldir3.qq.com/minigamefile/QQGame2013Beta5P1_setup_guanjia.EXE 2a1f6c54eefe4e7006bf4841310fe9422f1c0e5d53019ff8b92df60e00f2fd9b
-cd "$W_CACHE/$W_PACKAGE"
+
     if w_workaround_wine_bug 33086 "Installing native riched20 to allow typing in username"; then
         w_call riched20
     fi
@@ -21440,15 +21451,15 @@ load_qqlight()
     w_call mfc42
 
     if w_workaround_wine_bug 38171 "Installing desktop file to work around bug"; then
-        cd "$W_TMP/"
+        w_try_cd "$W_TMP/"
         tar -zxf "$W_CACHE/qqlight/QQLight.tar.gz"
-        w_try mkdir -p $HOME/.local/share/applications/wine/Programs/腾讯软件/QQ轻聊版/
-        w_try mkdir -p $HOME/.local/share/icons/hicolor/48x48/apps
-        w_try mkdir -p $HOME/.local/share/icons/hicolor/256x256/apps
-        w_try mv QQLight/QQ轻聊版.desktop $HOME/.local/share/applications/wine/Programs/腾讯软件/QQ轻聊版
-        w_try mv QQLight/48x48/QQLight.png $HOME/.local/share/icons/hicolor/48x48/apps
-        w_try mv QQLight/256x256/QQLight.png $HOME/.local/share/icons/hicolor/256x256/apps
-        echo Exec=env WINEPREFIX=$WINEPREFIX $WINE '"'$W_PROGRAMS_X86_WIN'\Tencent\QQLite\Bin\QQScLauncher.exe"' >> $HOME/.local/share/applications/wine/Programs/腾讯软件/QQ轻聊版/QQ轻聊版.desktop
+        w_try mkdir -p "$HOME/.local/share/applications/wine/Programs/腾讯软件/QQ轻聊版/"
+        w_try mkdir -p "$HOME/.local/share/icons/hicolor/48x48/apps"
+        w_try mkdir -p "$HOME/.local/share/icons/hicolor/256x256/apps"
+        w_try mv QQLight/QQ轻聊版.desktop "$HOME/.local/share/applications/wine/Programs/腾讯软件/QQ轻聊版"
+        w_try mv QQLight/48x48/QQLight.png "$HOME/.local/share/icons/hicolor/48x48/apps"
+        w_try mv QQLight/256x256/QQLight.png "$HOME/.local/share/icons/hicolor/256x256/apps"
+        echo Exec=env WINEPREFIX="$WINEPREFIX" "$WINE" \""$W_PROGRAMS_X86_WIN"/Tencent/QQLite/Bin/QQScLauncher.exe\" >> "$HOME/.local/share/applications/wine/Programs/腾讯软件/QQ轻聊版/QQ轻聊版.desktop"
     fi
 
     if w_workaround_wine_bug 39384 "Disable ntoskrnl.exe to work around can't be started bug"; then
@@ -21463,7 +21474,6 @@ load_qqlight()
         w_call winxp
     fi
   
-    cd "$W_CACHE/$W_PACKAGE"
     w_try "$WINE" "$file1"
     w_declare_exe "$W_PROGRAMS_X86_WIN\\Tencent\\QQ\\Bin" QQScLauncher.exe
 }
@@ -21483,7 +21493,6 @@ w_metadata qqmusic apps\
 load_qqmusic()
 {
 w_download https://dldir1.qq.com/music/clntupate/QQMusicSetup.exe 6c181eb37d91edb7788b2d3dd5f2891a6fa4c3a607317ae8c3cd75f85cf3358c
-cd "$W_CACHE/$W_PACKAGE"
 
     w_call winxp
     
@@ -21507,28 +21516,6 @@ w_try "$WINE" "$file1"
 w_declare_exe "$W_PROGRAMS_X86_WIN\\Tencent\QQMusic" "QQMusic.exe"
 }
 
-#----------------------------------------------------------------
-
-w_metadata THS apps\
-    title="同花顺免费版 (A Chinese stock app)" \
-    publisher="Zhejiang Hithink Flush Information Network Co." \
-    year="2017" \
-    media="download" \
-    file1="THS_freeldy_8.70.31.exe" \
-    installed_exe1="$W_PROGRAMS_X86_WIN/同花顺/zdsj.exe" \
-    homepage="http://www.10jqka.com.cn/" \
-    unattended="no"
-
-load_THS()
-{
-w_download http://zjcmpp.hexin.com.cn/soft/THS_freeldy_8.70.31.exe 1acc3008135995efad66504332223d786d68bb3e9704df51014d60dc5ecda0bb
-cd "$W_CACHE/$W_PACKAGE"
-    w_call ie8
-    # Make sure chinese fonts are available
-    w_call fakechinese
-w_try "$WINE" "$file1"
-w_declare_exe "$W_PROGRAMS_X86_WIN\\同花顺" "zdsj.exe"
-}
 
 #----------------------------------------------------------------
 
@@ -21563,15 +21550,15 @@ load_tim()
     fi
 
     if w_workaround_wine_bug 38171 "Installing desktop file to work around bug"; then
-        cd "$W_TMP/"
+        w_try_cd "$W_TMP/"
         tar -zxf "$W_CACHE/tim/TIM.tar.gz"
-        mkdir -p $HOME/.local/share/applications/wine/Programs/腾讯软件/TIM
-        mkdir -p $HOME/.local/share/icons/hicolor/48x48/apps
-        mkdir -p $HOME/.local/share/icons/hicolor/256x256/apps
+        mkdir -p "$HOME/.local/share/applications/wine/Programs/腾讯软件/TIM"
+        mkdir -p "$HOME/.local/share/icons/hicolor/48x48/apps"
+        mkdir -p "$HOME/.local/share/icons/hicolor/256x256/apps"
         w_try mv TIM/腾讯TIM.desktop ~/.local/share/applications/wine/Programs/腾讯软件/TIM
         w_try mv TIM/48x48/TIM.png ~/.local/share/icons/hicolor/48x48/apps
         w_try mv TIM/256x256/TIM.png ~/.local/share/icons/hicolor/256x256/apps
-        echo Exec=env WINEPREFIX=$WINEPREFIX $WINE '"'$W_PROGRAMS_X86_WIN'\Tencent\TIM\Bin\QQScLauncher.exe"'>> $HOME/.local/share/applications/wine/Programs/腾讯软件/TIM/腾讯TIM.desktop
+        echo Exec=env WINEPREFIX="$WINEPREFIX" "$WINE" \""$W_PROGRAMS_X86_WIN"/Tencent/TIM/Bin/QQScLauncher.exe\">> "$HOME/.local/share/applications/wine/Programs/腾讯软件/TIM/腾讯TIM.desktop"
     fi
 
     if w_workaround_wine_bug 39657 "Disable ntoskrnl.exe to work around can't be started bug"; then
@@ -21582,7 +21569,6 @@ load_tim()
         w_override_dlls disabled txplatform.exe
     fi    
 
-    cd "$W_CACHE/$W_PACKAGE"
     w_try "$WINE" "$file1"
 
     w_declare_exe "$W_PROGRAMS_X86_WIN\\Tencent\\TIM\\Bin" QQScLauncher.exe
@@ -21614,7 +21600,6 @@ load_wechat()
 
     w_call fakechinese
     
-    cd "$W_CACHE/$W_PACKAGE"
     w_try "$WINE" "$file1"
 
     w_declare_exe "$W_PROGRAMS_X86_WIN\\Tencent\\WeChat" WeChat.exe
@@ -21635,7 +21620,6 @@ w_metadata youku apps\
 load_youku()
 {
 w_download http://pcclient.download.youku.com/youkuclient/youkuclient_setup_7.2.6.8110.exe 29c974e8c2f164d44f96cda1bceb35d87298d7d4c8ebf34fac7b22e73fd8ac3d
-cd "$W_CACHE/$W_PACKAGE"
 
     # Make sure chinese fonts are available
     w_call fakechinese
@@ -21643,7 +21627,6 @@ cd "$W_CACHE/$W_PACKAGE"
 w_try "$WINE" "$file1"
 w_declare_exe "$W_PROGRAMS_X86_WIN\\YouKu\YoukuClient" "YoukuDesktop.exe"
 }
-
 
 #----------------------------------------------------------------
 
@@ -21659,13 +21642,13 @@ w_metadata youdaonote apps\
 load_youdaonote()
 {
 w_download http://download.ydstatic.com/notewebsite/downloads/YNote.exe 92fc72629b0caf144b69e2d04851a25158dbb9d6eefe48898d5f70ff5a484d1e
-cd "$W_CACHE/$W_PACKAGE"
 
     # Make sure chinese fonts are available
     w_call fakechinese
     
 w_try "$WINE" "$file1"
 w_declare_exe "$W_PROGRAMS_X86_WIN\\Youdao\YoudaoNote" "RunYNote.exe"
+
 }
 #######################
 # settings

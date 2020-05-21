@@ -22,7 +22,6 @@ load_wechat()
 
     w_call fakechinese
     
-    cd "$W_CACHE/$W_PACKAGE"
     w_try "$WINE" "$file1"
 
     w_declare_exe "$W_PROGRAMS_X86_WIN\\Tencent\\WeChat" WeChat.exe

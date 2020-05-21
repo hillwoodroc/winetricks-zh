@@ -5,31 +5,23 @@ w_metadata qqintl apps \
     media="download" \
     file1="QQIntl2.11.exe" \
     installed_exe1="$W_PROGRAMS_X86_WIN/Tencent/QQIntl/Bin/QQ.exe" \
-    homepage="http://www.imqq.com" \
+    homepage="https://www.imqq.com/" \
     unattended="no"
 
 load_qqintl()
 {
-    w_download http://dldir1.qq.com/qqfile/QQIntl/QQi_PC/QQIntl2.11.exe a08e5d8432ad41745cfe92479a9a0c3328a546c27f05486392ca7b77b1cb02a8
+    w_download https://dldir1.qq.com/qqfile/QQIntl/QQi_PC/QQIntl2.11.exe a08e5d8432ad41745cfe92479a9a0c3328a546c27f05486392ca7b77b1cb02a8
 
     if w_workaround_wine_bug 33086 "Installing native riched20 to allow typing in username"; then
         w_call riched20
     fi
 
-    if w_workaround_wine_bug 34566 "Installing native ctf to work around crash"; then
-        w_call msctf
-    fi
-
     if w_workaround_wine_bug 37617 "Installing native wininet to work around crash"; then
         w_call wininet
     fi
-    
-    if w_workaround_wine_bug 37680 "Disable txplatform.exe to fix QQ can't be quit cleanly"; then
-        w_override_dlls disabled txplatform.exe
-    fi 
 
-    if w_workaround_wine_bug 42810 "Setting Windows version as XP to work around launch native browser bug"; then
-        w_call winxp
+    if w_workaround_wine_bug 37680 "Disable txplatform.exe to work around QQ can't be quit cleanly"; then
+        w_override_dlls disabled txplatform.exe
     fi
 
     # Make sure chinese fonts are available
@@ -38,7 +30,7 @@ load_qqintl()
     # wants mfc80u.dll
     w_call vcrun2005
 
-    cd "$W_CACHE/$W_PACKAGE"
+    w_try_cd "$W_CACHE/$W_PACKAGE"
     w_try "$WINE" "$file1"
-    w_declare_exe "$W_PROGRAMS_X86_WIN\\Tencent\\QQIntl\\Bin" QQ.exe
 }
+

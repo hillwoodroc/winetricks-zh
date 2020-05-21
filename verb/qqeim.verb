@@ -19,7 +19,7 @@ load_qqeim()
     if w_workaround_wine_bug 34566 "Installing native ctf to work around crash"; then
         w_call msctf
     fi
-    
+
     if w_workaround_wine_bug 37680 "Disable txplatform.exe to fix QQ can't be quit cleanly"; then
         w_override_dlls disabled txplatform.exe
     fi
@@ -27,12 +27,10 @@ load_qqeim()
     if w_workaround_wine_bug 42810 "Setting Windows version as XP to work around launch native browser bug"; then
         w_call winxp
     fi
-
+    
     # Make sure chinese fonts are available
     w_call fakechinese
 
-
-    cd "$W_CACHE/$W_PACKAGE"
     w_try "$WINE" "$file1"
     w_declare_exe "$W_PROGRAMS_X86_WIN\\Tencent\\QQEIM\\Bin" QQEIM.exe
 }

@@ -1,4 +1,4 @@
-w_metadata THS apps\
+w_metadata flush apps\
     title="同花顺免费版 (A Chinese stock app)" \
     publisher="Zhejiang Hithink Flush Information Network Co." \
     year="2017" \
@@ -8,10 +8,9 @@ w_metadata THS apps\
     homepage="http://www.10jqka.com.cn/" \
     unattended="no"
 
-load_THS()
+load_flush()
 {
-w_download http://zjcmpp.hexin.com.cn/soft/THS_freeldy_8.70.31.exe 1acc3008135995efad66504332223d786d68bb3e9704df51014d60dc5ecda0bb
-cd "$W_CACHE/$W_PACKAGE"
+w_download http://zjcmpp.hexin.com.cn/soft/THS_freeldy_8.80.70.0421.exe ac08b7e76fb049cf77fd19bed97903227dc2f9026c33497660dcfba601969bc8
     w_call ie8
     # Make sure chinese fonts are available
     w_call fakechinese
