@@ -18,6 +18,7 @@ w_download http://dl.static.iqiyi.com/hz/IQIYIsetup_appstore.exe af804966a2da139
     # Make sure chinese fonts are available
     w_call fakechinese
 
-w_try "$WINE" "$file1"
-w_declare_exe "$W_PROGRAMS_X86_WIN\\IQIYI Video\LStyle" "QyClient.exe"
+    w_try_cd "$W_CACHE/$W_PACKAGE"
+    w_try "$WINE" "$file1"
+    w_declare_exe "$W_PROGRAMS_X86_WIN\\IQIYI Video\LStyle" "QyClient.exe"
 }

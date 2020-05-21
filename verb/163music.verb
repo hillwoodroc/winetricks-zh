@@ -21,6 +21,7 @@ w_download https://d1.music.126.net/dmusic/cloudmusicsetup2.7.1.198242.exe cf943
     # Make sure chinese fonts are available
     w_call fakechinese
 
-w_try "$WINE" "$file1"
-w_declare_exe "$W_PROGRAMS_X86_WIN\\Netease\CloudMusic" "cloudmusic.exe"
+    w_try_cd "$W_CACHE/$W_PACKAGE"
+    w_try "$WINE" "$file1"
+    w_declare_exe "$W_PROGRAMS_X86_WIN\\Netease\CloudMusic" "cloudmusic.exe"
 }

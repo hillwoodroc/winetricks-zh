@@ -14,6 +14,7 @@ w_download http://zjcmpp.hexin.com.cn/soft/THS_freeldy_8.80.70.0421.exe ac08b7e7
     w_call ie8
     # Make sure chinese fonts are available
     w_call fakechinese
-w_try "$WINE" "$file1"
-w_declare_exe "$W_PROGRAMS_X86_WIN\\同花顺" "zdsj.exe"
+    w_try_cd "$W_CACHE/$W_PACKAGE"
+    w_try "$WINE" "$file1"
+    w_declare_exe "$W_PROGRAMS_X86_WIN\\同花顺" "zdsj.exe"
 }

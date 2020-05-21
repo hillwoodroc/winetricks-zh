@@ -14,6 +14,7 @@ w_download http://cdn.line-apps.com/client/win/LineInst.exe 3208f74cecdfe55bfa67
 
     # Make sure chinese fonts are available
     w_call fakechinese
-w_try "$WINE" "$file1"
-w_declare_exe "$W_PROGRAMS_X86_WIN\\Naver\LINE" "Line.exe"
+    w_try_cd "$W_CACHE/$W_PACKAGE"
+    w_try "$WINE" "$file1"
+    w_declare_exe "$W_PROGRAMS_X86_WIN\\Naver\LINE" "Line.exe"
 }

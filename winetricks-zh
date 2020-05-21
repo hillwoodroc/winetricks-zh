@@ -21105,8 +21105,9 @@ w_download http://client.dl.126.net/pcmail/dashi/mail.exe 72dbb4fa3fb147207e32d4
     # uses vcrun2005
     w_call vcrun2005
 
-w_try "$WINE" "$file1"
-w_declare_exe "$W_PROGRAMS_X86_WIN\\MailMaster" "Start.exe"
+    w_try_cd "$W_CACHE/$W_PACKAGE"
+    w_try "$WINE" "$file1"
+    w_declare_exe "$W_PROGRAMS_X86_WIN\\MailMaster" "Start.exe"
 }
 
 #----------------------------------------------------------------
@@ -21134,6 +21135,7 @@ w_download https://d1.music.126.net/dmusic/cloudmusicsetup2.7.1.198242.exe cf943
     # Make sure chinese fonts are available
     w_call fakechinese
 
+w_try_cd "$W_CACHE/$W_PACKAGE"
 w_try "$WINE" "$file1"
 w_declare_exe "$W_PROGRAMS_X86_WIN\\Netease\CloudMusic" "cloudmusic.exe"
 }
@@ -21161,6 +21163,7 @@ load_evernote()
     # Make sure chinese fonts are available
     w_call fakechinese
 
+    w_try_cd "$W_CACHE/$W_PACKAGE"
     w_try "$WINE" "$file1"
     w_declare_exe "$W_PROGRAMS_X86_WIN\\Evernote\Evernote" Evernote.exe
 }
@@ -21183,8 +21186,9 @@ w_download http://zjcmpp.hexin.com.cn/soft/THS_freeldy_8.80.70.0421.exe ac08b7e7
     w_call ie8
     # Make sure chinese fonts are available
     w_call fakechinese
-w_try "$WINE" "$file1"
-w_declare_exe "$W_PROGRAMS_X86_WIN\\同花顺" "zdsj.exe"
+    w_try_cd "$W_CACHE/$W_PACKAGE"
+    w_try "$WINE" "$file1"
+    w_declare_exe "$W_PROGRAMS_X86_WIN\\同花顺" "zdsj.exe"
 }
 
 #----------------------------------------------------------------
@@ -21203,6 +21207,7 @@ load_foxit()
 {
     w_download http://cdn02.foxitsoftware.com/pub/foxit/reader/desktop/win/7.x/7.2/en_us/FoxitReader720.0722_prom_enu_Setup.exe cfb46ac23a4c5a02c641e33441bba4fe128cce3d4c05257199e0d7e029d20141
 
+    w_try_cd "$W_CACHE/$W_PACKAGE"
     w_try "$WINE" "$file1"
     w_declare_exe "$W_PROGRAMS_X86_WIN\\Foxit Software\\Foxit Reader" FoxitReader.exe
 }
@@ -21229,8 +21234,9 @@ w_download http://dl.static.iqiyi.com/hz/IQIYIsetup_appstore.exe af804966a2da139
     # Make sure chinese fonts are available
     w_call fakechinese
 
-w_try "$WINE" "$file1"
-w_declare_exe "$W_PROGRAMS_X86_WIN\\IQIYI Video\LStyle" "QyClient.exe"
+    w_try_cd "$W_CACHE/$W_PACKAGE"
+    w_try "$WINE" "$file1"
+    w_declare_exe "$W_PROGRAMS_X86_WIN\\IQIYI Video\LStyle" "QyClient.exe"
 }
 
 
@@ -21263,6 +21269,7 @@ load_kugou()
 
     # Make sure chinese fonts are available
     w_call fakechinese
+    w_try_cd "$W_CACHE/$W_PACKAGE"
     w_try "$WINE" "$file1"
     w_declare_exe "$W_PROGRAMS_X86_WIN\\KuGou\KGMusic" "KuGou.exe"
 }
@@ -21285,8 +21292,9 @@ w_download http://cdn.line-apps.com/client/win/LineInst.exe 3208f74cecdfe55bfa67
 
     # Make sure chinese fonts are available
     w_call fakechinese
-w_try "$WINE" "$file1"
-w_declare_exe "$W_PROGRAMS_X86_WIN\\Naver\LINE" "Line.exe"
+    w_try_cd "$W_CACHE/$W_PACKAGE"
+    w_try "$WINE" "$file1"
+    w_declare_exe "$W_PROGRAMS_X86_WIN\\Naver\LINE" "Line.exe"
 }
 
 #----------------------------------------------------------------
@@ -21311,6 +21319,7 @@ load_meitu()
     # Make sure chinese fonts are available
     w_call fakechinese
 
+    w_try_cd "$W_CACHE/$W_PACKAGE"
     w_try "$WINE" "$file1"
     w_declare_exe "$W_PROGRAMS_X86_WIN\\Meitu\\XiuXiu" XiuXiu.exe
 }
@@ -21343,6 +21352,7 @@ load_neoimaging()
     # Make sure chinese fonts are available
     w_call fakechinese
 
+    w_try_cd "$W_CACHE/$W_PACKAGE"
     w_try "$WINE" "$file1"
     w_declare_exe "$W_PROGRAMS_X86_WIN\\Thunder Network\NeoImaging\Program" "nEOiMAGING4.exe"
     w_declare_exe "$W_PROGRAMS_X86_WIN\\Thunder Network\NeoViewer\Program" "NeoViewer.exe"
@@ -21383,6 +21393,7 @@ load_qqeim()
     # Make sure chinese fonts are available
     w_call fakechinese
 
+    w_try_cd "$W_CACHE/$W_PACKAGE"
     w_try "$WINE" "$file1"
     w_declare_exe "$W_PROGRAMS_X86_WIN\\Tencent\\QQEIM\\Bin" QQEIM.exe
 }
@@ -21413,8 +21424,9 @@ w_download http://dldir3.qq.com/minigamefile/QQGame2013Beta5P1_setup_guanjia.EXE
     w_call mfc42
     # Make sure chinese fonts are available
     w_call fakechinese
-w_try "$WINE" "$file1"
-w_declare_exe "$W_PROGRAMS_X86_WIN\\Tencent\\QQGame" "QQGame.exe"
+    w_try_cd "$W_CACHE/$W_PACKAGE"
+    w_try "$WINE" "$file1"
+    w_declare_exe "$W_PROGRAMS_X86_WIN\\Tencent\\QQGame" "QQGame.exe"
 }
 
 #----------------------------------------------------------------
@@ -21473,7 +21485,8 @@ load_qqlight()
     if w_workaround_wine_bug 42810 "Setting Windows version as XP to work around launch native browser bug"; then
         w_call winxp
     fi
-  
+
+    w_try_cd "$W_CACHE/$W_PACKAGE"
     w_try "$WINE" "$file1"
     w_declare_exe "$W_PROGRAMS_X86_WIN\\Tencent\\QQ\\Bin" QQScLauncher.exe
 }
@@ -21512,8 +21525,9 @@ w_download https://dldir1.qq.com/music/clntupate/QQMusicSetup.exe 6c181eb37d91ed
     # Make sure chinese fonts are available
     w_call fakechinese
 
-w_try "$WINE" "$file1"
-w_declare_exe "$W_PROGRAMS_X86_WIN\\Tencent\QQMusic" "QQMusic.exe"
+    w_try_cd "$W_CACHE/$W_PACKAGE"
+    w_try "$WINE" "$file1"
+    w_declare_exe "$W_PROGRAMS_X86_WIN\\Tencent\QQMusic" "QQMusic.exe"
 }
 
 
@@ -21569,6 +21583,7 @@ load_tim()
         w_override_dlls disabled txplatform.exe
     fi    
 
+    w_try_cd "$W_CACHE/$W_PACKAGE"
     w_try "$WINE" "$file1"
 
     w_declare_exe "$W_PROGRAMS_X86_WIN\\Tencent\\TIM\\Bin" QQScLauncher.exe
@@ -21600,6 +21615,7 @@ load_wechat()
 
     w_call fakechinese
     
+    w_try_cd "$W_CACHE/$W_PACKAGE"
     w_try "$WINE" "$file1"
 
     w_declare_exe "$W_PROGRAMS_X86_WIN\\Tencent\\WeChat" WeChat.exe
@@ -21624,8 +21640,9 @@ w_download http://pcclient.download.youku.com/youkuclient/youkuclient_setup_7.2.
     # Make sure chinese fonts are available
     w_call fakechinese
 
-w_try "$WINE" "$file1"
-w_declare_exe "$W_PROGRAMS_X86_WIN\\YouKu\YoukuClient" "YoukuDesktop.exe"
+    w_try_cd "$W_CACHE/$W_PACKAGE"
+    w_try "$WINE" "$file1"
+    w_declare_exe "$W_PROGRAMS_X86_WIN\\YouKu\YoukuClient" "YoukuDesktop.exe"
 }
 
 #----------------------------------------------------------------
@@ -21645,9 +21662,9 @@ w_download http://download.ydstatic.com/notewebsite/downloads/YNote.exe 92fc7262
 
     # Make sure chinese fonts are available
     w_call fakechinese
-    
-w_try "$WINE" "$file1"
-w_declare_exe "$W_PROGRAMS_X86_WIN\\Youdao\YoudaoNote" "RunYNote.exe"
+    w_try_cd "$W_CACHE/$W_PACKAGE"
+    w_try "$WINE" "$file1"
+    w_declare_exe "$W_PROGRAMS_X86_WIN\\Youdao\YoudaoNote" "RunYNote.exe"
 
 }
 #######################
