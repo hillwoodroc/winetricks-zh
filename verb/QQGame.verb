@@ -1,27 +1,24 @@
 w_metadata QQGame games\
-    title="QQGame2013" \
+    title="QQGame2020" \
     publisher="Tencent" \
-    year="2013" \
+    year="2020" \
     media="download" \
-    file1="QQGame2013Beta5P1_setup_guanjia.EXE" \
+    file1="QQGame_setup_web_11.EXE" \
     installed_exe1="$W_PROGRAMS_X86_WIN/Tencent/QQGame/QQGame.exe" \
     homepage="http://www.qq.com" \
     unattended="no"
 
 load_QQGame()
 {
-w_download http://dldir3.qq.com/minigamefile/QQGame2013Beta5P1_setup_guanjia.EXE 2a1f6c54eefe4e7006bf4841310fe9422f1c0e5d53019ff8b92df60e00f2fd9b
+w_download https://dldir3.qq.com/minigamefile/QQGame_setup_web_11.EXE 019b46cd70b6ea764207e25fb165773df70ba2bfba0c35a77d61b55cd816e245
 
-    if w_workaround_wine_bug 33086 "Installing native riched20 to allow typing in username"; then
-        w_call riched20
-    fi
-    if w_workaround_wine_bug 30083 "Installing native ie8 to avoid crash in settings and other dialogs"; then
-        w_call ie8
-    fi
     # uses mfc42u.dll
-    w_call mfc42
+    # w_call mfc42
+    
     # Make sure chinese fonts are available
     w_call fakechinese
-w_try "$WINE" "$file1"
-w_declare_exe "$W_PROGRAMS_X86_WIN\\Tencent\\QQGame" "QQGame.exe"
+
+    w_try_cd "$W_CACHE/$W_PACKAGE"
+    w_try "$WINE" "$file1"
+    w_declare_exe "$W_PROGRAMS_X86_WIN\\Tencent\\QQGame" "QQGame.exe"
 }
