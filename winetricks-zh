@@ -21182,7 +21182,7 @@ w_metadata flush apps\
 
 load_flush()
 {
-w_download http://zjcmpp.hexin.com.cn/soft/THS_freeldy_8.80.70.0421.exe ac08b7e76fb049cf77fd19bed97903227dc2f9026c33497660dcfba601969bc8
+w_download http://zjcmpp.hexin.com.cn/soft/THS_freeldy_8.70.31.exe 1acc3008135995efad66504332223d786d68bb3e9704df51014d60dc5ecda0bb
     w_call ie8
     # Make sure chinese fonts are available
     w_call fakechinese

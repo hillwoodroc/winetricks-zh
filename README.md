@@ -23,7 +23,7 @@
 3.同花顺股票软件  
 对应的 verb 文件：flush.verb
 
-4.QQ游戏2013  
+4.QQ游戏 5.22(2020)  
 对应的 verb 文件：QQGame.verb
 
 ~~5.TM2013 Preview1~~  
