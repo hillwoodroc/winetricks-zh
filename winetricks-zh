@@ -21314,7 +21314,7 @@ w_metadata line apps\
 
 load_line()
 {
-w_download http://cdn.line-apps.com/client/win/LineInst.exe 3208f74cecdfe55bfa67d0a00abeed63f41810abbbf6a371a0e3460156a073fe
+w_download http://cdn.line-apps.com/client/win/LineInst.exe e77664efd7eb847eb193381fc669957d473a4f0c278bdc0345a231a309509135
 
     # Make sure chinese fonts are available
     w_call fakechinese
