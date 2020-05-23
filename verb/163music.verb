@@ -12,7 +12,9 @@ load_163music()
 {
 w_download https://d1.music.126.net/dmusic/cloudmusicsetup2.7.1.198242.exe cf94375212a77ec676aac90da0417cb56cfd8c1ecaa96773ce667a5a8e7a8309
 
-    w_call winxp
+    if w_workaround_wine_bug 49227 "Black window bug"; then
+        w_call winxp
+    fi
     
     if w_workaround_wine_bug 38028 "Installing native directx9 to work around playback bug"; then
         w_call d3dx9
