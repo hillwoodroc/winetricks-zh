@@ -1,0 +1,22 @@
+w_metadata dzh365 apps\
+    title="大智慧365" \
+    publisher="Shanghai DZH Limited" \
+    year="2020" \
+    media="download" \
+    file1="365.exe" \
+    installed_exe1="$W_PROGRAMS_X86_WIN/365/dzh2.exe" \
+    homepage="http://www.gw.com.cn" \
+
+load_dzh365()
+{
+    if [ "$W_ARCH" = "win32" ]; then
+        w_download http://downfile.gw.com.cn/pub/365.exe 58c6863b770fb22f6bbe5d69fee08bb9a40281137ca202a3abc6f3febdc167bb "$file1" 
+    elif [ "$W_ARCH" = "win64" ]; then
+        w_download http://downfile.gw.com.cn/pub/365\(64\).exe f740e820932f93a547d082f8892cd7c7ca7aa98419bc05ef5c3ac9c231e966b1 "$file1" 
+    fi
+
+    w_call fakechinese
+    
+    w_try "$WINE" "$file1"
+    w_declare_exe "$W_PROGRAMS_X86_WIN\\365" "dzh2.exe"
+}
