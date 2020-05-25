@@ -110,3 +110,18 @@ sudo cp winetricks-zh.desktop /usr/share/applications/
 ## 注意 ##
 
 winetricks 只是 wine 的配置工具 ，wine 另行安装。由于各个发行版自带的 wine 版本的差异，可能会导致使用该工具安装 windows 应用失败或者程序无法正常起动。遇到这种情况请安装新版 wine.
+
+## 已知问题 ##
+- QQ、TIM：
+  * 不支持视频通话
+  * 不能保存密码（若需启用保存密码功能，可以在 winecfg 中启用 txplatform.exe，不过这样QQ、TIM 不能完全退出）
+  * 偶尔出现卡死问题，一般等一段时间会恢复
+  * 在 wayland 中截图黑屏
+- QQ 游戏：
+  * 部分游戏无法加载
+- 微信：
+  * 不支持截图
+- 上游问题：
+  * .net 包安装时间很长，请耐心等待
+- 版本检测：
+  * 在终端中运行会出现版本检测的提示，请无视。
