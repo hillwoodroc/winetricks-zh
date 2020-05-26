@@ -21124,10 +21124,6 @@ w_metadata 163music apps\
 load_163music()
 {
 w_download https://d1.music.126.net/dmusic/cloudmusicsetup2.7.1.198242.exe cf94375212a77ec676aac90da0417cb56cfd8c1ecaa96773ce667a5a8e7a8309
-
-    if w_workaround_wine_bug 49227 "Black window bug"; then
-        w_call winxp
-    fi
     
     if w_workaround_wine_bug 38028 "Installing native directx9 to work around playback bug"; then
         w_call d3dx9
@@ -21580,7 +21576,7 @@ load_tim()
 
     # uses mfc42u.dll
     w_call mfc42
-    
+
     if w_workaround_wine_bug 42810 "Setting Windows version as XP to work around launch native browser bug"; then
         w_call winxp
     fi
@@ -21600,10 +21596,13 @@ load_tim()
     if w_workaround_wine_bug 39657 "Disable ntoskrnl.exe to work around can't be started bug"; then
         w_override_dlls disabled ntoskrnl.exe
     fi
-    
+
     if w_workaround_wine_bug 37680 "Disable txplatform.exe to work around QQ can't be quit cleanly"; then
         w_override_dlls disabled txplatform.exe
-    fi    
+    fi
+
+    # Disable update, stay on the version.
+    w_override_dlls disabled txupd.exe
 
     w_try_cd "$W_CACHE/$W_PACKAGE"
     w_try "$WINE" "$file1"
