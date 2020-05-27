@@ -21523,31 +21523,22 @@ w_metadata qqmusic apps\
 
 load_qqmusic()
 {
-w_download https://dldir1.qq.com/music/clntupate/QQMusicSetup.exe 6c181eb37d91edb7788b2d3dd5f2891a6fa4c3a607317ae8c3cd75f85cf3358c
+w_download https://dldir1.qq.com/music/clntupate/QQMusicSetup.exe bb7052200a95e30cdb0ba96d71a0665a8475ba6f4160615ad1fadba5933afb0e
 
-    w_call winxp
-    
+    if w_workaround_wine_bug 44985 "Black window bug"; then
+        w_call winxp
+    fi
+
     if w_workaround_wine_bug 5162 "Installing native riched20 to fix can not input username bug"; then
         w_call riched20
     fi
 
-    # uses vcrun2010
-    w_call vcrun2010
-    
-    # uses mfc42u.dll
-    w_call mfc42
-    
-    #use ie8
-    w_call ie8
-    
-    # Make sure chinese fonts are available
     w_call fakechinese
 
     w_try_cd "$W_CACHE/$W_PACKAGE"
     w_try "$WINE" "$file1"
     w_declare_exe "$W_PROGRAMS_X86_WIN\\Tencent\QQMusic" "QQMusic.exe"
 }
-
 
 #----------------------------------------------------------------
 
