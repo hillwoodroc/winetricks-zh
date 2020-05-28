@@ -48,7 +48,10 @@ load_qqlight()
     if w_workaround_wine_bug 37680 "Disable txplatform.exe to fix QQ can't be quit cleanly"; then
         w_override_dlls disabled txplatform.exe
     fi   
-  
+
+    # Disable update, stay on the version.
+    w_override_dlls disabled txupd.exe
+
     w_try_cd "$W_CACHE/$W_PACKAGE"
     w_try "$WINE" "$file1"
     w_declare_exe "$W_PROGRAMS_X86_WIN\\Tencent\\QQLite\\Bin" QQScLauncher.exe
