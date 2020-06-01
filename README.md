@@ -1,5 +1,7 @@
 # winetricks-zh #
 
+给开发者一点赏钱吧😎
+
 ![打赏](https://raw.githubusercontent.com/hillwoodroc/winetricks-zh/master/data/sponsor-wechat.png)
 
 这是一个 winetricks 的修改版，添加了一些国内常用的 windows 应用支持，以弥补官方版 winetricks 对国内应用支持不足的情况。但最终目的仍然是希望上游能将这些应用添加进去。
