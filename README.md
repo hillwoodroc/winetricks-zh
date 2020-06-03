@@ -124,6 +124,8 @@ winetricks 只是 wine 的配置工具 ，wine 另行安装。由于各个发行
   * 部分游戏无法加载
 - 微信：
   * 不支持截图
+- QQ 音乐 2020
+  * 无法登陆，其他正常 (https://bugs.winehq.org/show_bug.cgi?id=49268)
 - 上游问题：
   * .net 包安装时间很长，请耐心等待
 - 版本检测：
