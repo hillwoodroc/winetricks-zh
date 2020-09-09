@@ -10,7 +10,7 @@ w_metadata qqmusic apps\
 
 load_qqmusic()
 {
-w_download https://dldir1.qq.com/music/clntupate/QQMusicSetup.exe bb7052200a95e30cdb0ba96d71a0665a8475ba6f4160615ad1fadba5933afb0e
+w_download https://dldir1.qq.com/music/clntupate/QQMusicSetup.exe a28dbf0aef624e0c98fa6321265e8c16be3e240b72f5e329d91fdef682a2f7be
 
     if w_workaround_wine_bug 44985 "Black window bug"; then
         w_call winxp
