@@ -10,9 +10,9 @@ w_metadata dzh365 apps\
 load_dzh365()
 {
     if [ "$W_ARCH" = "win32" ]; then
-        w_download http://downfile.gw.com.cn/pub/365.exe 58c6863b770fb22f6bbe5d69fee08bb9a40281137ca202a3abc6f3febdc167bb "$file1" 
+        w_download http://downfile.gw.com.cn/pub/365.exe 80137b8e3006798c476ab4f273bc28439beec5fcd893664fce089fdb87ecc91a "$file1" 
     elif [ "$W_ARCH" = "win64" ]; then
-        w_download http://downfile.gw.com.cn/pub/365\(64\).exe f740e820932f93a547d082f8892cd7c7ca7aa98419bc05ef5c3ac9c231e966b1 "$file1" 
+        w_download http://downfile.gw.com.cn/pub/365\(64\).exe b191c51a830d3f6670d3905f690bb4c3622bc2a82b85f9db0cae43c3d615a9e1 "$file1" 
     fi
 
     w_call fakechinese

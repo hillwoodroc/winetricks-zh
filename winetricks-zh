@@ -21670,7 +21670,7 @@ w_metadata 163mail apps\
 
 load_163mail()
 {
-w_download http://client.dl.126.net/pcmail/dashi/mail.exe 51407e443013389b81d8699f4c33da19e0ab250f74c49ccde62909204135bd97
+w_download http://client.dl.126.net/pcmail/dashi/mail.exe bf4f06945c3762cca1cd795da9be9893d9d57f7f8714e225ca2cf10ae9c33072
 
     # uses vcrun2005
     w_call vcrun2005
@@ -21749,9 +21749,9 @@ w_metadata dzh365 apps\
 load_dzh365()
 {
     if [ "$W_ARCH" = "win32" ]; then
-        w_download http://downfile.gw.com.cn/pub/365.exe 58c6863b770fb22f6bbe5d69fee08bb9a40281137ca202a3abc6f3febdc167bb "$file1" 
+        w_download http://downfile.gw.com.cn/pub/365.exe 80137b8e3006798c476ab4f273bc28439beec5fcd893664fce089fdb87ecc91a "$file1" 
     elif [ "$W_ARCH" = "win64" ]; then
-        w_download http://downfile.gw.com.cn/pub/365\(64\).exe f740e820932f93a547d082f8892cd7c7ca7aa98419bc05ef5c3ac9c231e966b1 "$file1" 
+        w_download http://downfile.gw.com.cn/pub/365\(64\).exe b191c51a830d3f6670d3905f690bb4c3622bc2a82b85f9db0cae43c3d615a9e1 "$file1" 
     fi
 
     w_call fakechinese
@@ -21817,7 +21817,7 @@ w_metadata iqiyi apps\
 
 load_iqiyi()
 {
-w_download http://dl.static.iqiyi.com/hz/IQIYIsetup_appstore.exe af804966a2da139bb823c0f270e3018683907cb1f88d162c9fa6dbf4b10d153c
+w_download http://dl.static.iqiyi.com/hz/IQIYIsetup_appstore.exe d72f9dbe4390ecd8603106ebcba34d7e3dd8b77583943d63d089572652e71940
 
     if w_workaround_wine_bug 5162 "Installing native riched20 to work around can not input text in search box."; then
         w_call riched20
@@ -21880,7 +21880,7 @@ w_metadata line apps\
 
 load_line()
 {
-w_download http://cdn.line-apps.com/client/win/LineInst.exe e77664efd7eb847eb193381fc669957d473a4f0c278bdc0345a231a309509135
+w_download http://cdn.line-apps.com/client/win/LineInst.exe 7453d2ffaeaabd24888e384d5e54332b6a82a376bd34b4b153d98a436942dce6
 
     # Make sure chinese fonts are available
     w_call fakechinese
@@ -22212,7 +22212,7 @@ w_metadata youdaonote apps\
 
 load_youdaonote()
 {
-w_download http://download.ydstatic.com/notewebsite/downloads/YNote.exe 92fc72629b0caf144b69e2d04851a25158dbb9d6eefe48898d5f70ff5a484d1e
+w_download http://download.ydstatic.com/notewebsite/downloads/YNote.exe 5bd9ab33db9f48aeea2a171652c4918455d002bed1847d8ecb64c29e4e16c22e
 
     # Make sure chinese fonts are available
     w_call fakechinese

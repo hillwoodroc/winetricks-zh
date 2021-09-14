@@ -9,7 +9,7 @@ w_metadata youdaonote apps\
 
 load_youdaonote()
 {
-w_download http://download.ydstatic.com/notewebsite/downloads/YNote.exe 92fc72629b0caf144b69e2d04851a25158dbb9d6eefe48898d5f70ff5a484d1e
+w_download http://download.ydstatic.com/notewebsite/downloads/YNote.exe 5bd9ab33db9f48aeea2a171652c4918455d002bed1847d8ecb64c29e4e16c22e
 
     # Make sure chinese fonts are available
     w_call fakechinese

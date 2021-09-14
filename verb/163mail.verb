@@ -10,7 +10,7 @@ w_metadata 163mail apps\
 
 load_163mail()
 {
-w_download http://client.dl.126.net/pcmail/dashi/mail.exe 51407e443013389b81d8699f4c33da19e0ab250f74c49ccde62909204135bd97
+w_download http://client.dl.126.net/pcmail/dashi/mail.exe bf4f06945c3762cca1cd795da9be9893d9d57f7f8714e225ca2cf10ae9c33072
 
     # uses vcrun2005
     w_call vcrun2005
