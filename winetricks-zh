@@ -232,7 +232,7 @@ w_info()
     fi
 
     case ${WINETRICKS_GUI} in
-        zenity) ${WINETRICKS_GUI} --timeout=3 --info --title=winetricks --text="$(echo "$@" | sed 's,\\\\,\\\\\\\\,g')" --no-wrap;;
+        zenity) ${WINETRICKS_GUI} --timeout=3 --info --width=400 --title=winetricks --text="$(echo "$@" | sed 's,\\\\,\\\\\\\\,g')" --no-wrap;;
         kdialog) ${WINETRICKS_GUI} --title winetricks --msgbox "$@" ;;
         none) ;;
     esac
@@ -253,7 +253,7 @@ w_warn()
     fi
 
     case ${WINETRICKS_GUI} in
-        zenity) ${WINETRICKS_GUI} "${_W_timeout}" --error --title=winetricks --text="$(echo "$@" | sed 's,\\\\,\\\\\\\\,g')";;
+        zenity) ${WINETRICKS_GUI} "${_W_timeout}" --error --width=400 --title=winetricks --text="$(echo "$@" | sed 's,\\\\,\\\\\\\\,g')";;
         kdialog) ${WINETRICKS_GUI} --title winetricks --error "$@" ;;
         none) ;;
     esac
@@ -3386,8 +3386,8 @@ winetricks_latest_version_check()
         case ${LANG} in
             pl*) w_warn "GitHub nie działa? Wersja '${latest_version}' nie wydaje się być prawdiłową wersją" ;;
             ru*) w_warn "Отсутствует подключение к Github? версия '${latest_version}' может быть неактуальной" ;;
-            zh_CN*) w_warn "Github 提供的下载？${latest_version} 似乎不是个有效的版本号。" ;;
-            zh_TW*|zh_HK*) w_warn "Github 提供的下載？${latest_version} 似乎不是個有效的版本號。" ;;
+            zh_CN*) w_warn "GitHub 无法访问？${latest_version} 似乎不是个有效的版本号。" ;;
+            zh_TW*|zh_HK*) w_warn "GitHub 宕機了？${latest_version} 似乎不是個有效的版本號。" ;;
             *) w_warn "Github down? version '${latest_version}' doesn't appear to be a valid version" ;;
         esac
 
@@ -5353,6 +5353,12 @@ winetricks_init()
 
     winetricks_get_platform
 
+    # Workaround SIP DYLD_stripping
+    # See https://support.apple.com/en-us/HT204899
+    if [ -n "${WINETRICKS_FALLBACK_LIBRARY_PATH}" ]; then
+        export DYLD_FALLBACK_LIBRARY_PATH="${WINETRICKS_FALLBACK_LIBRARY_PATH}"
+    fi
+
     #---- Public Variables ----
 
     # Where application installers are cached
@@ -6039,7 +6045,7 @@ w_metadata cnc_ddraw dlls \
     title="Reimplentation of ddraw for CnC games" \
     homepage="https://github.com/CnCNet/cnc-ddraw" \
     publisher="CnCNet" \
-    year="2020" \
+    year="2021" \
     media="download" \
     file1="cnc-ddraw.zip" \
     installed_file1="${W_SYSTEM32_DLLS_WIN}/Shaders/readme.txt"
@@ -6047,7 +6053,7 @@ w_metadata cnc_ddraw dlls \
 load_cnc_ddraw()
 {
     # Note: only works if ddraw.ini contains settings for the executable
-    w_download https://github.com/CnCNet/cnc-ddraw/releases/download/1.3.5.0/cnc-ddraw.zip f603b2893cb6c73cf01743761a7d77917955e9a927752ef37b0b675e8b190f17
+    w_download https://github.com/CnCNet/cnc-ddraw/releases/download/v4.4.4.0/cnc-ddraw.zip 15b1f5ff38558869af651e3f10ab9e7728fa8f48d03b721e923f35fb417c55eb
     w_try_unzip "${W_SYSTEM32_DLLS}" "${W_CACHE}/${W_PACKAGE}/${file1}"
 
     w_override_dlls native,builtin ddraw
@@ -7157,233 +7163,6 @@ helper_dxvk_d9vk()
 
 #----------------------------------------------------------------
 
-w_metadata d9vk010 dlls \
-    title="Vulkan-based D3D9/D3D10/D3D11 implementation for Linux / Wine (0.10)" \
-    publisher="Joshua Ashton" \
-    year="2019" \
-    media="download" \
-    file1="d9vk-0.10.tar.gz" \
-    installed_file1="${W_SYSTEM32_DLLS_WIN}/d3d9.dll" \
-    installed_file1="${W_SYSTEM32_DLLS_WIN}/d3d10.dll" \
-    installed_file2="${W_SYSTEM32_DLLS_WIN}/d3d10_1.dll" \
-    installed_file3="${W_SYSTEM32_DLLS_WIN}/d3d10core.dll" \
-    installed_file4="${W_SYSTEM32_DLLS_WIN}/d3d11.dll" \
-    installed_file5="${W_SYSTEM32_DLLS_WIN}/dxgi.dll"
-
-load_d9vk010()
-{
-    # https://github.com/Joshua-Ashton/d9vk
-    w_download "https://github.com/Joshua-Ashton/d9vk/releases/download/0.10/d9vk-0.10.tar.gz" 9e50f2609aafaa7dd24c327f6af83c821c2259ca4967656029782faa71398ae2
-    helper_dxvk_d9vk "${file1}" "4.5" "1.1.104" "dxgi,d3d9,d3d10core,d3d10,d3d11"
-}
-
-w_metadata d9vk011 dlls \
-    title="Vulkan-based D3D9/D3D10/D3D11 implementation for Linux / Wine (0.11)" \
-    publisher="Joshua Ashton" \
-    year="2019" \
-    media="download" \
-    file1="d9vk-0.11.tar.gz" \
-    installed_file1="${W_SYSTEM32_DLLS_WIN}/d3d9.dll" \
-    installed_file1="${W_SYSTEM32_DLLS_WIN}/d3d10.dll" \
-    installed_file2="${W_SYSTEM32_DLLS_WIN}/d3d10_1.dll" \
-    installed_file3="${W_SYSTEM32_DLLS_WIN}/d3d10core.dll" \
-    installed_file4="${W_SYSTEM32_DLLS_WIN}/d3d11.dll" \
-    installed_file5="${W_SYSTEM32_DLLS_WIN}/dxgi.dll"
-
-load_d9vk011()
-{
-    # https://github.com/Joshua-Ashton/d9vk
-    w_download "https://github.com/Joshua-Ashton/d9vk/releases/download/0.11/d9vk-0.11.tar.gz" fac8eab2a7de7af2404d4bac13ed24ff60c1cf36ba6b8ab7fc5f0d405f284e08
-    helper_dxvk_d9vk "${file1}" "4.5" "1.1.104" "dxgi,d3d9,d3d10core,d3d10,d3d11"
-}
-
-w_metadata d9vk012 dlls \
-    title="Vulkan-based D3D9/D3D10/D3D11 implementation for Linux / Wine (0.12)" \
-    publisher="Joshua Ashton" \
-    year="2019" \
-    media="download" \
-    file1="d9vk-0.12.tar.gz" \
-    installed_file1="${W_SYSTEM32_DLLS_WIN}/d3d9.dll" \
-    installed_file1="${W_SYSTEM32_DLLS_WIN}/d3d10.dll" \
-    installed_file2="${W_SYSTEM32_DLLS_WIN}/d3d10_1.dll" \
-    installed_file3="${W_SYSTEM32_DLLS_WIN}/d3d10core.dll" \
-    installed_file4="${W_SYSTEM32_DLLS_WIN}/d3d11.dll" \
-    installed_file5="${W_SYSTEM32_DLLS_WIN}/dxgi.dll"
-
-load_d9vk012()
-{
-    # https://github.com/Joshua-Ashton/d9vk
-    w_download "https://github.com/Joshua-Ashton/d9vk/releases/download/0.12/d9vk-0.12.tar.gz" 13a657cce7d7a03aace794ab52f0d09cb5aaf1c59a9c9971eae294fc50f39f41
-    helper_dxvk_d9vk "${file1}" "4.5" "1.1.104" "dxgi,d3d9,d3d10core,d3d10,d3d11"
-}
-
-w_metadata d9vk013 dlls \
-    title="Vulkan-based D3D9/D3D10/D3D11 implementation for Linux / Wine (0.13)" \
-    publisher="Joshua Ashton" \
-    year="2019" \
-    media="download" \
-    file1="d9vk-0.13.tar.gz" \
-    installed_file1="${W_SYSTEM32_DLLS_WIN}/d3d9.dll" \
-    installed_file1="${W_SYSTEM32_DLLS_WIN}/d3d10.dll" \
-    installed_file2="${W_SYSTEM32_DLLS_WIN}/d3d10_1.dll" \
-    installed_file3="${W_SYSTEM32_DLLS_WIN}/d3d10core.dll" \
-    installed_file4="${W_SYSTEM32_DLLS_WIN}/d3d11.dll" \
-    installed_file5="${W_SYSTEM32_DLLS_WIN}/dxgi.dll"
-
-load_d9vk013()
-{
-    # https://github.com/Joshua-Ashton/d9vk
-    w_download "https://github.com/Joshua-Ashton/d9vk/releases/download/0.13/d9vk-0.13.tar.gz" 53eeca60e94d3bbe5dbf57eaaf3d15746d4bca48a15968cf841ffdf68d999e59
-    helper_dxvk_d9vk "${file1}" "4.5" "1.1.104" "dxgi,d3d9,d3d10core,d3d10,d3d11"
-}
-
-w_metadata d9vk013f dlls \
-    title="Vulkan-based D3D9/D3D10/D3D11 implementation for Linux / Wine (0.13f)" \
-    publisher="Joshua Ashton" \
-    year="2019" \
-    media="download" \
-    file1="d9vk-0.13f.tar.gz" \
-    installed_file1="${W_SYSTEM32_DLLS_WIN}/d3d9.dll" \
-    installed_file1="${W_SYSTEM32_DLLS_WIN}/d3d10.dll" \
-    installed_file2="${W_SYSTEM32_DLLS_WIN}/d3d10_1.dll" \
-    installed_file3="${W_SYSTEM32_DLLS_WIN}/d3d10core.dll" \
-    installed_file4="${W_SYSTEM32_DLLS_WIN}/d3d11.dll" \
-    installed_file5="${W_SYSTEM32_DLLS_WIN}/dxgi.dll"
-
-load_d9vk013f()
-{
-    # https://github.com/Joshua-Ashton/d9vk
-    w_download "https://github.com/Joshua-Ashton/d9vk/releases/download/0.13f/d9vk-0.13f.tar.gz" 7408ba54c4104b2a18ab4a4a575665f66e1517b46282724111d129bf127bfb8a
-    helper_dxvk_d9vk "${file1}" "4.5" "1.1.104" "dxgi,d3d9,d3d10core,d3d10,d3d11"
-}
-
-w_metadata d9vk020 dlls \
-    title="Vulkan-based D3D9/D3D10/D3D11 implementation for Linux / Wine (0.20)" \
-    publisher="Joshua Ashton" \
-    year="2019" \
-    media="download" \
-    file1="d9vk-0.20.tar.gz" \
-    installed_file1="${W_SYSTEM32_DLLS_WIN}/d3d9.dll" \
-    installed_file1="${W_SYSTEM32_DLLS_WIN}/d3d10.dll" \
-    installed_file2="${W_SYSTEM32_DLLS_WIN}/d3d10_1.dll" \
-    installed_file3="${W_SYSTEM32_DLLS_WIN}/d3d10core.dll" \
-    installed_file4="${W_SYSTEM32_DLLS_WIN}/d3d11.dll" \
-    installed_file5="${W_SYSTEM32_DLLS_WIN}/dxgi.dll"
-
-load_d9vk020()
-{
-    # https://github.com/Joshua-Ashton/d9vk
-    w_download "https://github.com/Joshua-Ashton/d9vk/releases/download/0.20/d9vk-0.20.tar.gz" bd53c17eafeffcf2251d3911b7814b92c8f7e4c6b7364217da38645093a1db35
-    helper_dxvk_d9vk "${file1}" "4.5" "1.1.104" "dxgi,d3d9,d3d10core,d3d10,d3d11"
-}
-
-w_metadata d9vk021 dlls \
-    title="Vulkan-based D3D9/D3D10/D3D11 implementation for Linux / Wine (0.21)" \
-    publisher="Joshua Ashton" \
-    year="2019" \
-    media="download" \
-    file1="d9vk-0.21.tar.gz" \
-    installed_file1="${W_SYSTEM32_DLLS_WIN}/d3d9.dll" \
-    installed_file1="${W_SYSTEM32_DLLS_WIN}/d3d10.dll" \
-    installed_file2="${W_SYSTEM32_DLLS_WIN}/d3d10_1.dll" \
-    installed_file3="${W_SYSTEM32_DLLS_WIN}/d3d10core.dll" \
-    installed_file4="${W_SYSTEM32_DLLS_WIN}/d3d11.dll" \
-    installed_file5="${W_SYSTEM32_DLLS_WIN}/dxgi.dll"
-
-load_d9vk021()
-{
-    # https://github.com/Joshua-Ashton/d9vk
-    w_download "https://github.com/Joshua-Ashton/d9vk/releases/download/0.21/d9vk-0.21.tar.gz" e58d11733b6471718b4652e5be66bfd1a4d908d0ddf96be0ecb9efb2fb748055
-    helper_dxvk_d9vk "${file1}" "4.5" "1.1.104" "dxgi,d3d9,d3d10core,d3d10,d3d11"
-}
-
-w_metadata d9vk022 dlls \
-    title="Vulkan-based D3D9/D3D10/D3D11 implementation for Linux / Wine (0.22)" \
-    publisher="Joshua Ashton" \
-    year="2019" \
-    media="download" \
-    file1="d9vk-0.22.tar.gz" \
-    installed_file1="${W_SYSTEM32_DLLS_WIN}/d3d9.dll" \
-    installed_file1="${W_SYSTEM32_DLLS_WIN}/d3d10.dll" \
-    installed_file2="${W_SYSTEM32_DLLS_WIN}/d3d10_1.dll" \
-    installed_file3="${W_SYSTEM32_DLLS_WIN}/d3d10core.dll" \
-    installed_file4="${W_SYSTEM32_DLLS_WIN}/d3d11.dll" \
-    installed_file5="${W_SYSTEM32_DLLS_WIN}/dxgi.dll"
-
-load_d9vk022()
-{
-    # https://github.com/Joshua-Ashton/d9vk
-    w_download "https://github.com/Joshua-Ashton/d9vk/releases/download/0.22/d9vk-0.22.tar.gz" 45d2b5d20cd6d96a43673b999814d3d9d3e64360a514757df3ef49b9a28ae65a
-    helper_dxvk_d9vk "${file1}" "4.5" "1.1.104" "dxgi,d3d9,d3d10core,d3d10,d3d11"
-}
-
-w_metadata d9vk030 dlls \
-    title="Vulkan-based D3D9/D3D10/D3D11 implementation for Linux / Wine (0.30)" \
-    publisher="Joshua Ashton" \
-    year="2019" \
-    media="download" \
-    file1="d9vk-0.30.tar.gz" \
-    installed_file1="${W_SYSTEM32_DLLS_WIN}/d3d9.dll" \
-    installed_file1="${W_SYSTEM32_DLLS_WIN}/d3d10.dll" \
-    installed_file2="${W_SYSTEM32_DLLS_WIN}/d3d10_1.dll" \
-    installed_file3="${W_SYSTEM32_DLLS_WIN}/d3d10core.dll" \
-    installed_file4="${W_SYSTEM32_DLLS_WIN}/d3d11.dll" \
-    installed_file5="${W_SYSTEM32_DLLS_WIN}/dxgi.dll"
-
-load_d9vk030()
-{
-    # https://github.com/Joshua-Ashton/d9vk
-    w_download "https://github.com/Joshua-Ashton/d9vk/releases/download/0.30/d9vk-0.30.tar.gz" 9654b888665184bf795aa33a0c7287d04666ebe21e56e53df0f6c331fde24927
-    helper_dxvk_d9vk "${file1}" "4.5" "1.1.104" "dxgi,d3d9,d3d10core,d3d10,d3d11"
-}
-
-w_metadata d9vk040 dlls \
-    title="Vulkan-based D3D9/D3D10/D3D11 implementation for Linux / Wine (0.40.1)" \
-    publisher="Joshua Ashton" \
-    year="2019" \
-    media="download" \
-    file1="d9vk-0.40.1.tar.gz" \
-    installed_file1="${W_SYSTEM32_DLLS_WIN}/d3d9.dll" \
-    installed_file1="${W_SYSTEM32_DLLS_WIN}/d3d10.dll" \
-    installed_file2="${W_SYSTEM32_DLLS_WIN}/d3d10_1.dll" \
-    installed_file3="${W_SYSTEM32_DLLS_WIN}/d3d10core.dll" \
-    installed_file4="${W_SYSTEM32_DLLS_WIN}/d3d11.dll" \
-    installed_file5="${W_SYSTEM32_DLLS_WIN}/dxgi.dll"
-
-load_d9vk040()
-{
-    # https://github.com/Joshua-Ashton/d9vk
-    w_download "https://github.com/Joshua-Ashton/d9vk/releases/download/0.40.1/d9vk-0.40.1.tar.gz" 6bfcf05d68207b140dbfaa938f8e3807d938466682b531d6daa36b22fa0a6d03
-    helper_dxvk_d9vk "${file1}" "4.5" "1.1.104" "dxgi,d3d9,d3d10core,d3d10,d3d11"
-}
-
-#----------------------------------------------------------------
-
-w_metadata d9vk dlls \
-    title="Vulkan-based D3D9/D3D10/D3D11 implementation for Linux / Wine (latest)" \
-    publisher="Joshua Ashton" \
-    year="2019" \
-    media="download" \
-    installed_file1="${W_SYSTEM32_DLLS_WIN}/d3d9.dll" \
-    installed_file1="${W_SYSTEM32_DLLS_WIN}/d3d10.dll" \
-    installed_file2="${W_SYSTEM32_DLLS_WIN}/d3d10_1.dll" \
-    installed_file3="${W_SYSTEM32_DLLS_WIN}/d3d10core.dll" \
-    installed_file4="${W_SYSTEM32_DLLS_WIN}/d3d11.dll" \
-    installed_file5="${W_SYSTEM32_DLLS_WIN}/dxgi.dll"
-
-load_d9vk()
-{
-    # https://github.com/Joshua-Ashton/d9vk
-    _W_d9vk_version="$(w_get_github_latest_prerelease Joshua-Ashton d9vk)"
-    _W_d9vk_version="${_W_d9vk_version#v}"
-    w_linkcheck_ignore=1 w_download "https://github.com/Joshua-Ashton/d9vk/releases/download/${_W_d9vk_version}/d9vk-${_W_d9vk_version}.tar.gz"
-    helper_dxvk_d9vk "d9vk-${_W_d9vk_version}.tar.gz" "4.5" "1.1.104" "dxgi,d3d9,d3d10core,d3d10,d3d11"
-    unset _W_d9vk_version
-}
-
-
-#----------------------------------------------------------------
-
 w_metadata dxvk054 dlls \
     title="Vulkan-based D3D11 implementation for Linux / Wine (0.54)" \
     publisher="Philip Rebohle" \
@@ -8428,6 +8207,24 @@ load_dxvk191()
     helper_dxvk_d9vk "${file1}" "5.14" "1.2.140" "dxgi,d3d9,d3d10core,d3d11"
 }
 
+w_metadata dxvk192 dlls \
+    title="Vulkan-based D3D9/D3D10/D3D11 implementation for Linux / Wine (1.9.2)" \
+    publisher="Philip Rebohle" \
+    year="2017" \
+    media="download" \
+    file1="dxvk-1.9.2.tar.gz" \
+    installed_file1="${W_SYSTEM32_DLLS_WIN}/d3d9.dll" \
+    installed_file2="${W_SYSTEM32_DLLS_WIN}/d3d10core.dll" \
+    installed_file3="${W_SYSTEM32_DLLS_WIN}/d3d11.dll" \
+    installed_file4="${W_SYSTEM32_DLLS_WIN}/dxgi.dll"
+
+load_dxvk192()
+{
+    # https://github.com/doitsujin/dxvk
+    w_download "https://github.com/doitsujin/dxvk/releases/download/v1.9.2/dxvk-1.9.2.tar.gz" 24bcee655767f4731b8d3883dd93ba4edc7f1e87421e15fab19499d57236b8e9
+    helper_dxvk_d9vk "${file1}" "5.14" "1.2.140" "dxgi,d3d9,d3d10core,d3d11"
+}
+
 #----------------------------------------------------------------
 
 w_metadata dxvk dlls \
@@ -8448,6 +8245,83 @@ load_dxvk()
     w_linkcheck_ignore=1 w_download "https://github.com/doitsujin/dxvk/releases/download/v${_W_dxvk_version}/dxvk-${_W_dxvk_version}.tar.gz"
     helper_dxvk_d9vk "dxvk-${_W_dxvk_version}.tar.gz" "5.14" "1.2.140" "dxgi,d3d9,d3d10core,d3d11"
     unset _W_dxvk_version
+}
+
+#----------------------------------------------------------------
+
+# $1 - vkd3d-proton archive name (required)
+helper_vkd3d_proton()
+{
+    _W_package_archive="${1}"
+
+    _W_dll_overrides="d3d12"
+
+    case "${_W_package_archive}" in
+        vkd3d-proton*)
+            _W_repository="HansKristian-Work/vkd3d-proton"
+            ;;
+        *)
+            w_die "parameter (1): unsupported package archive repository: '${_W_package_archive}'; supported: vkd3d-proton"
+            ;;
+    esac
+
+    case "${_W_package_archive}" in
+        *master*)
+            _W_package_dir="build/vkd3d-proton-release"
+            _W_package_version="master"
+            w_warn "Using master ${_W_repository} build"
+            ;;
+        *)
+            _W_package_dir="${_W_package_archive%.tar.zst}"
+            _W_package_version="${_W_package_dir#*-}"
+            _W_package_version="${_W_package_version#*-}"
+            w_warn "Please refer to ${_W_repository#*/} version ${_W_package_version} release notes... See: https://github.com/${_W_repository}/releases/tag/${_W_package_version}"
+            ;;
+    esac
+    w_warn "Please refer to current vkd3d-proton base graphics driver requirements... See: https://github.com/HansKristian-Work/vkd3d-proton#drivers"
+
+    if [ "${_W_package_archive##*.}" = "zip" ]; then
+        w_try_unzip "${W_TMP}" "${W_CACHE}/${W_PACKAGE}/${_W_package_archive}"
+    elif [ "${_W_package_archive##*.}" = "zst" ]; then
+        w_try_cd "${W_TMP}"
+        w_try tar -I zstd -xvf "${W_CACHE}/${W_PACKAGE}/${_W_package_archive}"
+    else
+        w_try_cd "${W_TMP}"
+        w_try tar -zxf "${W_CACHE}/${W_PACKAGE}/${_W_package_archive}"
+    fi
+
+    for _W_dll in ${_W_dll_overrides}; do
+        w_try mv "${W_TMP}/${_W_package_dir}/x86/${_W_dll}.dll" "${W_SYSTEM32_DLLS}/"
+    done
+    if test "${W_ARCH}" = "win64"; then
+        for _W_dll in ${_W_dll_overrides}; do
+            w_try mv "${W_TMP}/${_W_package_dir}/x64/${_W_dll}.dll" "${W_SYSTEM64_DLLS}/"
+        done
+    fi
+    # shellcheck disable=SC2086
+    w_override_dlls native ${_W_dll_overrides}
+
+    unset _W_dll _W_dll_overrides _W_package_archive _W_package_dir \
+        _W_package_version _W_repository
+}
+
+#----------------------------------------------------------------
+
+w_metadata vkd3d dlls \
+    title="Vulkan-based D3D12 implementation for Linux / Wine (latest)" \
+    publisher="Hans-Kristian Arntzen " \
+    year="2020" \
+    media="download" \
+    installed_file1="${W_SYSTEM32_DLLS_WIN}/d3d12.dll"
+
+load_vkd3d()
+{
+    # https://github.com/HansKristian-Work/vkd3d-proton
+    _W_vkd3d_proton_version="$(w_get_github_latest_release HansKristian-Work vkd3d-proton)"
+    _W_vkd3d_proton_version="${_W_vkd3d_proton_version#v}"
+    w_linkcheck_ignore=1 w_download "https://github.com/HansKristian-Work/vkd3d-proton/releases/download/v${_W_vkd3d_proton_version}/vkd3d-proton-${_W_vkd3d_proton_version}.tar.zst"
+    helper_vkd3d_proton "vkd3d-proton-${_W_vkd3d_proton_version}.tar.zst"
+    unset _W_vkd3d-proton_version
 }
 
 #----------------------------------------------------------------
@@ -9592,7 +9466,7 @@ load_dotnet462()
     w_package_warn_win64
 
     # Official version. See https://www.microsoft.com/en-us/download/details.aspx?id=53344
-    w_download https://download.microsoft.com/download/F/9/4/F942F07D-F26F-4F30-B4E3-EBD54FABA377/NDP462-KB3151800-x86-x64-AllOS-ENU.exe 28886593e3b32f018241a4c0b745e564526dbb3295cb2635944e3a393f4278d4
+    w_download https://web.archive.org/web/20210320155343if_/https://download.microsoft.com/download/F/9/4/F942F07D-F26F-4F30-B4E3-EBD54FABA377/NDP462-KB3151800-x86-x64-AllOS-ENU.exe 28886593e3b32f018241a4c0b745e564526dbb3295cb2635944e3a393f4278d4
     file_package="NDP462-KB3151800-x86-x64-AllOS-ENU.exe"
 
     w_call remove_mono
@@ -9672,8 +9546,8 @@ load_dotnet472()
 
     w_package_warn_win64
 
-    # Official version. See https://www.microsoft.com/en-us/download/details.aspx?id=53344
-    w_download https://download.microsoft.com/download/6/E/4/6E48E8AB-DC00-419E-9704-06DD46E5F81D/NDP472-KB4054530-x86-x64-AllOS-ENU.exe c908f0a5bea4be282e35acba307d0061b71b8b66ca9894943d3cbb53cad019bc
+    # Official version. See https://dotnet.microsoft.com/download/dotnet-framework/net472
+    w_download https://download.visualstudio.microsoft.com/download/pr/1f5af042-d0e4-4002-9c59-9ba66bcf15f6/089f837de42708daacaae7c04b7494db/NDP472-KB4054530-x86-x64-AllOS-ENU.exe 5cb624b97f9fd6d3895644c52231c9471cd88aacb57d6e198d3024a1839139f6
 
     w_call remove_mono
 
@@ -11060,6 +10934,28 @@ load_mfc70()
 
     w_try cp "${W_TMP}"/FL_mfc70_dll_____X86.3643236F_FC70_11D3_A536_0090278A1BB8 "${W_SYSTEM32_DLLS}"/mfc70.dll
     w_try cp "${W_TMP}"/FL_mfc70u_dll_____X86.3643236F_FC70_11D3_A536_0090278A1BB8 "${W_SYSTEM32_DLLS}"/mfc70u.dll
+}
+
+#----------------------------------------------------------------
+
+w_metadata msaa dlls \
+    title="MS Active Accessibility (oleacc.dll, oleaccrc.dll, msaatext.dll)" \
+    publisher="Microsoft" \
+    year="2003" \
+    media="download" \
+    file1="MSAA20_RDK.exe" \
+    installed_file1="${W_SYSTEM32_DLLS_WIN}/oleacc.dll" \
+    installed_file2="${W_SYSTEM32_DLLS_WIN}/oleaccrc.dll" \
+    installed_file3="${W_SYSTEM32_DLLS_WIN}/msaatext.dll"
+
+load_msaa()
+{
+    w_download https://download.microsoft.com/download/c/1/c/c1cf13a6-4d7f-4b7d-9f67-51ef3a421fc7/MSAA20_RDK.exe 081e382f7e5b874ab143f0b073246fd31f84ae181df1838813b02935a951c9da
+    w_try_unzip "${W_TMP}/${W_PACKAGE}" "${W_CACHE}/${W_PACKAGE}"/MSAA20_RDK.exe
+    w_try cp "${W_TMP}/${W_PACKAGE}/oleaccW.dll" "${W_SYSTEM32_DLLS}/oleacc.dll"
+    w_try cp "${W_TMP}/${W_PACKAGE}/oleaccrc.dll" "${W_SYSTEM32_DLLS}/oleaccrc.dll"
+    w_try cp "${W_TMP}/${W_PACKAGE}/MSAATextW.dll" "${W_SYSTEM32_DLLS}/msaatext.dll"
+    w_override_dlls native,builtin oleacc oleaccrc msaatext
 }
 
 #----------------------------------------------------------------
@@ -12967,12 +12863,13 @@ load_vcrun2019()
     # 2021/04/13: 14563755ac24a874241935ef2c22c5fce973acb001f99e524145113b2dc638c1
     # 2021/06/06: 91c21c93a88dd82e8ae429534dacbc7a4885198361eae18d82920c714e328cf9
     # 2021/08/26: 1acd8d5ea1cdc3eb2eb4c87be3ab28722d0825c15449e5c9ceef95d897de52fa
+    # 2021/10/23: 80c7969f4e05002a0cd820b746e0acb7406d4b85e52ef096707315b390927824
 
     w_warn "ucrtbase.dll is no longer included in vcrun2019. For details see: https://github.com/Winetricks/winetricks/issues/1770"
 
     w_override_dlls native,builtin api-ms-win-crt-private-l1-1-0 api-ms-win-crt-conio-l1-1-0 api-ms-win-crt-heap-l1-1-0 api-ms-win-crt-locale-l1-1-0 api-ms-win-crt-math-l1-1-0 api-ms-win-crt-runtime-l1-1-0 api-ms-win-crt-stdio-l1-1-0 api-ms-win-crt-time-l1-1-0 atl140 concrt140 msvcp140 msvcp140_1 msvcp140_2 msvcr140 vcomp140 vcruntime140
 
-    w_download https://aka.ms/vs/16/release/vc_redist.x86.exe 1acd8d5ea1cdc3eb2eb4c87be3ab28722d0825c15449e5c9ceef95d897de52fa
+    w_download https://aka.ms/vs/16/release/vc_redist.x86.exe 80c7969f4e05002a0cd820b746e0acb7406d4b85e52ef096707315b390927824
 
     if w_workaround_wine_bug 50894 "Working around failing wusa.exe lookup via C:\windows\SysNative"; then
         w_set_winver winxp
@@ -12996,11 +12893,12 @@ load_vcrun2019()
             # 2021/04/13: 52b196bbe9016488c735e7b41805b651261ffa5d7aa86eb6a1d0095be83687b2
             # 2021/06/06: a1592d3da2b27230c087a3b069409c1e82c2664b0d4c3b511701624702b2e2a3
             # 2021/08/26: 003063723b2131da23f40e2063fb79867bae275f7b5c099dbd1792e25845872b
+            # 2021/10/23: 9b9dd72c27ab1db081de56bb7b73bee9a00f60d14ed8e6fde45dab3e619b5f04
 
             # vcruntime140_1 is only shipped on x64:
             w_override_dlls native,builtin vcruntime140_1
 
-            w_download https://aka.ms/vs/16/release/vc_redist.x64.exe 003063723b2131da23f40e2063fb79867bae275f7b5c099dbd1792e25845872b
+            w_download https://aka.ms/vs/16/release/vc_redist.x64.exe 9b9dd72c27ab1db081de56bb7b73bee9a00f60d14ed8e6fde45dab3e619b5f04
             w_try "${WINE}" vc_redist.x64.exe ${W_OPT_UNATTENDED:+/q}
             ;;
     esac
