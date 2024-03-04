@@ -1,20 +1,16 @@
 w_metadata 163music apps\
     title="NetEase Cloud Music" \
     publisher="NetEase" \
-    year="2020" \
+    year="2023" \
     media="download" \
-    file1="cloudmusicsetup2.7.1.198242.exe" \
+    file1="cloudmusicsetup2.9.9.199909.exe" \
     installed_exe1="$W_PROGRAMS_X86_WIN/Netease/CloudMusic/cloudmusic.exe" \
     homepage="http://music.163.com/" \
     unattended="no"
 
 load_163music()
 {
-w_download https://d1.music.126.net/dmusic/cloudmusicsetup2.7.1.198242.exe cf94375212a77ec676aac90da0417cb56cfd8c1ecaa96773ce667a5a8e7a8309
-
-    if w_workaround_wine_bug 49227 "Black window bug"; then
-        w_call winxp
-    fi
+w_download https://d1.music.126.net/dmusic/cloudmusicsetup2.9.9.199909.exe dfa07efeb984fe10dc2527461a4ea34121f3d8b42b5cda6ee61beabec12e9e2e
     
     if w_workaround_wine_bug 38028 "Installing native directx9 to work around playback bug"; then
         w_call d3dx9
