@@ -21866,22 +21866,22 @@ load_dzh365()
 w_metadata flush apps\
     title="同花顺免费版 (A Chinese stock app)" \
     publisher="Zhejiang Hithink Flush Information Network Co." \
-    year="2017" \
+    year="2023" \
     media="download" \
-    file1="THS_freeldy_8.70.31.exe" \
-    installed_exe1="$W_PROGRAMS_X86_WIN/同花顺/zdsj.exe" \
+    file1="THS_9.20.71_20231127.exe" \
+    installed_exe1="$W_PROGRAMS_X86_WIN/同花顺/hexin.exe" \
     homepage="http://www.10jqka.com.cn/" \
     unattended="no"
 
 load_flush()
 {
-w_download http://zjcmpp.hexin.com.cn/soft/THS_freeldy_8.70.31.exe 1acc3008135995efad66504332223d786d68bb3e9704df51014d60dc5ecda0bb
-    w_call ie8
+w_download http://resource.thsi.cn/soft/THS_9.20.71_20231127.exe 0e82959c8d3739a3f57bfee9abfbd51118bbf5db3009bb0a4e8b82936afbe3be
+
     # Make sure chinese fonts are available
     w_call fakechinese
     w_try_cd "$W_CACHE/$W_PACKAGE"
     w_try "$WINE" "$file1"
-    w_declare_exe "$W_PROGRAMS_X86_WIN\\同花顺" "zdsj.exe"
+    w_declare_exe "$W_PROGRAMS_X86_WIN\\同花顺" "hexin.exe"
 }
 
 #----------------------------------------------------------------
