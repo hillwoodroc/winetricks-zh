@@ -22249,16 +22249,16 @@ load_tim()
 w_metadata wechat apps \
  title="WeChat" \
  publisher="Tencent" \
- year="2019" \
+ year="2022" \
  media="download" \
- file1="WeChat_C1018.exe" \
+ file1="WeChatSetup-3.8.1.26.exe" \
  installed_exe1="$W_PROGRAMS_X86_WIN/Tencent/WeChat/WeChat.exe" \
  homepage="http://weixin.qq.com/" \
  unattended="no"
 
 load_wechat()
 {
-    w_download https://dldir1.qq.com/weixin/Windows/WeChat_C1018.exe 973b429c4f9c1882340c3b8bfa066ae159b5dd409f876538e3820efbeb0a5ab4
+    w_download https://github.com/tom-snow/wechat-windows-versions/releases/download/v3.8.1.26/WeChatSetup-3.8.1.26.exe b3d8704ce4e5614aa037f0c0b930029648d0f0e47548f50f8bb297036a038627
 
     if w_workaround_wine_bug 38038 "Installing native riched20 to work around typing bug"; then
         w_call riched20
@@ -22269,7 +22269,7 @@ load_wechat()
     fi
 
     w_call fakechinese
-    
+
     w_try_cd "$W_CACHE/$W_PACKAGE"
     w_try "$WINE" "$file1"
 
