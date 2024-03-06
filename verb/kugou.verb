@@ -1,27 +1,24 @@
 w_metadata kugou apps\
     title="KuGou Music" \
     publisher="KuGou" \
-    year="2020" \
+    year="2023" \
     media="download" \
-    file1="kugou9132s.exe" \
+    file1="kugou_10250.exe" \
     installed_exe1="$W_PROGRAMS_X86_WIN/KuGou/KGMusic/KuGou.exe" \
     homepage="http://www.kugou.com/" \
     unattended="no"
 
 load_kugou()
 {
-    w_download http://downmini.kugou.com/web/kugou9132s.exe b9716651dc3ef5374adcc0765d87e6c26971686a4b151fda450f6ccf02762081
+    w_download https://downmini.yun.kugou.com/web/kugou_10250.exe 4df0aceb15bbd181abab392fe3718178cd68b1b5b97f453717b16fa1628e7c29
 
-    if w_workaround_wine_bug 38037 "Installing native directmusic to work around playback bug"; then
-    w_call directmusic
+    if w_workaround_wine_bug XXX "Installing native directmusic to work around playback bug"; then
+        w_call quartz
     fi
 
     if w_workaround_wine_bug 38038 "Installing native riched20 to work around typing in search box"; then
-    w_call riched20
+        w_call riched20
     fi
-    
-    # use ie8
-    w_call ie8
 
     # Make sure chinese fonts are available
     w_call fakechinese
