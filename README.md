@@ -17,11 +17,11 @@
 
 ## 目前支持的应用 ##
 
-1.QQ国际版2.11  
-对应的 verb 文件：qqintl.verb
+~~1.QQ国际版2.11~~  
+~~对应的 verb 文件：qqintl.verb~~
 
-2.QQ 8.9.6  
-对应的 verb 文件：qq.verb
+2.QQ 9.7.1  
+对应的 verb 文件：qq.verb (已推出原生 Linux 版不再更新)
 
 3.同花顺股票软件  
 对应的 verb 文件：flush.verb
@@ -47,14 +47,14 @@
 10.美图秀秀  
 对应的 verb 文件：meitu.verb
 
-11.印象笔记  
-对应的 verb 文件：evernote.verb
+~~11.印象笔记~~  
+~~对应的 verb 文件：evernote.verb~~
 
 12.光影魔术手  
 对应的 verb 文件：neoimaging.verb
 
-13.QQ轻聊版 7.9  
-对应的 verb 文件：qqlight.verb
+~~13.QQ轻聊版 7.9~~  
+~~对应的 verb 文件：qqlight.verb~~
 
 14.LINE（连我）  
 对应的 verb 文件：line.verb
@@ -69,10 +69,10 @@
 对应的 verb 文件：163mail.verb
 
 ~~18.QQ音乐~~  
-~~对应的 verb 文件：qqmusic.verb~~
+~~已推出原生 Linux 版不再更新~~
 
-19.有道云笔记  
-对应的 verb 文件：youdaonote.verb
+~~19.有道云笔记~~  
+~~已推出原生 Linux 版不再更新~~
 
 20.爱奇艺  
 对应的 verb 文件：iqiyi.verb
