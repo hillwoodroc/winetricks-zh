@@ -21884,31 +21884,6 @@ load_evernote()
 
 #----------------------------------------------------------------
 
-w_metadata dzh365 apps\
-    title="大智慧365" \
-    publisher="Shanghai DZH Limited" \
-    year="2020" \
-    media="download" \
-    file1="365.exe" \
-    installed_exe1="$W_PROGRAMS_X86_WIN/365/dzh2.exe" \
-    homepage="http://www.gw.com.cn" \
-
-load_dzh365()
-{
-    if [ "$W_ARCH" = "win32" ]; then
-        w_download http://downfile.gw.com.cn/pub/365.exe 80137b8e3006798c476ab4f273bc28439beec5fcd893664fce089fdb87ecc91a "$file1" 
-    elif [ "$W_ARCH" = "win64" ]; then
-        w_download http://downfile.gw.com.cn/pub/365\(64\).exe b191c51a830d3f6670d3905f690bb4c3622bc2a82b85f9db0cae43c3d615a9e1 "$file1" 
-    fi
-
-    w_call fakechinese
-    
-    w_try "$WINE" "$file1"
-    w_declare_exe "$W_PROGRAMS_X86_WIN\\365" "dzh2.exe"
-}
-
-#----------------------------------------------------------------
-
 w_metadata flush apps\
     title="同花顺免费版 (A Chinese stock app)" \
     publisher="Zhejiang Hithink Flush Information Network Co." \
