@@ -1,4 +1,12 @@
 -------------------------------------------
+Sun Mar 17 2024 - hillwood@opensuse.org
+
+- Merge changes from upstream's git version
+- Update 163 music, wechat, 同花顺免费版, kugou
+- Drop support for QQ, evernote, QQMusic, 有道云笔记 and 大智慧365
+- AliWangWang reborns: update version to 10.01.03C
+
+-------------------------------------------
 Wed Dec 20 2020 - hillwood@opensuse.org
 
 - Merge changes from upstream's git version, Fix issue#174
