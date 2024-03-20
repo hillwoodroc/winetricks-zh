@@ -1,16 +1,16 @@
 w_metadata QQGame apps\
-    title="QQGame2020" \
+    title="QQGame" \
     publisher="Tencent" \
-    year="2020" \
+    year="2024" \
     media="download" \
-    file1="QQGame_setup_web_11.EXE" \
-    installed_exe1="$W_PROGRAMS_X86_WIN/Tencent/QQGame/QQGame.exe" \
+    file1="QQGame_setup_web_1010000018.exe" \
+    installed_exe1="$W_PROGRAMS_X86_WIN/Tencent/QQGameTempest/QQGame.exe" \
     homepage="http://www.qq.com" \
     unattended="no"
 
 load_QQGame()
 {
-w_download https://dldir3.qq.com/minigamefile/QQGame_setup_web_11.EXE 019b46cd70b6ea764207e25fb165773df70ba2bfba0c35a77d61b55cd816e245
+w_download https://dldir3.qq.com/minigamefile/QQGame_setup_web_1010000018.exe 540f8c845b02ae93b4f5cdb1fd4607f88d46cb5f9f61d0c8286b9de9001f2f91
 
     # uses mfc42u.dll
     # w_call mfc42
@@ -20,5 +20,5 @@ w_download https://dldir3.qq.com/minigamefile/QQGame_setup_web_11.EXE 019b46cd70
 
     w_try_cd "$W_CACHE/$W_PACKAGE"
     w_try "$WINE" "$file1"
-    w_declare_exe "$W_PROGRAMS_X86_WIN\\Tencent\\QQGame" "QQGame.exe"
+    w_declare_exe "$W_PROGRAMS_X86_WIN\\Tencent\\QQGameTempest" "QQGame.exe"
 }
